@@ -57,8 +57,19 @@ namespace LotteryApi.Controllers
         {
             try
             {
-                _webService.DownloadFile(_settings.Lotteries.Where(lottery => lottery.Name == "DuplaSena").SingleOrDefault(),
+                //download file
+                var setting = _settings.Lotteries.Where(lottery => lottery.Name == "DuplaSena").SingleOrDefault();
+                _webService.DownloadFile(setting,
                                          string.Concat(Environment.CurrentDirectory, _settings.TempFilePath));
+
+                //load file into object
+                HTMLHandler handler = new HTMLHandler();
+                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _settings.TempFilePath), string.Concat($@"{setting.Name}\",setting.HtmlFileName));
+                handler.LoadHTMLFile(path);
+                //var results = htmlLoader.Loader()
+                //send to database
+                //duplaSenaRepository.Load()
+
                 return Ok();
             }
             catch (Exception e)

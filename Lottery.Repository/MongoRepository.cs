@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace Lottery.Repository
 {
+    /// <summary>
+    /// Class repoistory resposible to manage all lottery data from database
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class MongoRepository<T> : IRepository<T> where T : class, new()
     {
         private string _collectionName;
@@ -28,8 +32,15 @@ namespace Lottery.Repository
         }
         public MongoRepository(AppSettings settings, string collectionName)
         {
-            _db = new MongoClient(settings.Database.Url).GetDatabase(settings.Database.Name);
             _collectionName = collectionName;
+            _db = new MongoClient(settings.Database.Url).GetDatabase(settings.Database.Name);
+
+            var collection = _db.GetCollection<T>(_collectionName);
+            if (collection != null)
+            {
+                _db.DropCollection(_collectionName);
+            }
+            _db.CreateCollection(_collectionName);
         }
 
         public T GetOne(Expression<Func<T, bool>> expression)

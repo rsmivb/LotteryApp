@@ -36,7 +36,7 @@ namespace Lottery.Models
 
     public static class DuplaSenaExtensionMethods
     {
-        public static DuplaSena Load(IList<string> nodes) => new DuplaSena
+        public static DuplaSena Load(IEnumerable<string> nodes) => new DuplaSena
             {
                 LotteryId = nodes[0].ConvertToInt(),
                 DateRealized = nodes[1].ConvertToDateTime(),

@@ -23,47 +23,44 @@ namespace Lottery.Services
     }
     public class HTMLHandler
     {
-        private readonly string _tempFile;
-        private readonly string _htmlFileName;
-        private readonly Type _type;
-        public HTMLHandler(string tempFile, string htmlFileName, Type type)
-        {
-            _tempFile = tempFile;
-            _htmlFileName = htmlFileName;
-            _type = type;
-        }
+
         /// <summary>
         /// NEED to Improve loading data for a specific Lottery, maybe pass class name and generate it.
         /// Or maybe create a specific method for each lottery class
         /// </summary>
-        public void ReadHTMLFile()
+        public void LoadHTMLFile(string path)
         {
-            string file = string.Concat(_tempFile, _htmlFileName);
-
+            //string file = string.Concat(_tempFile, _htmlFileName);
             var doc = new HtmlDocument();
-            doc.Load(file);
-            var trs = doc.DocumentNode.SelectNodes("//tr").Skip(1); //Skip headers on table
-            IList<string> nodes = new List<string>();
-            CultureInfo BrCulture = new CultureInfo("pt-BR");
-            IList<MegaSena> allConcursos = new List<MegaSena>();
-            foreach (var tr in trs)
+            doc.Load(path);//file);
+            if (doc != null)
             {
-                foreach (var td in tr.ChildNodes)
+                var trs = doc.DocumentNode.SelectNodes("//tr").Skip(1); //Skip headers on table
+                foreach (var row in trs)
                 {
-                    if (!td.InnerText.Equals("\r\r\n") &&
-                        !td.InnerText.Equals("\r\n") &&
-                        !td.InnerText.Equals("\r"))
+                    var results = row.ChildNodes.Where(td => !td.InnerText.Equals("\r\r\n") &&
+                                                               !td.InnerText.Equals("\r\n") &&
+                                                               !td.InnerText.Equals("\r"));
+                }
+                IList<string> nodes = new List<string>();
+                foreach (var tr in trs)
+                {
+                    foreach (var td in tr.ChildNodes)
                     {
-                        nodes.Add(td.InnerText.Trim());
+                        if (!td.InnerText.Equals("\r\r\n") &&
+                            !td.InnerText.Equals("\r\n") &&
+                            !td.InnerText.Equals("\r"))
+                        {
+                            nodes.Add(td.InnerText.Trim());
+                        }
                     }
-                }
-                if (nodes.Count == 21)
-                {
-                    allConcursos.Add(null);
-                }
-                nodes = new List<string>();
-            }
+                    if (nodes.Count == 21)
+                    {
 
+                    }
+                    nodes = new List<string>();
+                }
+            }
         }
     }
 }
