@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lottery.Models
 {
-    public class DuplaSena : MongoObject
+    public class DuplaSena : MongoModel
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -36,41 +37,47 @@ namespace Lottery.Models
 
     public static class DuplaSenaExtensionMethods
     {
-        public static DuplaSena Load(IEnumerable<string> nodes) => new DuplaSena
+        public static IEnumerable<DuplaSena> Load(IList<IList<string>> items)
+        {
+            foreach (var item in items)
             {
-                LotteryId = nodes[0].ConvertToInt(),
-                DateRealized = nodes[1].ConvertToDateTime(),
-                DozensRound1 = new int[] { nodes[2].ConvertToInt(), nodes[3].ConvertToInt(),
-                                           nodes[4].ConvertToInt(), nodes[5].ConvertToInt(),
-                                           nodes[6].ConvertToInt(), nodes[7].ConvertToInt() },
-                TotalAmount = nodes[8].ConvertToDecimal(),
-                Winners6NumbersRound1 = nodes[9].ConvertToInt(),
-                City = nodes[10].ConvertEmptyToString(),
-                UF = nodes[11].ConvertWithMetaChatToString(),
-                Average6NumbersRound1 = nodes[12].ConvertToDecimal(),
-                IsAccumulated = nodes[13].ConvertToBoolean(),
-                AccumulatedValueRound1 = nodes[14].ConvertToDecimal(),
-                Winners5NumbersRound1 = nodes[15].ConvertToInt(),
-                Average5NumbersRound1 = nodes[16].ConvertToDecimal(),
-                Winners4NumbersRound1 = nodes[17].ConvertToInt(),
-                Average4NumbersRound1 = nodes[18].ConvertToDecimal(),
-                Winners3NumbersRound1 = nodes[19].ConvertToInt(),
-                Average3NumbersRound1 = nodes[20].ConvertToDecimal(),
+                yield return new DuplaSena
+                {
+                    LotteryId = item[0].ConvertToInt(),
+                    DateRealized = item[1].ConvertToDateTime(),
+                    DozensRound1 = new int[] { item[2].ConvertToInt(), item[3].ConvertToInt(),
+                                           item[4].ConvertToInt(), item[5].ConvertToInt(),
+                                           item[6].ConvertToInt(), item[7].ConvertToInt() }.OrderBy(c => c).ToArray(),
+                    TotalAmount = item[8].ConvertToDecimal(),
+                    Winners6NumbersRound1 = item[9].ConvertToInt(),
+                    City = item[10].ConvertEmptyToString(),
+                    UF = item[11].ConvertWithMetaChatToString(),
+                    Average6NumbersRound1 = item[12].ConvertToDecimal(),
+                    IsAccumulated = item[13].ConvertToBoolean(),
+                    AccumulatedValueRound1 = item[14].ConvertToDecimal(),
+                    Winners5NumbersRound1 = item[15].ConvertToInt(),
+                    Average5NumbersRound1 = item[16].ConvertToDecimal(),
+                    Winners4NumbersRound1 = item[17].ConvertToInt(),
+                    Average4NumbersRound1 = item[18].ConvertToDecimal(),
+                    Winners3NumbersRound1 = item[19].ConvertToInt(),
+                    Average3NumbersRound1 = item[20].ConvertToDecimal(),
 
-                DozensRound2 = new int[] { nodes[21].ConvertToInt(), nodes[22].ConvertToInt(),
-                                           nodes[23].ConvertToInt(), nodes[24].ConvertToInt(),
-                                           nodes[25].ConvertToInt(), nodes[26].ConvertToInt() },
-                Winners6NumbersRound2 = nodes[27].ConvertToInt(),
-                Average6NumbersRound2 = nodes[28].ConvertToDecimal(),
-                Winners5NumbersRound2 = nodes[29].ConvertToInt(),
-                Average5NumbersRound2 = nodes[30].ConvertToDecimal(),
-                Winners4NumbersRound2 = nodes[31].ConvertToInt(),
-                Average4NumbersRound2 = nodes[32].ConvertToDecimal(),
-                Winners3NumbersRound2 = nodes[33].ConvertToInt(),
-                Average3NumbersRound2 = nodes[34].ConvertToDecimal(),
+                    DozensRound2 = new int[] { item[21].ConvertToInt(), item[22].ConvertToInt(),
+                                           item[23].ConvertToInt(), item[24].ConvertToInt(),
+                                           item[25].ConvertToInt(), item[26].ConvertToInt() }.OrderBy(c => c).ToArray(),
+                    Winners6NumbersRound2 = item[27].ConvertToInt(),
+                    Average6NumbersRound2 = item[28].ConvertToDecimal(),
+                    Winners5NumbersRound2 = item[29].ConvertToInt(),
+                    Average5NumbersRound2 = item[30].ConvertToDecimal(),
+                    Winners4NumbersRound2 = item[31].ConvertToInt(),
+                    Average4NumbersRound2 = item[32].ConvertToDecimal(),
+                    Winners3NumbersRound2 = item[33].ConvertToInt(),
+                    Average3NumbersRound2 = item[34].ConvertToDecimal(),
 
-                EstimatedPrize = nodes[35].ConvertToDecimal(),
-                AccumulatedEspecialPascoa = nodes[36].ConvertToDecimal()
-            };
+                    EstimatedPrize = item[35].ConvertToDecimal(),
+                    AccumulatedEspecialPascoa = item[36].ConvertToDecimal()
+                };
+            }
+        }
     }
 }

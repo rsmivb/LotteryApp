@@ -4,9 +4,8 @@ using System.Globalization;
 
 namespace Lottery.Models
 {
-    public class MegaSena : MongoObject
+    public class MegaSena : MongoModel
     {
-        public string LotteryName { get; set; }
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
         public int[] Dozens { get; set; }
@@ -27,26 +26,32 @@ namespace Lottery.Models
 
     public static class MegaSenaExtensionMethods
     {
-        public static MegaSena Load(IList<string> nodes) => new MegaSena
+        public static IEnumerable<MegaSena> Load(IList<IList<string>> items)
+        {
+            foreach (var item in items)
             {
-                LotteryId = nodes[0].ConvertToInt(),
-                DateRealized = nodes[1].ConvertToDateTime(),
-                Dozens = new int[] { nodes[2].ConvertToInt(), nodes[3].ConvertToInt(),
-                                     nodes[4].ConvertToInt(), nodes[5].ConvertToInt(),
-                                     nodes[6].ConvertToInt(), nodes[7].ConvertToInt() },
-                TotalCollection = nodes[8].ConvertToDecimal(),
-                Winners6Numbers = nodes[9].ConvertToInt(),
-                City = nodes[10].ConvertEmptyToString(),
-                UF = nodes[11].ConvertWithMetaChatToString(),
-                Average6Numbers = nodes[12].ConvertToDecimal(),
-                Winners5Numbers = nodes[13].ConvertToInt(),
-                Average5Numbers = nodes[14].ConvertToDecimal(),
-                Winners4Numbers = nodes[15].ConvertToInt(),
-                Average4Numbers = nodes[16].ConvertToDecimal(),
-                IsAccumulated = nodes[17].ConvertToBoolean(),
-                AccumulatedPrize = nodes[18].ConvertToDecimal(),
-                EstimatedPrize = nodes[19].ConvertToDecimal(),
-                AccumulatedMegaSenaVirada = nodes[20].ConvertToDecimal()
-            };
+                yield return new MegaSena
+                {
+                    LotteryId = item[0].ConvertToInt(),
+                    DateRealized = item[1].ConvertToDateTime(),
+                    Dozens = new int[] { item[2].ConvertToInt(), item[3].ConvertToInt(),
+                                     item[4].ConvertToInt(), item[5].ConvertToInt(),
+                                     item[6].ConvertToInt(), item[7].ConvertToInt() },
+                    TotalCollection = item[8].ConvertToDecimal(),
+                    Winners6Numbers = item[9].ConvertToInt(),
+                    City = item[10].ConvertEmptyToString(),
+                    UF = item[11].ConvertWithMetaChatToString(),
+                    Average6Numbers = item[12].ConvertToDecimal(),
+                    Winners5Numbers = item[13].ConvertToInt(),
+                    Average5Numbers = item[14].ConvertToDecimal(),
+                    Winners4Numbers = item[15].ConvertToInt(),
+                    Average4Numbers = item[16].ConvertToDecimal(),
+                    IsAccumulated = item[17].ConvertToBoolean(),
+                    AccumulatedPrize = item[18].ConvertToDecimal(),
+                    EstimatedPrize = item[19].ConvertToDecimal(),
+                    AccumulatedMegaSenaVirada = item[20].ConvertToDecimal()
+                };
+            }
+        }
     }
 }

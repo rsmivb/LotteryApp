@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottery.Service", "Lottery.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottery.Models", "Lottery.Models\Lottery.Models.csproj", "{1BBBBCA9-4DDF-4271-B5E2-1D03377310FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottery.Tests", "Lottery.Tests\Lottery.Tests.csproj", "{04C7169E-96DF-4AF0-8DC4-4EB497D1E368}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotteryProjectTests", "XUnitTestProject1\LotteryProjectTests.csproj", "{170F05E7-8264-48D3-AA89-158BBA30E974}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{1BBBBCA9-4DDF-4271-B5E2-1D03377310FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BBBBCA9-4DDF-4271-B5E2-1D03377310FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BBBBCA9-4DDF-4271-B5E2-1D03377310FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04C7169E-96DF-4AF0-8DC4-4EB497D1E368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04C7169E-96DF-4AF0-8DC4-4EB497D1E368}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04C7169E-96DF-4AF0-8DC4-4EB497D1E368}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04C7169E-96DF-4AF0-8DC4-4EB497D1E368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{170F05E7-8264-48D3-AA89-158BBA30E974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{170F05E7-8264-48D3-AA89-158BBA30E974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{170F05E7-8264-48D3-AA89-158BBA30E974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{170F05E7-8264-48D3-AA89-158BBA30E974}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

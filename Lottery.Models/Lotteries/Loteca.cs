@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Lottery.Models
 {
-    public class Loteca : MongoObject
+    public class Loteca : MongoModel
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -25,26 +26,32 @@ namespace Lottery.Models
 
     public static class LotecaExtensionMethods
     {
-        public static Loteca Load(IList<string> nodes) => new Loteca
+        public static IEnumerable<Loteca> Load(IList<IList<string>> items)
+        {
+            foreach (var item in items)
             {
-                LotteryId = nodes[0].ConvertToInt(),
-                DateRealized = nodes[1].ConvertToDateTime(),
-                Winners14 = nodes[2].ConvertToInt(),
-                City = nodes[3].ConvertEmptyToString(),
-                UF = nodes[4].ConvertWithMetaChatToString(),
-                Average14 = nodes[5].ConvertToDecimal(),
-                IsAcumulated = nodes[6].ConvertToBoolean(),
-                AmountValue14 = nodes[7].ConvertToDecimal(),
-                Winners13 = nodes[8].ConvertToInt(),
-                AmountValue13 = nodes[9].ConvertToDecimal(),
-                Winners12 = nodes[10].ConvertToInt(),
-                AmountValue12 = nodes[11].ConvertToDecimal(),
-                Dozens = new char[] { nodes[12].ConvertToChar(), nodes[13].ConvertToChar(), nodes[14].ConvertToChar(), nodes[15].ConvertToChar(),
-                                      nodes[16].ConvertToChar(), nodes[17].ConvertToChar(), nodes[18].ConvertToChar(), nodes[19].ConvertToChar(),
-                                      nodes[20].ConvertToChar(), nodes[21].ConvertToChar(), nodes[22].ConvertToChar(), nodes[23].ConvertToChar(),
-                                      nodes[24].ConvertToChar(), nodes[25].ConvertToChar()},
-                TotalAmount = nodes[26].ConvertToDecimal(),
-                EstimatedPrize = nodes[27].ConvertToDecimal()
-            };
+                yield return new Loteca
+                {
+                    LotteryId = item[0].ConvertToInt(),
+                    DateRealized = item[1].ConvertToDateTime(),
+                    Winners14 = item[2].ConvertToInt(),
+                    City = item[3].ConvertEmptyToString(),
+                    UF = item[4].ConvertWithMetaChatToString(),
+                    Average14 = item[5].ConvertToDecimal(),
+                    IsAcumulated = item[6].ConvertToBoolean(),
+                    AmountValue14 = item[7].ConvertToDecimal(),
+                    Winners13 = item[8].ConvertToInt(),
+                    AmountValue13 = item[9].ConvertToDecimal(),
+                    Winners12 = item[10].ConvertToInt(),
+                    AmountValue12 = item[11].ConvertToDecimal(),
+                    Dozens = new char[] { item[12].ConvertToChar(), item[13].ConvertToChar(), item[14].ConvertToChar(), item[15].ConvertToChar(),
+                                      item[16].ConvertToChar(), item[17].ConvertToChar(), item[18].ConvertToChar(), item[19].ConvertToChar(),
+                                      item[20].ConvertToChar(), item[21].ConvertToChar(), item[22].ConvertToChar(), item[23].ConvertToChar(),
+                                      item[24].ConvertToChar(), item[25].ConvertToChar()}.OrderBy(c => c).ToArray(),
+                    TotalAmount = item[26].ConvertToDecimal(),
+                    EstimatedPrize = item[27].ConvertToDecimal()
+                };
+            }
+        }
     }
 }

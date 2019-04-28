@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lottery.Models
 {
-    public class LotoFacil : MongoObject
+    public class LotoFacil : MongoModel
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -28,34 +29,40 @@ namespace Lottery.Models
 
     public static class LotoFacilExtensionMethods
     {
-        public static LotoFacil Load(IList<string> nodes) => new LotoFacil
+        public static IEnumerable<LotoFacil> Load(IList<IList<string>> items)
+        {
+            foreach (var item in items)
             {
-                LotteryId = nodes[0].ConvertToInt(),
-                DateRealized = nodes[1].ConvertToDateTime(),
-                Dozens = new int[] { nodes[2].ConvertToInt(),
-                                     nodes[3].ConvertToInt(),
-                                     nodes[4].ConvertToInt(), nodes[5].ConvertToInt(),
-                                     nodes[6].ConvertToInt(), nodes[7].ConvertToInt(),
-                                     nodes[8].ConvertToInt(), nodes[9].ConvertToInt(),
-                                     nodes[10].ConvertToInt(), nodes[11].ConvertToInt(),
-                                     nodes[12].ConvertToInt(), nodes[13].ConvertToInt(),
-                                     nodes[14].ConvertToInt(), nodes[15].ConvertToInt(), nodes[16].ConvertToInt()},
-                TotalAmount = nodes[17].ConvertToDecimal(),
-                Winners15 = nodes[18].ConvertToInt(),
-                City = nodes[19].ConvertEmptyToString(),
-                UF = nodes[20].ConvertWithMetaChatToString(),
-                Winners14 = nodes[21].ConvertToInt(),
-                Winners13 = nodes[22].ConvertToInt(),
-                Winners12 = nodes[23].ConvertToInt(),
-                Winners11 = nodes[24].ConvertToInt(),
-                AverageAmount15 = nodes[25].ConvertToDecimal(),
-                AverageAmount14 = nodes[26].ConvertToDecimal(),
-                AverageAmount13 = nodes[27].ConvertToDecimal(),
-                AverageAmount12 = nodes[28].ConvertToDecimal(),
-                AverageAmount11 = nodes[29].ConvertToDecimal(),
-                Accumulated15 = nodes[30].ConvertToDecimal(),
-                EstimatedPrize = nodes[31].ConvertToDecimal(),
-                SpecialAmount = nodes[32].ConvertToDecimal()
-            };
+                yield return new LotoFacil
+                {
+                    LotteryId = item[0].ConvertToInt(),
+                    DateRealized = item[1].ConvertToDateTime(),
+                    Dozens = new int[] { item[2].ConvertToInt(),
+                                     item[3].ConvertToInt(),
+                                     item[4].ConvertToInt(), item[5].ConvertToInt(),
+                                     item[6].ConvertToInt(), item[7].ConvertToInt(),
+                                     item[8].ConvertToInt(), item[9].ConvertToInt(),
+                                     item[10].ConvertToInt(), item[11].ConvertToInt(),
+                                     item[12].ConvertToInt(), item[13].ConvertToInt(),
+                                     item[14].ConvertToInt(), item[15].ConvertToInt(), item[16].ConvertToInt()}.OrderBy(c => c).ToArray(),
+                    TotalAmount = item[17].ConvertToDecimal(),
+                    Winners15 = item[18].ConvertToInt(),
+                    City = item[19].ConvertEmptyToString(),
+                    UF = item[20].ConvertWithMetaChatToString(),
+                    Winners14 = item[21].ConvertToInt(),
+                    Winners13 = item[22].ConvertToInt(),
+                    Winners12 = item[23].ConvertToInt(),
+                    Winners11 = item[24].ConvertToInt(),
+                    AverageAmount15 = item[25].ConvertToDecimal(),
+                    AverageAmount14 = item[26].ConvertToDecimal(),
+                    AverageAmount13 = item[27].ConvertToDecimal(),
+                    AverageAmount12 = item[28].ConvertToDecimal(),
+                    AverageAmount11 = item[29].ConvertToDecimal(),
+                    Accumulated15 = item[30].ConvertToDecimal(),
+                    EstimatedPrize = item[31].ConvertToDecimal(),
+                    SpecialAmount = item[32].ConvertToDecimal()
+                };
+            }
+        }
     }
 }

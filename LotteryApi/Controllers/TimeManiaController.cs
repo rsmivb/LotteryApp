@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lottery.Models;
+using Lottery.Repository;
 using Lottery.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace LotteryApi.Controllers
 {
@@ -13,11 +15,15 @@ namespace LotteryApi.Controllers
     {
         private readonly AppSettings _settings;
         private readonly IWebService _webService;
+        private readonly IRepository<TimeMania> _repository;
+        private readonly ILogger<TimeManiaController> _logger;
 
-        public TimeManiaController(AppSettings settings, IWebService webService)
+        public TimeManiaController(AppSettings settings, IWebService webService, IRepository<TimeMania> repository, ILogger<TimeManiaController> logger)
         {
             _settings = settings;
             _webService = webService;
+            _repository = repository;
+            _logger = logger;
         }
         // GET api/values
         [HttpGet]
@@ -55,13 +61,24 @@ namespace LotteryApi.Controllers
         {
             try
             {
-                _webService.DownloadFile(_settings.Lotteries.Where(lottery => lottery.Name == "TimeMania").SingleOrDefault(),
+                _logger.LogInformation("Get information from CEF server");
+                //download file
+                var setting = _settings.Lotteries.Where(lottery => lottery.Name == Constant.TIMEMANIA).SingleOrDefault();
+                _webService.DownloadFile(setting,
                                          string.Concat(Environment.CurrentDirectory, _settings.TempFilePath));
-                return Ok();
+                _logger.LogInformation("Load HTML file into Objects");
+                //load file into object
+                HTMLHandler handler = new HTMLHandler();
+                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _settings.TempFilePath), string.Concat($@"{setting.Name}\", setting.HtmlFileName));
+                var results = (IEnumerable<TimeMania>)handler.LoadHTMLFile(path, setting);
+                _logger.LogInformation("loading into database");
+                _repository.InsertMany(results);
+                return Ok("Loaded itens on database.");
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                _logger.LogError($"Error when try to call DownloadResultsFromSource {e.Message} - {e.StackTrace}");
+                return BadRequest("An error was found.");
             }
         }
     }

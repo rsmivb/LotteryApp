@@ -30,10 +30,11 @@ namespace Lottery.Repository
                 Collection = value;
             }
         }
-        public MongoRepository(AppSettings settings, string collectionName)
+
+        public MongoRepository(AppSettings settings)
         {
-            _collectionName = collectionName;
             _db = new MongoClient(settings.Database.Url).GetDatabase(settings.Database.Name);
+            _collectionName = settings.Lotteries.Where(lottery => lottery.Name.Equals(typeof(T).Name)).FirstOrDefault().Name;
 
             var collection = _db.GetCollection<T>(_collectionName);
             if (collection != null)

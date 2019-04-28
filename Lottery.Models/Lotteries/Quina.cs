@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lottery.Models
 {
-    public class Quina : MongoObject
+    public class Quina : MongoModel
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -28,28 +29,34 @@ namespace Lottery.Models
 
     public static class QuinaExtensionMethods
     {
-        public static Quina LoadQuina(IList<string> nodes) =>  new Quina
+        public static IEnumerable<Quina> Load(IList<IList<string>> items)
+        {
+            foreach (var item in items)
             {
-                LotteryId = nodes[0].ConvertToInt(),
-                DateRealized = nodes[1].ConvertToDateTime(),
-                Dozens = new int[] { nodes[2].ConvertToInt(), nodes[3].ConvertToInt(),
-                                             nodes[4].ConvertToInt(), nodes[5].ConvertToInt(),
-                                             nodes[6].ConvertToInt() },
-                TotalAmount = nodes[7].ConvertToDecimal(),
-                Winners5 = nodes[8].ConvertToInt(),
-                City = nodes[9].ConvertEmptyToString(),
-                UF = nodes[10].ConvertWithMetaChatToString(),
-                Average5Numbers = nodes[11].ConvertToDecimal(),
-                Winners4 = nodes[12].ConvertToInt(),
-                Average4Numbers = nodes[13].ConvertToDecimal(),
-                Winners3 = nodes[14].ConvertToInt(),
-                Average3Numbers = nodes[15].ConvertToDecimal(),
-                Winners2 = nodes[16].ConvertToInt(),
-                Average2Numbers = nodes[17].ConvertToDecimal(),
-                IsAccumulated = nodes[18].ConvertToBoolean(),
-                AccumulatedValue = nodes[19].ConvertToDecimal(),
-                EstimatePrize = nodes[20].ConvertToDecimal(),
-                AccumulatedSorteioSaoJoao = nodes[21].ConvertToDecimal()
-            };
+                yield return new Quina
+                {
+                    LotteryId = item[0].ConvertToInt(),
+                    DateRealized = item[1].ConvertToDateTime(),
+                    Dozens = new int[] { item[2].ConvertToInt(), item[3].ConvertToInt(),
+                                             item[4].ConvertToInt(), item[5].ConvertToInt(),
+                                             item[6].ConvertToInt() }.OrderBy(c => c).ToArray(),
+                    TotalAmount = item[7].ConvertToDecimal(),
+                    Winners5 = item[8].ConvertToInt(),
+                    City = item[9].ConvertEmptyToString(),
+                    UF = item[10].ConvertWithMetaChatToString(),
+                    Average5Numbers = item[11].ConvertToDecimal(),
+                    Winners4 = item[12].ConvertToInt(),
+                    Average4Numbers = item[13].ConvertToDecimal(),
+                    Winners3 = item[14].ConvertToInt(),
+                    Average3Numbers = item[15].ConvertToDecimal(),
+                    Winners2 = item[16].ConvertToInt(),
+                    Average2Numbers = item[17].ConvertToDecimal(),
+                    IsAccumulated = item[18].ConvertToBoolean(),
+                    AccumulatedValue = item[19].ConvertToDecimal(),
+                    EstimatePrize = item[20].ConvertToDecimal(),
+                    AccumulatedSorteioSaoJoao = item[21].ConvertToDecimal()
+                };
+            }
+        }
     }
 }

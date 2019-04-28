@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lottery.Models
 {
-    public class LotoMania : MongoObject
+    public class LotoMania : MongoModel
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -33,45 +34,51 @@ namespace Lottery.Models
         public decimal SpecialPrizeEstimated { get; set; }
     }
 
-    public static class LotoManiaExtensonMethods
+    public static class LotoManiaExtensionMethods
     {
-        public static LotoMania Load(IList<string> nodes) => new LotoMania
+        public static IEnumerable<LotoMania> Load(IList<IList<string>> items)
+        {
+            foreach (var item in items)
             {
-                LotteryId = nodes[0].ConvertToInt(),
-                DateRealized = nodes[1].ConvertToDateTime(),
-                Dozens = new int[] { nodes[2].ConvertToInt(),  nodes[3].ConvertToInt(),
-                                     nodes[4].ConvertToInt(),  nodes[5].ConvertToInt(),
-                                     nodes[6].ConvertToInt(),  nodes[7].ConvertToInt(),
-                                     nodes[8].ConvertToInt(),  nodes[9].ConvertToInt(),
-                                     nodes[10].ConvertToInt(), nodes[11].ConvertToInt(),
-                                     nodes[12].ConvertToInt(), nodes[13].ConvertToInt(),
-                                     nodes[14].ConvertToInt(), nodes[15].ConvertToInt(),
-                                     nodes[16].ConvertToInt(), nodes[17].ConvertToInt(),
-                                     nodes[18].ConvertToInt(), nodes[19].ConvertToInt(),
-                                     nodes[20].ConvertToInt(), nodes[21].ConvertToInt()},
-                TotalValue = nodes[22].ConvertToDecimal(),
-                TotalWinners20 = nodes[23].ConvertToInt(),
-                City = nodes[24].ConvertEmptyToString(),
-                UF = nodes[25].ConvertEmptyToString(),
-                TotalWinners19 = nodes[26].ConvertToInt(),
-                TotalWinners18 = nodes[27].ConvertToInt(),
-                TotalWinners17 = nodes[28].ConvertToInt(),
-                TotalWinners16 = nodes[29].ConvertToInt(),
-                TotalWinnersNoNumbers = nodes[30].ConvertToInt(),
-                TotalValueNumbers20 = nodes[31].ConvertToDecimal(),
-                TotalValueNumbers19 = nodes[32].ConvertToDecimal(),
-                TotalValueNumbers18 = nodes[33].ConvertToDecimal(),
-                TotalValueNumbers17 = nodes[34].ConvertToDecimal(),
-                TotalValueNumbers16 = nodes[35].ConvertToDecimal(),
-                TotalValueNoNumbers = nodes[36].ConvertToDecimal(),
-                Acumulated20 = nodes[37].ConvertToDecimal(),
-                Acumulated19 = nodes[38].ConvertToDecimal(),
-                Acumulated18 = nodes[39].ConvertToDecimal(),
-                Acumulated17 = nodes[40].ConvertToDecimal(),
-                Acumulated16 = nodes[41].ConvertToDecimal(),
-                AcumulatedNoNumbers = nodes[42].ConvertToDecimal(),
-                PrizeEstimated = nodes[43].ConvertToDecimal(),
-                SpecialPrizeEstimated = nodes[44].ConvertToDecimal()
-            };
+                yield return new LotoMania
+                {
+                    LotteryId = item[0].ConvertToInt(),
+                    DateRealized = item[1].ConvertToDateTime(),
+                    Dozens = new int[] { item[2].ConvertToInt(),  item[3].ConvertToInt(),
+                                     item[4].ConvertToInt(),  item[5].ConvertToInt(),
+                                     item[6].ConvertToInt(),  item[7].ConvertToInt(),
+                                     item[8].ConvertToInt(),  item[9].ConvertToInt(),
+                                     item[10].ConvertToInt(), item[11].ConvertToInt(),
+                                     item[12].ConvertToInt(), item[13].ConvertToInt(),
+                                     item[14].ConvertToInt(), item[15].ConvertToInt(),
+                                     item[16].ConvertToInt(), item[17].ConvertToInt(),
+                                     item[18].ConvertToInt(), item[19].ConvertToInt(),
+                                     item[20].ConvertToInt(), item[21].ConvertToInt()}.OrderBy(c => c).ToArray(),
+                    TotalValue = item[22].ConvertToDecimal(),
+                    TotalWinners20 = item[23].ConvertToInt(),
+                    City = item[24].ConvertEmptyToString(),
+                    UF = item[25].ConvertEmptyToString(),
+                    TotalWinners19 = item[26].ConvertToInt(),
+                    TotalWinners18 = item[27].ConvertToInt(),
+                    TotalWinners17 = item[28].ConvertToInt(),
+                    TotalWinners16 = item[29].ConvertToInt(),
+                    TotalWinnersNoNumbers = item[30].ConvertToInt(),
+                    TotalValueNumbers20 = item[31].ConvertToDecimal(),
+                    TotalValueNumbers19 = item[32].ConvertToDecimal(),
+                    TotalValueNumbers18 = item[33].ConvertToDecimal(),
+                    TotalValueNumbers17 = item[34].ConvertToDecimal(),
+                    TotalValueNumbers16 = item[35].ConvertToDecimal(),
+                    TotalValueNoNumbers = item[36].ConvertToDecimal(),
+                    Acumulated20 = item[37].ConvertToDecimal(),
+                    Acumulated19 = item[38].ConvertToDecimal(),
+                    Acumulated18 = item[39].ConvertToDecimal(),
+                    Acumulated17 = item[40].ConvertToDecimal(),
+                    Acumulated16 = item[41].ConvertToDecimal(),
+                    AcumulatedNoNumbers = item[42].ConvertToDecimal(),
+                    PrizeEstimated = item[43].ConvertToDecimal(),
+                    SpecialPrizeEstimated = item[44].ConvertToDecimal()
+                };
+            }
+        }
     }
 }

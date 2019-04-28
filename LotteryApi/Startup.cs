@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lottery.Models;
+using Lottery.Repository;
 using Lottery.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -67,6 +68,15 @@ namespace LotteryApi
             //add all dependencies
             services.AddSingleton<IFileHandler, FileHandler>();
             services.AddSingleton<IWebService, WebService>();
+            services.AddSingleton<IRepository<DuplaSena>, MongoRepository<DuplaSena>>();
+            services.AddSingleton<IRepository<MegaSena>, MongoRepository<MegaSena>>();
+            services.AddSingleton<IRepository<Loteca>, MongoRepository<Loteca>>();
+            services.AddSingleton<IRepository<Federal>, MongoRepository<Federal>>();
+            services.AddSingleton<IRepository<LotoFacil>, MongoRepository<LotoFacil>>();
+            services.AddSingleton<IRepository<LotoGol>, MongoRepository<LotoGol>>();
+            services.AddSingleton<IRepository<LotoMania>, MongoRepository<LotoMania>>();
+            services.AddSingleton<IRepository<Quina>, MongoRepository<Quina>>();
+            services.AddSingleton<IRepository<TimeMania>, MongoRepository<TimeMania>>();
             return services;
         }
 

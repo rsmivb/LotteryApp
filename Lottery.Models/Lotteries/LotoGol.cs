@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lottery.Models
 {
-    public class LotoGol : MongoObject
+    public class LotoGol : MongoModel
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -27,29 +28,35 @@ namespace Lottery.Models
     }
     public static class LotoGolExtensionMethods
     {
-        public static LotoGol Load(IList<string> nodes) => new LotoGol
+        public static IEnumerable<LotoGol> Load(IList<IList<string>> items)
+        {
+            foreach (var item in items)
             {
-                LotteryId = nodes[0].ConvertToInt(),
-                DateRealized = nodes[1].ConvertToDateTime(),
-                City = nodes[2].ConvertEmptyToString(),
-                UF = nodes[3].ConvertWithMetaChatToString(),
-                Winners5 = nodes[4].ConvertToInt(),
-                Average5 = nodes[5].ConvertToDecimal(),
-                IsAcumlated5 = nodes[6].ConvertToBoolean(),
-                Acumulated5 = nodes[7].ConvertToDecimal(),
-                Winners4 = nodes[8].ConvertToInt(),
-                Average4 = nodes[9].ConvertToDecimal(),
-                IsAcumlated4 = nodes[10].ConvertToBoolean(),
-                Acumulated4 = nodes[11].ConvertToDecimal(),
-                Winners3 = nodes[12].ConvertToInt(),
-                Average3 = nodes[13].ConvertToDecimal(),
-                IsAcumlated3 = nodes[14].ConvertToBoolean(),
-                Acumulated3 = nodes[15].ConvertToDecimal(),
-                Dozens = new char[] { nodes[16].ConvertToChar(), nodes[17].ConvertToChar(), nodes[18].ConvertToChar(), nodes[19].ConvertToChar(),
-                                      nodes[20].ConvertToChar(), nodes[21].ConvertToChar(), nodes[22].ConvertToChar(), nodes[23].ConvertToChar(),
-                                      nodes[24].ConvertToChar(), nodes[25].ConvertToChar() },
-                TotalAmount = nodes[26].ConvertToDecimal(),
-                EstimatedPrize = nodes[27].ConvertToDecimal()
-            };
+                yield return new LotoGol
+                {
+                    LotteryId = item[0].ConvertToInt(),
+                    DateRealized = item[1].ConvertToDateTime(),
+                    City = item[2].ConvertEmptyToString(),
+                    UF = item[3].ConvertWithMetaChatToString(),
+                    Winners5 = item[4].ConvertToInt(),
+                    Average5 = item[5].ConvertToDecimal(),
+                    IsAcumlated5 = item[6].ConvertToBoolean(),
+                    Acumulated5 = item[7].ConvertToDecimal(),
+                    Winners4 = item[8].ConvertToInt(),
+                    Average4 = item[9].ConvertToDecimal(),
+                    IsAcumlated4 = item[10].ConvertToBoolean(),
+                    Acumulated4 = item[11].ConvertToDecimal(),
+                    Winners3 = item[12].ConvertToInt(),
+                    Average3 = item[13].ConvertToDecimal(),
+                    IsAcumlated3 = item[14].ConvertToBoolean(),
+                    Acumulated3 = item[15].ConvertToDecimal(),
+                    Dozens = new char[] { item[16].ConvertToChar(), item[17].ConvertToChar(), item[18].ConvertToChar(), item[19].ConvertToChar(),
+                                      item[20].ConvertToChar(), item[21].ConvertToChar(), item[22].ConvertToChar(), item[23].ConvertToChar(),
+                                      item[24].ConvertToChar(), item[25].ConvertToChar() }.OrderBy(c => c).ToArray(),
+                    TotalAmount = item[26].ConvertToDecimal(),
+                    EstimatedPrize = item[27].ConvertToDecimal()
+                };
+            }
+        }
     }
 }

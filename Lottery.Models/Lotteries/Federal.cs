@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lottery.Models
 {
-    public class Federal : MongoObject
+    public class Federal : MongoModel
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -17,20 +17,26 @@ namespace Lottery.Models
 
     public static class FederalExtensionMethods
     {
-        public static Federal Load(IList<string> nodes) => new Federal
+        public static IEnumerable<Federal> Load(IList<IList<string>> items)
+        {
+            foreach (var item in items)
             {
-                LotteryId = nodes[0].ConvertToInt(),
-                DateRealized = nodes[1].ConvertToDateTime(),
-                Dozens = new int[] { nodes[2].ConvertToInt(),
-                                     nodes[3].ConvertToInt(),
-                                     nodes[4].ConvertToInt(),
-                                     nodes[5].ConvertToInt(),
-                                     nodes[6].ConvertToInt()},
-                Prize1 = nodes[7].ConvertToDecimal(),
-                Prize2 = nodes[8].ConvertToDecimal(),
-                Prize3 = nodes[9].ConvertToDecimal(),
-                Prize4 = nodes[10].ConvertToDecimal(),
-                Prize5 = nodes[11].ConvertToDecimal()
-            };
+                yield return new Federal
+                {
+                    LotteryId = item[0].ConvertToInt(),
+                    DateRealized = item[1].ConvertToDateTime(),
+                    Dozens = new int[] { item[2].ConvertToInt(),
+                                     item[3].ConvertToInt(),
+                                     item[4].ConvertToInt(),
+                                     item[5].ConvertToInt(),
+                                     item[6].ConvertToInt()},
+                    Prize1 = item[7].ConvertToDecimal(),
+                    Prize2 = item[8].ConvertToDecimal(),
+                    Prize3 = item[9].ConvertToDecimal(),
+                    Prize4 = item[10].ConvertToDecimal(),
+                    Prize5 = item[11].ConvertToDecimal()
+                };
+            }
+        }
     }
 }
