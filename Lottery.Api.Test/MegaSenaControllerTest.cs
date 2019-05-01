@@ -18,7 +18,6 @@ namespace Lottery.Api.Test
         [TestInitialize]
         public void Setup()
         {
-            var megaSena = new List<MegaSena>();
             var appSettings = new AppSettings();
             var mockWebService = new Mock<IWebService>();
             var mockRepo = new Mock<IRepository<MegaSena>>();
@@ -31,7 +30,7 @@ namespace Lottery.Api.Test
         public void TestMethod1()
         {
             var expectedResult = "An error was found.";
-            IActionResult result = megaSenaControllerTest.DownloadResultsFromSource();
+            var result = megaSenaControllerTest.DownloadResultsFromSource();
 
 
         }

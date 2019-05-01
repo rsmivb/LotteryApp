@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Lottery.Models
 {
@@ -16,6 +17,16 @@ namespace Lottery.Models
 
         public static bool ConvertToBoolean(this string node) => node.Trim().ToUpper().Equals(Constant.YES) ? true : false;
 
-        public static char ConvertToChar(this string node) => Char.Parse(node.Trim());
+        public static char ConvertToChar(this string node)
+        {
+            try
+            {
+                return Char.Parse(node.Trim());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -10,18 +10,22 @@ namespace Lottery.Repository
 {
     public interface IRepository<T> where T : class, new()
     {
-        T GetOne(Expression<Func<T, bool>> expression);
+        T GetOne(FilterDefinition<T> filter);
 
-        IEnumerable<T> GetByFilterAsync(Expression<Func<T, bool>> expression);
+        IEnumerable<T> GetByFilterAsync(FilterDefinition<T> filter);
 
-        Task<T> FindOneAndUpdate(Expression<Func<T, bool>> expression, UpdateDefinition<T> update, FindOneAndUpdateOptions<T> option);
+        IEnumerable<T> GetAll();
 
-        void UpdateOne(Expression<Func<T, bool>> expression, UpdateDefinition<T> update);
+        Task<T> FindOneAndUpdate(FilterDefinition<T> filter, UpdateDefinition<T> update, FindOneAndUpdateOptions<T> option);
 
-        void DeleteOne(Expression<Func<T, bool>> expression);
+        void UpdateOne(FilterDefinition<T> filter, UpdateDefinition<T> update);
+
+        void DeleteOne(FilterDefinition<T> filter);
 
         void InsertMany(IEnumerable<T> items);
 
         void InsertOne(T item);
+
+        void CreateDatabase();
     }
 }

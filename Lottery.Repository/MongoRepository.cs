@@ -35,39 +35,35 @@ namespace Lottery.Repository
         {
             _db = new MongoClient(settings.Database.Url).GetDatabase(settings.Database.Name);
             _collectionName = settings.Lotteries.Where(lottery => lottery.Name.Equals(typeof(T).Name)).FirstOrDefault().Name;
-
-            var collection = _db.GetCollection<T>(_collectionName);
-            if (collection != null)
-            {
-                _db.DropCollection(_collectionName);
-            }
-            _db.CreateCollection(_collectionName);
+        }
+        public T GetOne(FilterDefinition<T> filter)
+        {
+            return Collection.Find(filter).SingleOrDefault();
         }
 
-        public T GetOne(Expression<Func<T, bool>> expression)
+        public IEnumerable<T> GetByFilterAsync(FilterDefinition<T> filter)
         {
-            return Collection.Find(expression).SingleOrDefault();
+            return Collection.Find(filter).ToListAsync().Result;
         }
 
-        public IEnumerable<T> GetByFilterAsync(Expression<Func<T, bool>> expression)
+        public IEnumerable<T> GetAll()
         {
-            var result = Collection.FindAsync(expression).Result;
-            return result.ToEnumerable();
+            return Collection.Find(Builders<T>.Filter.Empty).ToListAsync().Result;
         }
 
-        public async Task<T> FindOneAndUpdate(Expression<Func<T, bool>> expression, UpdateDefinition<T> update, FindOneAndUpdateOptions<T> option)
+        public async Task<T> FindOneAndUpdate(FilterDefinition<T> filter, UpdateDefinition<T> update, FindOneAndUpdateOptions<T> option)
         {
-            return await Collection.FindOneAndUpdateAsync(expression, update, option);
+            return await Collection.FindOneAndUpdateAsync(filter, update, option);
         }
 
-        public void UpdateOne(Expression<Func<T, bool>> expression, UpdateDefinition<T> update)
+        public void UpdateOne(FilterDefinition<T> filter, UpdateDefinition<T> update)
         {
-            Collection.UpdateOneAsync(expression, update);
+            Collection.UpdateOneAsync(filter, update);
         }
 
-        public void DeleteOne(Expression<Func<T, bool>> expression)
+        public void DeleteOne(FilterDefinition<T> filter)
         {
-            Collection.DeleteOneAsync(expression);
+            Collection.DeleteOneAsync(filter);
         }
 
         public void InsertMany(IEnumerable<T> items)
@@ -78,6 +74,16 @@ namespace Lottery.Repository
         public void InsertOne(T item)
         {
             Collection.InsertOneAsync(item);
+        }
+
+        public void CreateDatabase()
+        {
+            var collection = _db.GetCollection<T>(_collectionName).EstimatedDocumentCount();
+            if (collection > 0)
+            {
+                _db.DropCollection(_collectionName);
+            }
+            _db.CreateCollection(_collectionName);
         }
     }
 }

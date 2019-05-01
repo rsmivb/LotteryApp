@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2050
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryApi", "LotteryApi\LotteryApi.csproj", "{625810C4-A2CB-424B-924E-8E509AA5A147}"
 EndProject
@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottery.Service", "Lottery.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottery.Models", "Lottery.Models\Lottery.Models.csproj", "{1BBBBCA9-4DDF-4271-B5E2-1D03377310FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotteryProjectTests", "XUnitTestProject1\LotteryProjectTests.csproj", "{170F05E7-8264-48D3-AA89-158BBA30E974}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottery.Service.Tests", "Lottery.Service.Tests\Lottery.Service.Tests.csproj", "{0DE2BC14-8788-4905-B387-16D32E11A3BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotteryApi.Test", "Lottery.Api.Test\LotteryApi.Test.csproj", "{85DD0AFE-A2C7-4BBD-92A0-2E57E5C04A7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +37,14 @@ Global
 		{1BBBBCA9-4DDF-4271-B5E2-1D03377310FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BBBBCA9-4DDF-4271-B5E2-1D03377310FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BBBBCA9-4DDF-4271-B5E2-1D03377310FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{170F05E7-8264-48D3-AA89-158BBA30E974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{170F05E7-8264-48D3-AA89-158BBA30E974}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{170F05E7-8264-48D3-AA89-158BBA30E974}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{170F05E7-8264-48D3-AA89-158BBA30E974}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DE2BC14-8788-4905-B387-16D32E11A3BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DE2BC14-8788-4905-B387-16D32E11A3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DE2BC14-8788-4905-B387-16D32E11A3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DE2BC14-8788-4905-B387-16D32E11A3BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85DD0AFE-A2C7-4BBD-92A0-2E57E5C04A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85DD0AFE-A2C7-4BBD-92A0-2E57E5C04A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85DD0AFE-A2C7-4BBD-92A0-2E57E5C04A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85DD0AFE-A2C7-4BBD-92A0-2E57E5C04A7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

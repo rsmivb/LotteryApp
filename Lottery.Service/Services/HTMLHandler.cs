@@ -3,6 +3,7 @@ using Lottery.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Lottery.Services
 {
@@ -18,7 +19,10 @@ namespace Lottery.Services
             try
             {
                 var doc = new HtmlDocument();
-                doc.Load(path);
+                doc.Load(path, Encoding.UTF7);
+                //doc.Load(path, Encoding.UTF8);
+
+                //doc.DetectEncodingAndLoad(path);
                 if (doc != null)
                 {
                     var trs = doc.DocumentNode.SelectNodes("//tr").Skip(1); //Skip headers on table
@@ -39,10 +43,6 @@ namespace Lottery.Services
                         if (nodes.Count == lotterySettings.Columns)
                         {
                             lines.Add(nodes);
-                        }
-                        else
-                        {
-                            Console.WriteLine(nodes.Count);
                         }
                         nodes = new List<string>();
                     }

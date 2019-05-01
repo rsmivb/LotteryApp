@@ -12,9 +12,9 @@ namespace Lottery.Services
 {
     public class WebService : IWebService
     {
-        private readonly IFileHandler _fileHandler;
+        private readonly IFileHandlerService _fileHandler;
 
-        public WebService(IFileHandler fileHandler)
+        public WebService(IFileHandlerService fileHandler)
         {
             _fileHandler = fileHandler;
         }
