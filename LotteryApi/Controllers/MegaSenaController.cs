@@ -81,16 +81,16 @@ namespace LotteryApi.Controllers
                 _webService.DownloadFile(Constant.MEGASENA);
                 _logger.LogInformation("api/megasena/downloadResultsFromSource - Load HTML file into Objects");
 
-                var results = (IEnumerable<MegaSena>)_lotteryService.Load(Constant.MEGASENA);
+                var results = _lotteryService.Load(Constant.MEGASENA);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
-                _repository.InsertMany(results);
+                _repository.InsertMany(results as IList<MegaSena>);
                 return Ok("All items have been loaded to database.");
             }
             catch (Exception e)
             {
                 _logger.LogError($"api/megasena/downloadResultsFromSource - Error when try to call DownloadResultsFromSource {e.Message} - {e.StackTrace}");
-                return BadRequest("An error was found.");
+                return NotFound("An error was found.");
             }
         }
     }

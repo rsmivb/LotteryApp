@@ -27,7 +27,7 @@ namespace Lottery.Services
         public IEnumerable<MongoModel> ChooseLottery(List<List<string>> htmlLines, string lotteryName)
         {
             _logger.LogDebug($"Initializing loading for lottery {lotteryName}");
-            IEnumerable<MongoModel> results = new List<MongoModel>();
+            IEnumerable<MongoModel> results;
             switch (lotteryName)
             {
                 case "DuplaSena":
