@@ -55,7 +55,7 @@ namespace Lottery.Api.Test
         }
         [TestMethod]
         [TestCategory("Controller Test - MegaSena Lottery")]
-        public async void DownloadResultsFromSource_Test()
+        public void DownloadResultsFromSource_Test()
         {
             mockLotteryService.SetReturnsDefault(listOfLottery);
             megaSenaControllerTest = new MegaSenaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);

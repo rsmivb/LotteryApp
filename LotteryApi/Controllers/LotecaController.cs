@@ -87,7 +87,7 @@ namespace LotteryApi.Controllers
             catch (Exception e)
             {
                 _logger.LogError($"api/loteca/downloadResultsFromSource - Error when try to call DownloadResultsFromSource {e.Message} - {e.StackTrace}");
-                return BadRequest("An error was found.");
+                return NotFound("An error was found.");
             }
         }
     }

@@ -52,11 +52,6 @@ namespace LotteryApi.Controllers
             try
             {
                 _logger.LogInformation("api/megasena/dozenByQuantity - Getting data from mongo database");
-                var result = _repository.GetAll();
-                //        i.SelectMany(s => s.Many).GroupBy(g => g)
-                //.Select(s => new { Key = s.Key, Count = s.Count() })
-                //.OrderBy(o => o.Key)
-                //.ToDictionary(d => d.Key, d => d.Count);
                 var projectNumbers = _repository.GetAll() //get all megasena lottery entries
                                     .SelectMany(lottery => lottery.Dozens) //select all list of dozens
                                     .GroupBy(dozens => dozens) // group into a new list

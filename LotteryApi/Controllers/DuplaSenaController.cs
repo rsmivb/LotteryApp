@@ -97,7 +97,7 @@ namespace LotteryApi.Controllers
             catch (Exception e)
             {
                 _logger.LogError($"Error when try to call DownloadResultsFromSource {e.Message} - {e.StackTrace}");
-                return BadRequest("An error was found.");
+                return NotFound("An error was found.");
             }
         }
     }
