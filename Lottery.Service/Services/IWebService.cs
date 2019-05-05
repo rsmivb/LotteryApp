@@ -4,6 +4,6 @@ namespace Lottery.Services
 {
     public interface IWebService
     {
-        void DownloadFile(LotterySetting setting, string partialPath);
+        void DownloadFile(string lotteryName);
     }
 }

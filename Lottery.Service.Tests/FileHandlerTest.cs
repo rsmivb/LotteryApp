@@ -15,15 +15,16 @@ namespace Lottery.Service.Tests
         private string _zipFileTest;
         private string _folderToZip;
         private string _zipFile;
+        private string _zipFolder;
 
         [TestInitialize]
         public void Setup()
         {
             _fileHandler = new FileHandlerService();
             _folderPath = @"C:\TempFolderTest";
-            _zipFileTest = @"C:\ZipFileTest\Test.txt";
-            _folderToZip = @"C:\ZipFileTest\";
-            _zipFile = @"C:\ZipFolderTest\testZip.zip";
+            _zipFileTest = $@"{_folderPath}\ZipFileTest\Test.txt";
+            _folderToZip = $@"{_folderPath}\ZipFileTest\";
+            _zipFile = $@"{_folderPath}\ZipFolderTest\testZip.zip";
 
         }
         [TestCategory("File Handler Service Test")]
@@ -40,17 +41,17 @@ namespace Lottery.Service.Tests
         [TestMethod]
         public void UnZipFolder_Test()
         {
-            var expectedZipFile = @"C:\ZipFolderTest\testZip.zip";
-            _fileHandler.CreateFolder(@"C:\ZipFolderTest");
+            var expectedZipFile = @"C:\TempFolderTest\ZipFolderTest\testZip.zip";
+            _fileHandler.CreateFolder(@"C:\TempFolderTest\ZipFolderTest");
             CreateZipTestFile();
             Assert.IsTrue(System.IO.File.Exists(expectedZipFile));
 
             _fileHandler.ExtractFile(_zipFile, _folderPath);
-            var expectedFile = @"C:\TempFolderTest\ZipFileTest\Test.txt";
-            Assert.IsFalse(System.IO.File.Exists(expectedFile));
+            var expectedFile = @"C:\TempFolderTest\Test.txt";
+            Assert.IsTrue(System.IO.File.Exists(expectedFile));
 
             _fileHandler.CleanUpFolder(_folderPath);
-            _fileHandler.CleanUpFolder(_folderToZip);
+            Assert.IsFalse(System.IO.Directory.Exists(_folderPath));
         }
         private void CreateZipTestFile()
         {

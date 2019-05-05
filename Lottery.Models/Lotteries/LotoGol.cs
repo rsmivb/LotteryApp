@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lottery.Models
 {
-    public class LotoGol : MongoModel
+    public class LotoGol : MongoModel, IEquatable<LotoGol>
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -22,13 +22,68 @@ namespace Lottery.Models
         public decimal Average3 { get; set; }
         public bool IsAcumlated3 { get; set; }
         public decimal Acumulated3 { get; set; }
-        public char[] Dozens { get; set; }
+        public List<char> Dozens { get; set; }
         public decimal TotalAmount { get; set; }
         public decimal EstimatedPrize { get; set; }
+        public override string ToString()
+        {
+            return $"{{ {LotteryId}-{DateRealized}-{City}-{UF}-{Winners5}-{Average5}-{IsAcumlated5}-{Acumulated5}-{Winners4}-{Average4}-{IsAcumlated4}-{Acumulated4}-{Winners3}-{Average3}-{IsAcumlated3}-{Acumulated3}-[{string.Join(",", Dozens)}]-{TotalAmount}-{EstimatedPrize} }}";
+        }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as LotoGol);
+        }
+        public bool Equals(LotoGol other)
+        {
+            return other != null &&
+                   LotteryId == other.LotteryId &&
+                   DateRealized == other.DateRealized &&
+                   City == other.City &&
+                   UF == other.UF &&
+                   Winners5 == other.Winners5 &&
+                   Average5 == other.Average5 &&
+                   IsAcumlated5 == other.IsAcumlated5 &&
+                   Acumulated5 == other.Acumulated5 &&
+                   Winners4 == other.Winners4 &&
+                   Average4 == other.Average4 &&
+                   IsAcumlated4 == other.IsAcumlated4 &&
+                   Acumulated4 == other.Acumulated4 &&
+                   Winners3 == other.Winners3 &&
+                   Average3 == other.Average3 &&
+                   IsAcumlated3 == other.IsAcumlated3 &&
+                   Acumulated3 == other.Acumulated3 &&
+                   EqualityComparer<List<char>>.Default.Equals(Dozens, other.Dozens) &&
+                   TotalAmount == other.TotalAmount &&
+                   EstimatedPrize == other.EstimatedPrize;
+        }
+        public override int GetHashCode()
+        {
+            var hashCode = -710035858;
+            hashCode = hashCode * -1521134295 + LotteryId.GetHashCode();
+            hashCode = hashCode * -1521134295 + DateRealized.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UF);
+            hashCode = hashCode * -1521134295 + Winners5.GetHashCode();
+            hashCode = hashCode * -1521134295 + Average5.GetHashCode();
+            hashCode = hashCode * -1521134295 + IsAcumlated5.GetHashCode();
+            hashCode = hashCode * -1521134295 + Acumulated5.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners4.GetHashCode();
+            hashCode = hashCode * -1521134295 + Average4.GetHashCode();
+            hashCode = hashCode * -1521134295 + IsAcumlated4.GetHashCode();
+            hashCode = hashCode * -1521134295 + Acumulated4.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners3.GetHashCode();
+            hashCode = hashCode * -1521134295 + Average3.GetHashCode();
+            hashCode = hashCode * -1521134295 + IsAcumlated3.GetHashCode();
+            hashCode = hashCode * -1521134295 + Acumulated3.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<char>>.Default.GetHashCode(Dozens);
+            hashCode = hashCode * -1521134295 + TotalAmount.GetHashCode();
+            hashCode = hashCode * -1521134295 + EstimatedPrize.GetHashCode();
+            return hashCode;
+        }
     }
     public static class LotoGolExtensionMethods
     {
-        public static IEnumerable<LotoGol> Load(IList<IList<string>> items)
+        public static IEnumerable<LotoGol> Load(List<List<string>> items)
         {
             foreach (var item in items)
             {
@@ -50,9 +105,9 @@ namespace Lottery.Models
                     Average3 = item[13].ConvertToDecimal(),
                     IsAcumlated3 = item[14].ConvertToBoolean(),
                     Acumulated3 = item[15].ConvertToDecimal(),
-                    Dozens = new char[] { item[16].ConvertToChar(), item[17].ConvertToChar(), item[18].ConvertToChar(), item[19].ConvertToChar(),
+                    Dozens = new List<char> { item[16].ConvertToChar(), item[17].ConvertToChar(), item[18].ConvertToChar(), item[19].ConvertToChar(),
                                       item[20].ConvertToChar(), item[21].ConvertToChar(), item[22].ConvertToChar(), item[23].ConvertToChar(),
-                                      item[24].ConvertToChar(), item[25].ConvertToChar() }.OrderBy(c => c).ToArray(),
+                                      item[24].ConvertToChar(), item[25].ConvertToChar() }.OrderBy(c => c).ToList(),
                     TotalAmount = item[26].ConvertToDecimal(),
                     EstimatedPrize = item[27].ConvertToDecimal()
                 };

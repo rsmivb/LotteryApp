@@ -13,17 +13,20 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class LotoGolController : Controller
     {
-        private readonly AppSettings _settings;
         private readonly IWebService _webService;
         private readonly IRepository<LotoGol> _repository;
         private readonly ILogger<LotoGolController> _logger;
+        private readonly ILotteryService _lotteryService;
 
-        public LotoGolController(AppSettings settings, IWebService webService, IRepository<LotoGol> repository, ILogger<LotoGolController> logger)
+        public LotoGolController(IWebService webService,
+            IRepository<LotoGol> repository,
+            ILogger<LotoGolController> logger,
+            ILotteryService lotteryService)
         {
-            _settings = settings;
             _webService = webService;
             _repository = repository;
             _logger = logger;
+            _lotteryService = lotteryService;
         }
         // GET api/lotogol/allLoteries
         [HttpGet("AllLoteries")]
@@ -71,14 +74,9 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                var setting = _settings.Lotteries.Where(lottery => lottery.Name == Constant.LOTOGOL).SingleOrDefault();
-                _webService.DownloadFile(setting,
-                                         string.Concat(Environment.CurrentDirectory, _settings.TempFilePath));
+                _webService.DownloadFile(Constant.LOTOGOL);
                 _logger.LogInformation("Load HTML file into Objects");
-                //load file into object
-                HTMLHandler handler = new HTMLHandler();
-                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _settings.TempFilePath), string.Concat($@"{setting.Name}\", setting.HtmlFileName));
-                var results = (IEnumerable<LotoGol>)handler.LoadHTMLFile(path, setting);
+                var results = (IEnumerable<LotoGol>)_lotteryService.Load(Constant.LOTOGOL);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);

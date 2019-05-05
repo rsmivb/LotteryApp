@@ -18,16 +18,16 @@ namespace Lottery.Api.Test
         [TestInitialize]
         public void Setup()
         {
-            var appSettings = new AppSettings();
             var mockWebService = new Mock<IWebService>();
             var mockRepo = new Mock<IRepository<MegaSena>>();
             var mockwebService = new Mock<IWebService>();
             var mockLog = new Mock<ILogger<MegaSenaController>>();
-            megaSenaControllerTest = new MegaSenaController(appSettings, mockwebService.Object, mockRepo.Object, mockLog.Object);
+            var mockLotteryService = new Mock<ILotteryService>();
+            megaSenaControllerTest = new MegaSenaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
         }
         [TestMethod]
         [TestCategory("Controller Test - MegaSena Lottery")]
-        public void TestMethod1()
+        public void DownloadResultsFromSource_Test()
         {
             var expectedResult = "An error was found.";
             var result = megaSenaControllerTest.DownloadResultsFromSource();

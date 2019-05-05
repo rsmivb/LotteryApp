@@ -13,17 +13,20 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class QuinaController : Controller
     {
-        private readonly AppSettings _settings;
         private readonly IWebService _webService;
         private readonly IRepository<Quina> _repository;
         private readonly ILogger<QuinaController> _logger;
+        private readonly ILotteryService _lotteryService;
 
-        public QuinaController(AppSettings settings, IWebService webService, IRepository<Quina> repository, ILogger<QuinaController> logger)
+        public QuinaController( IWebService webService,
+            IRepository<Quina> repository,
+            ILogger<QuinaController> logger,
+            ILotteryService lotteryService)
         {
-            _settings = settings;
             _webService = webService;
             _repository = repository;
             _logger = logger;
+            _lotteryService = lotteryService;
         }
         // GET api/quina/allLoteries
         [HttpGet("AllLoteries")]
@@ -72,15 +75,10 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("api/quina/downloadResultsFromSource - Get information from CEF server");
                 //download file
-                var setting = _settings.Lotteries.Where(lottery => lottery.Name == Constant.QUINA).SingleOrDefault();
-                _webService.DownloadFile(setting,
-                                         string.Concat(Environment.CurrentDirectory, _settings.TempFilePath));
+                _webService.DownloadFile(Constant.QUINA);
                 _logger.LogInformation("api/quina/downloadResultsFromSource - Load HTML file into Objects");
                 //load file into object
-                HTMLHandler handler = new HTMLHandler();
-                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _settings.TempFilePath), string.Concat($@"{setting.Name}\", setting.HtmlFileName));
-                var results = (IEnumerable<Quina>)handler.LoadHTMLFile(path, setting);
-                _logger.LogInformation("api/quina/downloadResultsFromSource - loading into database");
+                var results = (IEnumerable<Quina>)_lotteryService.Load(Constant.QUINA);
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);
                 return Ok("Loaded itens on database.");

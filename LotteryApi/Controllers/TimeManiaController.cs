@@ -13,17 +13,20 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class TimeManiaController : Controller
     {
-        private readonly AppSettings _settings;
         private readonly IWebService _webService;
         private readonly IRepository<TimeMania> _repository;
         private readonly ILogger<TimeManiaController> _logger;
+        private readonly ILotteryService _lotteryService;
 
-        public TimeManiaController(AppSettings settings, IWebService webService, IRepository<TimeMania> repository, ILogger<TimeManiaController> logger)
+        public TimeManiaController( IWebService webService,
+            IRepository<TimeMania> repository,
+            ILogger<TimeManiaController> logger,
+            ILotteryService lotteryService)
         {
-            _settings = settings;
             _webService = webService;
             _repository = repository;
             _logger = logger;
+            _lotteryService = lotteryService;
         }
         // GET api/timemania/allLoteries
         [HttpGet("AllLoteries")]
@@ -81,14 +84,10 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                var setting = _settings.Lotteries.Where(lottery => lottery.Name == Constant.TIMEMANIA).SingleOrDefault();
-                _webService.DownloadFile(setting,
-                                         string.Concat(Environment.CurrentDirectory, _settings.TempFilePath));
+                _webService.DownloadFile(Constant.TIMEMANIA);
+
                 _logger.LogInformation("Load HTML file into Objects");
-                //load file into object
-                HTMLHandler handler = new HTMLHandler();
-                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _settings.TempFilePath), string.Concat($@"{setting.Name}\", setting.HtmlFileName));
-                var results = (IEnumerable<TimeMania>)handler.LoadHTMLFile(path, setting);
+                var results = (IEnumerable<TimeMania>)_lotteryService.Load(Constant.TIMEMANIA);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);

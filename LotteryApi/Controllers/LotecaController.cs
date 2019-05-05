@@ -13,17 +13,20 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class LotecaController : Controller
     {
-        private readonly AppSettings _settings;
         private readonly IWebService _webService;
         private readonly IRepository<Loteca> _repository;
         private readonly ILogger<LotecaController> _logger;
+        private readonly ILotteryService _lotteryService;
 
-        public LotecaController(AppSettings settings, IWebService webService, IRepository<Loteca> repository, ILogger<LotecaController> logger)
+        public LotecaController(IWebService webService,
+            IRepository<Loteca> repository,
+            ILogger<LotecaController> logger,
+            ILotteryService lotteryService)
         {
-            _settings = settings;
             _webService = webService;
             _repository = repository;
             _logger = logger;
+            _lotteryService = lotteryService;
         }
         // GET api/loteca/allLoteries
         [HttpGet("AllLoteries")]
@@ -72,15 +75,11 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("api/loteca/downloadResultsFromSource - Get information from CEF server");
                 //download file
-                var setting = _settings.Lotteries.Where(lottery => lottery.Name == Constant.LOTECA).SingleOrDefault();
-                _webService.DownloadFile(setting,
-                                         string.Concat(Environment.CurrentDirectory, _settings.TempFilePath));
+                _webService.DownloadFile(Constant.LOTECA);
                 _logger.LogInformation("api/loteca/downloadResultsFromSource - Load HTML file into Objects");
                 //load file into object
-                HTMLHandler handler = new HTMLHandler();
-                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _settings.TempFilePath), string.Concat($@"{setting.Name}\", setting.HtmlFileName));
-                var results = (IEnumerable<Loteca>)handler.LoadHTMLFile(path, setting);
-                _logger.LogInformation("api/loteca/downloadResultsFromSource - Loading into database");
+                var results = (IEnumerable<Loteca>)_lotteryService.Load(Constant.LOTECA);
+                _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);
                 return Ok("Loaded itens on database.");

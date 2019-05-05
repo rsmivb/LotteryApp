@@ -14,17 +14,20 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class DuplaSenaController : Controller
     {
-        private readonly AppSettings _settings;
         private readonly IWebService _webService;
         private readonly IRepository<DuplaSena> _repository;
         private readonly ILogger<DuplaSenaController> _logger;
+        private readonly ILotteryService _lotteryService;
 
-        public DuplaSenaController(AppSettings settings, IWebService webService, IRepository<DuplaSena> repository, ILogger<DuplaSenaController> logger)
+        public DuplaSenaController(IWebService webService,
+            IRepository<DuplaSena> repository,
+            ILogger<DuplaSenaController> logger,
+            ILotteryService lotteryService)
         {
-            _settings = settings;
             _webService = webService;
             _repository = repository;
             _logger = logger;
+            _lotteryService = lotteryService;
         }
         // GET api/duplasena/allLoteries
         [HttpGet("AllLoteries")]
@@ -82,14 +85,10 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                var setting = _settings.Lotteries.Where(lottery => lottery.Name == Constant.DUPLASENA).SingleOrDefault();
-                _webService.DownloadFile(setting,
-                                         string.Concat(Environment.CurrentDirectory, _settings.TempFilePath));
+                _webService.DownloadFile(Constant.DUPLASENA);
                 _logger.LogInformation("Load HTML file into Objects");
                 //load file into object
-                HTMLHandler handler = new HTMLHandler();
-                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _settings.TempFilePath), string.Concat($@"{setting.Name}\",setting.HtmlFileName));
-                var results = (IEnumerable<DuplaSena>)handler.LoadHTMLFile(path,setting);
+                var results = (IEnumerable<DuplaSena>)_lotteryService.Load(Constant.DUPLASENA);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);

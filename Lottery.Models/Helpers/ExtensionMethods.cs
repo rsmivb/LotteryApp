@@ -25,7 +25,7 @@ namespace Lottery.Models
             }
             catch (Exception)
             {
-                throw;
+                return Char.Parse(string.Empty);
             }
         }
     }

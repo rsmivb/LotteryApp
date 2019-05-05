@@ -66,8 +66,11 @@ namespace LotteryApi
         public static IServiceCollection LoadDependencies(this IServiceCollection services)
         {
             //add all dependencies
-            services.AddSingleton<IFileHandlerService, FileHandlerService>();
-            services.AddSingleton<IWebService, WebService>();
+            services.AddTransient<IFileHandlerService, FileHandlerService>();
+            services.AddTransient<IWebService, WebService>();
+            services.AddTransient<IHTMLHandlerService, HTMLHandlerService>();
+            services.AddTransient<ILotteryService, LotteryService>();
+
             services.AddSingleton<IRepository<DuplaSena>, MongoRepository<DuplaSena>>();
             services.AddSingleton<IRepository<MegaSena>, MongoRepository<MegaSena>>();
             services.AddSingleton<IRepository<Loteca>, MongoRepository<Loteca>>();

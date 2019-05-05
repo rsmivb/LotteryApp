@@ -13,17 +13,20 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class LotoFacilController : Controller
     {
-        private readonly AppSettings _settings;
         private readonly IWebService _webService;
         private readonly IRepository<LotoFacil> _repository;
         private readonly ILogger<LotoFacilController> _logger;
+        private readonly ILotteryService _lotteryService;
 
-        public LotoFacilController(AppSettings settings, IWebService webService, IRepository<LotoFacil> repository, ILogger<LotoFacilController> logger)
+        public LotoFacilController(IWebService webService,
+            IRepository<LotoFacil> repository,
+            ILogger<LotoFacilController> logger,
+            ILotteryService lotteryService)
         {
-            _settings = settings;
             _webService = webService;
             _repository = repository;
             _logger = logger;
+            _lotteryService = lotteryService;
         }
         // GET api/lotofacil/allLoteries
         [HttpGet("AllLoteries")]
@@ -72,15 +75,11 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("api/lotofacil/downloadResultsFromSource - Get information from CEF server");
                 //download file
-                var setting = _settings.Lotteries.Where(lottery => lottery.Name == Constant.LOTOFACIL).SingleOrDefault();
-                _webService.DownloadFile(setting,
-                                         string.Concat(Environment.CurrentDirectory, _settings.TempFilePath));
+                _webService.DownloadFile(Constant.LOTOFACIL);
                 _logger.LogInformation("api/lotofacil/downloadResultsFromSource - Load HTML file into Objects");
                 //load file into object
-                HTMLHandler handler = new HTMLHandler();
-                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _settings.TempFilePath), string.Concat($@"{setting.Name}\", setting.HtmlFileName));
-                var results = (IEnumerable<LotoFacil>)handler.LoadHTMLFile(path, setting);
-                _logger.LogInformation("api/lotofacil/downloadResultsFromSource - loading into database");
+                var results = (IEnumerable<LotoFacil>)_lotteryService.Load(Constant.LOTOFACIL);
+                _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);
                 return Ok("Loaded itens on database.");

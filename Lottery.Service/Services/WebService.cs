@@ -13,37 +13,30 @@ namespace Lottery.Services
     public class WebService : IWebService
     {
         private readonly IFileHandlerService _fileHandler;
+        private readonly AppSettings _settings;
 
-        public WebService(IFileHandlerService fileHandler)
+        public WebService(IFileHandlerService fileHandler, AppSettings settings)
         {
             _fileHandler = fileHandler;
+            _settings = settings;
         }
-
-        private void CreateFolder(string path)
-        {
-            _fileHandler.CreateFolder(path);
-        }
-
-        private void ExtractFile(string path, string destinationPath)
-        {
-            _fileHandler.ExtractFile(path, destinationPath);
-        }
-
-        public void DownloadFile(LotterySetting setting, string path)
+        public void DownloadFile(string lotteryName)
         {
             try
             {
-                if (setting == null) throw new ArgumentNullException("Object Lottery setting must not be null.");
-                CreateFolder(path);
+                var _setting = _settings.Lotteries.Where(l => l.Name.Equals(lotteryName)).FirstOrDefault();
+                if (_setting == null) throw new ArgumentNullException("Object Lottery setting must not be null.");
+                string path = string.Concat(Environment.CurrentDirectory, _settings.TempFilePath);
+                _fileHandler.CreateFolder(path);
 
                 CookieContainer myContainer = new CookieContainer();
-                var request = (HttpWebRequest)WebRequest.Create(setting.WebService);
+                var request = (HttpWebRequest)WebRequest.Create(_setting.WebService);
                 request.MaximumAutomaticRedirections = 1;
                 request.AllowAutoRedirect = true;
                 request.CookieContainer = myContainer;
                 var response = (HttpWebResponse)request.GetResponse();
-                var filePath = Path.Combine(path, setting.ZipFileName);
-                var destinationPath = Path.Combine(path, setting.Name);
+                var filePath = Path.Combine(path, _setting.ZipFileName);
+                var destinationPath = Path.Combine(path, _setting.Name);
                 using (var responseStream = response.GetResponseStream())
                 {
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -51,7 +44,7 @@ namespace Lottery.Services
                         responseStream.CopyTo(fileStream);
                     }
                 }
-                ExtractFile(filePath, destinationPath);
+                _fileHandler.ExtractFile(path, destinationPath);
             }
             catch (Exception e)
             {

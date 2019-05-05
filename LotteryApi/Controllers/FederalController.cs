@@ -13,17 +13,20 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class FederalController : Controller
     {
-        private readonly AppSettings _settings;
         private readonly IWebService _webService;
         private readonly IRepository<Federal> _repository;
         private readonly ILogger<FederalController> _logger;
+        private readonly ILotteryService _lotteryService;
 
-        public FederalController(AppSettings settings, IWebService webService, IRepository<Federal> repository, ILogger<FederalController> logger)
+        public FederalController(IWebService webService,
+            IRepository<Federal> repository,
+            ILogger<FederalController> logger,
+            ILotteryService lotteryService)
         {
-            _settings = settings;
             _webService = webService;
             _repository = repository;
             _logger = logger;
+            _lotteryService = lotteryService;
         }
         // GET api/loteca/allLoteries
         [HttpGet("AllLoteries")]
@@ -71,17 +74,14 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                var setting = _settings.Lotteries.Where(lottery => lottery.Name == Constant.FEDERAL).SingleOrDefault();
-                _webService.DownloadFile(setting,
-                                         string.Concat(Environment.CurrentDirectory, _settings.TempFilePath));
+                _webService.DownloadFile(Constant.FEDERAL);
                 _logger.LogInformation("Load HTML file into Objects");
                 //load file into object
-                HTMLHandler handler = new HTMLHandler();
-                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _settings.TempFilePath), string.Concat($@"{setting.Name}\", setting.HtmlFileName));
-                var results = (IEnumerable<Federal>)handler.LoadHTMLFile(path, setting);
+                var results = (IEnumerable<Federal>)_lotteryService.Load(Constant.FEDERAL);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);
+
                 return Ok("Loaded itens on database.");
             }
             catch (Exception e)

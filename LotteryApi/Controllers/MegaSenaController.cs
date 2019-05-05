@@ -13,17 +13,20 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class MegaSenaController : Controller
     {
-        private readonly AppSettings _settings;
         private readonly IWebService _webService;
         private readonly IRepository<MegaSena> _repository;
         private readonly ILogger<MegaSenaController> _logger;
+        private readonly ILotteryService _lotteryService;
 
-        public MegaSenaController(AppSettings settings, IWebService webService, IRepository<MegaSena> repository, ILogger<MegaSenaController> logger)
+        public MegaSenaController(IWebService webService,
+            IRepository<MegaSena> repository,
+            ILogger<MegaSenaController> logger,
+            ILotteryService lotteryService)
         {
-            _settings = settings;
             _webService = webService;
             _repository = repository;
             _logger = logger;
+            _lotteryService = lotteryService;
         }
         // GET api/megasena/allLoteries
         [HttpGet("AllLoteries")]
@@ -75,18 +78,13 @@ namespace LotteryApi.Controllers
             try
             {
                 _logger.LogInformation("api/megasena/downloadResultsFromSource - Downloading from web service.");
-                var setting = _settings.Lotteries.Where(lottery => lottery.Name == Constant.MEGASENA).SingleOrDefault();
-                _webService.DownloadFile(setting,
-                                         string.Concat(Environment.CurrentDirectory, _settings.TempFilePath));
+                _webService.DownloadFile(Constant.MEGASENA);
                 _logger.LogInformation("api/megasena/downloadResultsFromSource - Load HTML file into Objects");
-                //load file into object
-                HTMLHandler handler = new HTMLHandler();
-                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _settings.TempFilePath), string.Concat($@"{setting.Name}\", setting.HtmlFileName));
-                var results = (IEnumerable<MegaSena>)handler.LoadHTMLFile(path, setting);
-                _logger.LogInformation("api/megasena/downloadResultsFromSource - loading into database");
+
+                var results = (IEnumerable<MegaSena>)_lotteryService.Load(Constant.MEGASENA);
+                _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);
-
                 return Ok("All items have been loaded to database.");
             }
             catch (Exception e)

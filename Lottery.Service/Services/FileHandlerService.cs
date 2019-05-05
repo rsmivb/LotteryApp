@@ -14,7 +14,6 @@ namespace Lottery.Services
         {
             try
             {
-                CleanUpFolder(tempFile);
                 ZipFile.ExtractToDirectory(zipPath, tempFile);
             }
             catch (Exception e)
