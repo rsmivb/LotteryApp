@@ -1,9 +1,10 @@
-﻿using Lottery.Models;
+﻿using System.IO;
 
 namespace Lottery.Services
 {
     public interface IWebService
     {
-        void DownloadFile(string lotteryName);
+        bool DownloadFile(string lotteryName);
+        Stream GetStreamFileFromWebService(string lotteryWebServiceUrl);
     }
 }

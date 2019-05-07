@@ -10,9 +10,9 @@ namespace Lottery.Services
 {
     public class HTMLHandlerService : IHTMLHandlerService
     {
-        private ILogger<HTMLHandlerService> _logger;
+        private ILogger<IHTMLHandlerService> _logger;
 
-        public HTMLHandlerService(ILogger<HTMLHandlerService> logger)
+        public HTMLHandlerService(ILogger<IHTMLHandlerService> logger)
         {
             _logger = logger;
         }
