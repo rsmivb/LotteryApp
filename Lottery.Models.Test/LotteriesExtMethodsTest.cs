@@ -107,9 +107,10 @@ namespace Lottery.Models.Test
                 Prize4 = 4000.00m,
                 Prize5 = 2000.00m
             };
-            var result = FederalExtensionMethods.Load(listOfValuesFederal).FirstOrDefault();
+            var actualResult = FederalExtensionMethods.Load(listOfValuesFederal).FirstOrDefault();
 
-            Assert.AreEqual(expectedFederal.ToString(), result.ToString());
+
+            Assert.AreEqual(expectedFederal.ToString(), actualResult.ToString());
         }
         [TestMethod]
         public void ExtensioMethod_Loteca_Test()

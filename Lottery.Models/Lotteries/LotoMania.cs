@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lottery.Models
 {
-    public class LotoMania : MongoModel, IEquatable<LotoMania>
+    public class LotoMania : MongoModel
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -32,74 +32,9 @@ namespace Lottery.Models
         public decimal AcumulatedNoNumbers { get; set; }
         public decimal PrizeEstimated { get; set; }
         public decimal SpecialPrizeEstimated { get; set; }
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as LotoMania);
-        }
         public override string ToString()
         {
             return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-{TotalValue}-{TotalWinners20}-{City}-{UF}-{TotalWinners19}-{TotalWinners18}-{TotalWinners17}-{TotalWinners16}-{TotalWinnersNoNumbers}-{TotalValueNumbers20}-{TotalValueNumbers19}-{TotalValueNumbers18}-{TotalValueNumbers17}-{TotalValueNumbers16}-{TotalValueNoNumbers}-{Acumulated20}-{Acumulated19}-{Acumulated18}-{Acumulated17}-{Acumulated16}-{AcumulatedNoNumbers}-{PrizeEstimated}-{SpecialPrizeEstimated} }}";
-        }
-        public bool Equals(LotoMania other)
-        {
-            return other != null &&
-                   LotteryId == other.LotteryId &&
-                   DateRealized == other.DateRealized &&
-                   EqualityComparer<List<int>>.Default.Equals(Dozens, other.Dozens) &&
-                   TotalValue == other.TotalValue &&
-                   TotalWinners20 == other.TotalWinners20 &&
-                   City == other.City &&
-                   UF == other.UF &&
-                   TotalWinners19 == other.TotalWinners19 &&
-                   TotalWinners18 == other.TotalWinners18 &&
-                   TotalWinners17 == other.TotalWinners17 &&
-                   TotalWinners16 == other.TotalWinners16 &&
-                   TotalWinnersNoNumbers == other.TotalWinnersNoNumbers &&
-                   TotalValueNumbers20 == other.TotalValueNumbers20 &&
-                   TotalValueNumbers19 == other.TotalValueNumbers19 &&
-                   TotalValueNumbers18 == other.TotalValueNumbers18 &&
-                   TotalValueNumbers17 == other.TotalValueNumbers17 &&
-                   TotalValueNumbers16 == other.TotalValueNumbers16 &&
-                   TotalValueNoNumbers == other.TotalValueNoNumbers &&
-                   Acumulated20 == other.Acumulated20 &&
-                   Acumulated19 == other.Acumulated19 &&
-                   Acumulated18 == other.Acumulated18 &&
-                   Acumulated17 == other.Acumulated17 &&
-                   Acumulated16 == other.Acumulated16 &&
-                   AcumulatedNoNumbers == other.AcumulatedNoNumbers &&
-                   PrizeEstimated == other.PrizeEstimated &&
-                   SpecialPrizeEstimated == other.SpecialPrizeEstimated;
-        }
-        public override int GetHashCode()
-        {
-            var hashCode = -94129212;
-            hashCode = hashCode * -1521134295 + LotteryId.GetHashCode();
-            hashCode = hashCode * -1521134295 + DateRealized.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<int>>.Default.GetHashCode(Dozens);
-            hashCode = hashCode * -1521134295 + TotalValue.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners20.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UF);
-            hashCode = hashCode * -1521134295 + TotalWinners19.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners18.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners17.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners16.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinnersNoNumbers.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers20.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers19.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers18.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers17.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers16.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNoNumbers.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated20.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated19.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated18.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated17.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated16.GetHashCode();
-            hashCode = hashCode * -1521134295 + AcumulatedNoNumbers.GetHashCode();
-            hashCode = hashCode * -1521134295 + PrizeEstimated.GetHashCode();
-            hashCode = hashCode * -1521134295 + SpecialPrizeEstimated.GetHashCode();
-            return hashCode;
         }
     }
 

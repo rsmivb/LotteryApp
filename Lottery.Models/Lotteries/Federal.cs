@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lottery.Models
 {
-    public class Federal : MongoModel, IEquatable<Federal>
+    public class Federal : MongoModel
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -14,38 +14,6 @@ namespace Lottery.Models
         public decimal Prize3 { get; set; }
         public decimal Prize4 { get; set; }
         public decimal Prize5 { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as Federal);
-        }
-
-        public bool Equals(Federal other)
-        {
-            return other != null &&
-                   LotteryId == other.LotteryId &&
-                   DateRealized == other.DateRealized &&
-                   EqualityComparer<List<int>>.Default.Equals(Dozens, other.Dozens) &&
-                   Prize1 == other.Prize1 &&
-                   Prize2 == other.Prize2 &&
-                   Prize3 == other.Prize3 &&
-                   Prize4 == other.Prize4 &&
-                   Prize5 == other.Prize5;
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = 2146608948;
-            hashCode = hashCode * -1521134295 + LotteryId.GetHashCode();
-            hashCode = hashCode * -1521134295 + DateRealized.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<int>>.Default.GetHashCode(Dozens);
-            hashCode = hashCode * -1521134295 + Prize1.GetHashCode();
-            hashCode = hashCode * -1521134295 + Prize2.GetHashCode();
-            hashCode = hashCode * -1521134295 + Prize3.GetHashCode();
-            hashCode = hashCode * -1521134295 + Prize4.GetHashCode();
-            hashCode = hashCode * -1521134295 + Prize5.GetHashCode();
-            return hashCode;
-        }
 
         public override string ToString()
         {
