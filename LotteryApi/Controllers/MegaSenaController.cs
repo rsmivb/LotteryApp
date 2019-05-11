@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Lottery.Models;
 using Lottery.Repository;
 using Lottery.Services;
@@ -73,10 +72,10 @@ namespace LotteryApi.Controllers
             try
             {
                 _logger.LogInformation("api/megasena/downloadResultsFromSource - Downloading from web service.");
-                _webService.DownloadFile(Constant.MEGASENA);
+                _webService.DownloadFile(Constants.MEGASENA);
                 _logger.LogInformation("api/megasena/downloadResultsFromSource - Load HTML file into Objects");
 
-                var results = _lotteryService.Load(Constant.MEGASENA);
+                var results = _lotteryService.Load(Constants.MEGASENA);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results as IList<MegaSena>);

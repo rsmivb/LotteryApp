@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Lottery.Models;
 using Lottery.Repository;
 using Lottery.Services;
@@ -75,10 +74,10 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("api/quina/downloadResultsFromSource - Get information from CEF server");
                 //download file
-                _webService.DownloadFile(Constant.QUINA);
+                _webService.DownloadFile(Constants.QUINA);
                 _logger.LogInformation("api/quina/downloadResultsFromSource - Load HTML file into Objects");
                 //load file into object
-                var results = (IEnumerable<Quina>)_lotteryService.Load(Constant.QUINA);
+                var results = (IEnumerable<Quina>)_lotteryService.Load(Constants.QUINA);
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);
                 return Ok("Loaded itens on database.");

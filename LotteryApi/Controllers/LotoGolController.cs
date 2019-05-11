@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Lottery.Models;
 using Lottery.Repository;
 using Lottery.Services;
@@ -74,9 +73,9 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                _webService.DownloadFile(Constant.LOTOGOL);
+                _webService.DownloadFile(Constants.LOTOGOL);
                 _logger.LogInformation("Load HTML file into Objects");
-                var results = (IEnumerable<LotoGol>)_lotteryService.Load(Constant.LOTOGOL);
+                var results = (IEnumerable<LotoGol>)_lotteryService.Load(Constants.LOTOGOL);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);
