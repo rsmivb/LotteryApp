@@ -12,12 +12,12 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class LotoGolController : Controller
     {
-        private readonly IWebService _webService;
+        private readonly IProcessLotteryService _webService;
         private readonly IRepository<LotoGol> _repository;
         private readonly ILogger<LotoGolController> _logger;
         private readonly ILotteryService _lotteryService;
 
-        public LotoGolController(IWebService webService,
+        public LotoGolController(IProcessLotteryService webService,
             IRepository<LotoGol> repository,
             ILogger<LotoGolController> logger,
             ILotteryService lotteryService)
@@ -73,7 +73,7 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                _webService.DownloadFile(Constants.LOTOGOL);
+                _webService.ProcessLotteryFile(Constants.LOTOGOL);
                 _logger.LogInformation("Load HTML file into Objects");
                 var results = (IEnumerable<LotoGol>)_lotteryService.Load(Constants.LOTOGOL);
                 _logger.LogInformation("loading into database");

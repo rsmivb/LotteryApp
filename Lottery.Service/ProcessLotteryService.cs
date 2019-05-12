@@ -8,19 +8,21 @@ using System.Net;
 
 namespace Lottery.Services
 {
-    public class WebService : IWebService
+    public class ProcessLotteryService : IProcessLotteryService
     {
         private readonly IFileHandlerService _fileHandler;
         private readonly AppSettings _settings;
-        private readonly ILogger<IWebService> _logger;
+        private readonly IWebServiceService _webService;
+        private readonly ILogger<IProcessLotteryService> _logger;
 
-        public WebService(IFileHandlerService fileHandler, AppSettings settings, ILogger<IWebService> logger)
+        public ProcessLotteryService(IFileHandlerService fileHandler, AppSettings settings, IWebServiceService webService, ILogger<IProcessLotteryService> logger)
         {
             _fileHandler = fileHandler;
             _settings = settings;
+            _webService = webService;
             _logger = logger;
         }
-        public bool DownloadFile(string lotteryName)
+        public bool ProcessLotteryFile(string lotteryName)
         {
             try
             {
@@ -32,7 +34,7 @@ namespace Lottery.Services
                 _fileHandler.CreateFolder(path);
                 var filePath = Path.Combine(path, _setting.ZipFileName);
                 var destinationPath = Path.Combine(path, _setting.Name);
-                var streamResponse = GetStreamFileFromWebService(_setting.WebService);
+                var streamResponse = _webService.GetStreamFileFromWebService(_setting.WebService);
                 _fileHandler.CreateFileFromStream(filePath, streamResponse);
                 _fileHandler.ExtractFile(filePath, destinationPath);
                 _logger.LogInformation($"Finished DownloadFile for {lotteryName}.");
@@ -43,16 +45,6 @@ namespace Lottery.Services
                 _logger.LogError($"Error during downloading file process. Lottery {lotteryName}, error message - {e.Message}, stacktrace - {e.StackTrace} - inner exception - {e.InnerException?.Message}.");
                 throw e;
             }
-        }
-        public Stream GetStreamFileFromWebService(string lotteryWebServiceUrl)
-        {
-            _logger.LogDebug($"Connecting with web service url: {lotteryWebServiceUrl}.");
-            CookieContainer myContainer = new CookieContainer();
-            var request = (HttpWebRequest)WebRequest.Create(lotteryWebServiceUrl);
-            request.MaximumAutomaticRedirections = 1;
-            request.AllowAutoRedirect = true;
-            request.CookieContainer = myContainer;
-            return request.GetResponse().GetResponseStream();
         }
     }
 }

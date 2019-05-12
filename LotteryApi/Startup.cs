@@ -60,8 +60,9 @@ namespace LotteryApi
         public static IServiceCollection LoadDependencies(this IServiceCollection services)
         {
             //add all dependencies
+            services.AddTransient<IWebServiceService, WebServiceService>();
             services.AddTransient<IFileHandlerService, FileHandlerService>();
-            services.AddTransient<IWebService, WebService>();
+            services.AddTransient<IProcessLotteryService, ProcessLotteryService>();
             services.AddTransient<IHTMLHandlerService, HTMLHandlerService>();
             services.AddTransient<ILotteryService, LotteryService>();
 

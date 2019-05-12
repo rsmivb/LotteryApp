@@ -12,12 +12,12 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class DuplaSenaController : Controller
     {
-        private readonly IWebService _webService;
+        private readonly IProcessLotteryService _webService;
         private readonly IRepository<DuplaSena> _repository;
         private readonly ILogger<DuplaSenaController> _logger;
         private readonly ILotteryService _lotteryService;
 
-        public DuplaSenaController(IWebService webService,
+        public DuplaSenaController(IProcessLotteryService webService,
             IRepository<DuplaSena> repository,
             ILogger<DuplaSenaController> logger,
             ILotteryService lotteryService)
@@ -57,11 +57,11 @@ namespace LotteryApi.Controllers
                                     .GroupBy(dozens => dozens) // group into a new list
                                     .Select(s => new { Dozen = s.Key, Quantity = s.Count() }) // runs each number and count it
                                     .OrderBy(o => o.Dozen); //order by ascending
-                var projectNumbers2 = _repository.GetAll() //get all megasena lottery entries
-                                                    .SelectMany(lottery => lottery.DozensRound2) //select all list of dozens
-                                                    .GroupBy(dozens => dozens) // group into a new list
-                                                    .Select(s => new { Dozen = s.Key, Quantity = s.Count() }) // runs each number and count it
-                                                    .OrderBy(o => o.Dozen); //order by ascending
+                var projectNumbers2 = _repository.GetAll()
+                                                    .SelectMany(lottery => lottery.DozensRound2)
+                                                    .GroupBy(dozens => dozens)
+                                                    .Select(s => new { Dozen = s.Key, Quantity = s.Count() })
+                                                    .OrderBy(o => o.Dozen);
                 var list = new
                 {
                     DozensRound1 = projectNumbers1,
@@ -82,10 +82,8 @@ namespace LotteryApi.Controllers
             try
             {
                 _logger.LogInformation("Get information from CEF server");
-                //download file
-                _webService.DownloadFile(Constants.DUPLASENA);
+                _webService.ProcessLotteryFile(Constants.DUPLASENA);
                 _logger.LogInformation("Load HTML file into Objects");
-                //load file into object
                 var results = (IEnumerable<DuplaSena>)_lotteryService.Load(Constants.DUPLASENA);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();

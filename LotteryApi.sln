@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryApi", "LotteryApi\Lo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottery.Repository", "Lottery.Repository\Lottery.Repository.csproj", "{001DED6C-C38D-44C9-A637-CBDB66B5695F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottery.Service", "Lottery.Service\Lottery.Service.csproj", "{C97C78F8-1E38-439C-AAFA-5A2C0661DB93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottery.Services", "Lottery.Service\Lottery.Services.csproj", "{C97C78F8-1E38-439C-AAFA-5A2C0661DB93}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottery.Models", "Lottery.Models\Lottery.Models.csproj", "{1BBBBCA9-4DDF-4271-B5E2-1D03377310FA}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottery.Service.Tests", "Lo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryApi.Test", "Lottery.Api.Test\LotteryApi.Test.csproj", "{85DD0AFE-A2C7-4BBD-92A0-2E57E5C04A7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottery.Models.Test", "Lottery.Models.Test\Lottery.Models.Test.csproj", "{83368A1B-F120-4D11-AF08-FB07AD9485F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottery.Models.Test", "Lottery.Models.Test\Lottery.Models.Test.csproj", "{83368A1B-F120-4D11-AF08-FB07AD9485F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

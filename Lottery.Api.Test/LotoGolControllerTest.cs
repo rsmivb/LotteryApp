@@ -17,7 +17,7 @@ namespace Lottery.Api.Test
     {
         private LotoGolController lotoGolControllerTest;
         private Mock<IRepository<LotoGol>> mockRepo;
-        private Mock<IWebService> mockwebService;
+        private Mock<IProcessLotteryService> mockwebService;
         private Mock<ILogger<LotoGolController>> mockLog;
         private Mock<ILotteryService> mockLotteryService;
         private IEnumerable<MongoModel> listOfLottery;
@@ -26,7 +26,7 @@ namespace Lottery.Api.Test
         public void Setup()
         {
 
-            mockwebService = new Mock<IWebService>();
+            mockwebService = new Mock<IProcessLotteryService>();
             mockLog = new Mock<ILogger<LotoGolController>>();
             mockLotteryService = new Mock<ILotteryService>();
             mockRepo = new Mock<IRepository<LotoGol>>();

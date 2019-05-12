@@ -12,12 +12,12 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class QuinaController : Controller
     {
-        private readonly IWebService _webService;
+        private readonly IProcessLotteryService _webService;
         private readonly IRepository<Quina> _repository;
         private readonly ILogger<QuinaController> _logger;
         private readonly ILotteryService _lotteryService;
 
-        public QuinaController( IWebService webService,
+        public QuinaController( IProcessLotteryService webService,
             IRepository<Quina> repository,
             ILogger<QuinaController> logger,
             ILotteryService lotteryService)
@@ -74,7 +74,7 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("api/quina/downloadResultsFromSource - Get information from CEF server");
                 //download file
-                _webService.DownloadFile(Constants.QUINA);
+                _webService.ProcessLotteryFile(Constants.QUINA);
                 _logger.LogInformation("api/quina/downloadResultsFromSource - Load HTML file into Objects");
                 //load file into object
                 var results = (IEnumerable<Quina>)_lotteryService.Load(Constants.QUINA);

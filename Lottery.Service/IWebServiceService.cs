@@ -2,9 +2,8 @@
 
 namespace Lottery.Services
 {
-    public interface IWebService
+    public interface IWebServiceService
     {
-        bool DownloadFile(string lotteryName);
         Stream GetStreamFileFromWebService(string lotteryWebServiceUrl);
     }
 }

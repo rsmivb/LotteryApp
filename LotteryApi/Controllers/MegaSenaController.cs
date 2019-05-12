@@ -12,12 +12,12 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class MegaSenaController : Controller
     {
-        private readonly IWebService _webService;
+        private readonly IProcessLotteryService _webService;
         private readonly IRepository<MegaSena> _repository;
         private readonly ILogger<MegaSenaController> _logger;
         private readonly ILotteryService _lotteryService;
 
-        public MegaSenaController(IWebService webService,
+        public MegaSenaController(IProcessLotteryService webService,
             IRepository<MegaSena> repository,
             ILogger<MegaSenaController> logger,
             ILotteryService lotteryService)
@@ -72,7 +72,7 @@ namespace LotteryApi.Controllers
             try
             {
                 _logger.LogInformation("api/megasena/downloadResultsFromSource - Downloading from web service.");
-                _webService.DownloadFile(Constants.MEGASENA);
+                _webService.ProcessLotteryFile(Constants.MEGASENA);
                 _logger.LogInformation("api/megasena/downloadResultsFromSource - Load HTML file into Objects");
 
                 var results = _lotteryService.Load(Constants.MEGASENA);

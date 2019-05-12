@@ -12,12 +12,12 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class TimeManiaController : Controller
     {
-        private readonly IWebService _webService;
+        private readonly IProcessLotteryService _webService;
         private readonly IRepository<TimeMania> _repository;
         private readonly ILogger<TimeManiaController> _logger;
         private readonly ILotteryService _lotteryService;
 
-        public TimeManiaController( IWebService webService,
+        public TimeManiaController( IProcessLotteryService webService,
             IRepository<TimeMania> repository,
             ILogger<TimeManiaController> logger,
             ILotteryService lotteryService)
@@ -83,7 +83,7 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                _webService.DownloadFile(Constants.TIMEMANIA);
+                _webService.ProcessLotteryFile(Constants.TIMEMANIA);
 
                 _logger.LogInformation("Load HTML file into Objects");
                 var results = (IEnumerable<TimeMania>)_lotteryService.Load(Constants.TIMEMANIA);

@@ -12,12 +12,12 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class LotecaController : Controller
     {
-        private readonly IWebService _webService;
+        private readonly IProcessLotteryService _webService;
         private readonly IRepository<Loteca> _repository;
         private readonly ILogger<LotecaController> _logger;
         private readonly ILotteryService _lotteryService;
 
-        public LotecaController(IWebService webService,
+        public LotecaController(IProcessLotteryService webService,
             IRepository<Loteca> repository,
             ILogger<LotecaController> logger,
             ILotteryService lotteryService)
@@ -74,7 +74,7 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("api/loteca/downloadResultsFromSource - Get information from CEF server");
                 //download file
-                _webService.DownloadFile(Constants.LOTECA);
+                _webService.ProcessLotteryFile(Constants.LOTECA);
                 _logger.LogInformation("api/loteca/downloadResultsFromSource - Load HTML file into Objects");
                 //load file into object
                 var results = (IEnumerable<Loteca>)_lotteryService.Load(Constants.LOTECA);

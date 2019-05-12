@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lottery.Repository\Lottery.Repository.csproj" />
-    <ProjectReference Include="..\Lottery.Service\Lottery.Service.csproj" />
+    <ProjectReference Include="..\Lottery.Service\Lottery.Services.csproj" />
   </ItemGroup>
 
 </Project>
