@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
 
 namespace LotteryApi
 {
@@ -31,9 +33,32 @@ namespace LotteryApi
             services.LoadDependencies();
 
             // Added Swashbuckle.AspNetCore
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Lottery Api", Version = "v1" });
+                options.SwaggerDoc("v1",
+                    new Info {
+                                Title = "Lottery Api",
+                                Description = "API which consumes data from Loterias Caixa and provides all lotteries results.",
+                                Version = "v1",
+                                Contact = new Contact
+                                {
+                                    Name = "Rafael Mesquita",
+                                    Email = "mesquita.cob@gmail.com",
+                                    Url = "https://github.com/rsmivb/LotteryApp"
+                                }
+                            });
+                //Swagger documentation: https://medium.com/tableless/documenta%C3%A7%C3%A3o-de-apis-com-swagger-no-asp-net-core-e7bc3caa9185
+                var applicationBasePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var applicationName = PlatformServices.Default.Application.ApplicationName;
+                var xmlDocumentPath = Path.Combine(applicationBasePath, $"{applicationName}.xml");
+
+                if (File.Exists(xmlDocumentPath))
+                {
+                    options.IncludeXmlComments(xmlDocumentPath);
+                }
+                // https://blog.zhaytam.com/2018/09/23/generate-aspnetcore-web-api-doc-swagger/
+                //enables annotations for each end point
+                options.EnableAnnotations();
             });
             services.AddMvc();
         }
@@ -49,6 +74,7 @@ namespace LotteryApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
+                c.RoutePrefix = "swagger";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lottery API V1");
             });
             app.UseMvc();

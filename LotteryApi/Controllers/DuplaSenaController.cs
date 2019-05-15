@@ -6,6 +6,7 @@ using Lottery.Repository;
 using Lottery.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LotteryApi.Controllers
 {
@@ -28,7 +29,14 @@ namespace LotteryApi.Controllers
             _lotteryService = lotteryService;
         }
         // GET api/duplasena/allLoteries
+        /// <summary>
+        /// It gets information for all DuplaSena results
+        /// </summary>
+        /// <returns>All DuplaSena results </returns>
         [HttpGet("AllLoteries")]
+        [SwaggerOperation(Summary = "Gets DuplaSena all results", Description = "This is a description examples")]
+        [SwaggerResponse(200, "I guess everything worked")]
+        [SwaggerResponse(400, "BAD REQUUUUEST")]
         public IActionResult GetAllLoteries()
         {
             try
