@@ -17,7 +17,6 @@ namespace Lottery.Service.Tests
         private string _zipFileTest;
         private string _folderToZip;
         private string _zipFile;
-        private string _zipFolder;
 
         [TestInitialize]
         public void Setup()
@@ -105,7 +104,7 @@ namespace Lottery.Service.Tests
             using (FileStream fs = File.Create(_zipFileTest))
             {
                 // Add some text to file
-                Byte[] title = new UTF8Encoding(true).GetBytes("Test creating a file");
+                byte[] title = new UTF8Encoding(true).GetBytes("Test creating a file");
                 fs.Write(title, 0, title.Length);
             }
 

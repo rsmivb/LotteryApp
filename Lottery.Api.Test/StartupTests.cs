@@ -5,12 +5,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-using System.Text;
 
 
 namespace LotteryApi.Test
@@ -25,20 +23,26 @@ namespace LotteryApi.Test
         [TestCategory("Startup Test - Init .NET core app test")]
         public void Startup_Test()
         {
-            var configuration = new ConfigurationBuilder()
-                                        .AddJsonFile("appsettings.json")
-                                        .Build();
-            // Create builder
+            var contentRootPath = GetContentRootPath();
+            var config = new ConfigurationBuilder()
+                        .SetBasePath(contentRootPath)
+                        .AddJsonFile("appsettings.json")
+                        .Build();
             var builder = new WebHostBuilder()
-                            .UseEnvironment("Testing")
-                            .UseStartup<Startup>()
-                            .ConfigureTestServices(services => services.LoadDependencies())
-                            .UseConfiguration(configuration);
+                   .UseContentRoot(contentRootPath)
+                   .UseEnvironment("Testing")
+                   .UseConfiguration(config) // load configuration
+                   .ConfigureTestServices(services => services.LoadDependencies()) // load dependecies
+                   .UseStartup<Startup>();  // Uses Start up class from your API Host project to configure the test server
+
+
             // Create test server
             _server = new TestServer(builder);
             Assert.IsNotNull(_server);
+            // create http client
             _client = _server.CreateClient();
             Assert.IsNotNull(_client);
+            // test each dependency injection if exists
             var service = _server.Host.Services.GetService(typeof(IWebServiceService));
             Assert.IsNotNull(service);
             service = _server.Host.Services.GetService(typeof(IFileHandlerService));
@@ -68,6 +72,14 @@ namespace LotteryApi.Test
             service = _server.Host.Services.GetService(typeof(IRepository<TimeMania>));
             Assert.IsNotNull(service);
         }
+        private string GetContentRootPath()
+        {
+            var testProjectPath = PlatformServices.Default.Application.ApplicationBasePath;
+
+            var relativePathToHostProject = @"..\..\..\..\LotteryApi";
+
+            return Path.Combine(testProjectPath, relativePathToHostProject);
+        }
     }
     public static class TestServices
     {
@@ -89,7 +101,6 @@ namespace LotteryApi.Test
             services.AddSingleton<IRepository<Quina>, MongoRepository<Quina>>();
             services.AddSingleton<IRepository<TimeMania>, MongoRepository<TimeMania>>();
             return services;
-
         }
     }
 }
