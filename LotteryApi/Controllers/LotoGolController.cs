@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Lottery.Models;
 using Lottery.Repository;
 using Lottery.Services;
@@ -31,7 +32,7 @@ namespace LotteryApi.Controllers
         // GET api/lotogol/results
         [HttpGet("Results")]
         [SwaggerOperation(Summary = "Gets all results for LotoGol Lottery", Description = "This is a description examples")]
-        public IActionResult GetResults()
+        public async Task<IActionResult> GetResults()
         {
             try
             {
@@ -48,7 +49,7 @@ namespace LotteryApi.Controllers
         // GET api/lotogol/dozenByQuantity
         [HttpGet("DozenByQuantity")]
         [SwaggerOperation(Summary = "Gets info from dozens by quantity", Description = "This is a description examples")]
-        public IActionResult GetDozenByQuantity()
+        public async Task<IActionResult> GetDozenByQuantity()
         {
             try
             {
@@ -71,7 +72,7 @@ namespace LotteryApi.Controllers
         // GET api/lotogol/downloadResultsFromSource
         [HttpGet("DownloadResultsFromSource")]
         [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]
-        public IActionResult DownloadResultsFromSource()
+        public async Task<IActionResult> DownloadResultsFromSource()
         {
             try
             {

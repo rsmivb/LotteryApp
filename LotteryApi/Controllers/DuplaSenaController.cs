@@ -56,7 +56,7 @@ namespace LotteryApi.Controllers
         // GET api/duplasena/dozenByQuantity
         [HttpGet("DozenByQuantity")]
         [SwaggerOperation(Summary = "Gets info from dozens by quantity", Description = "This is a description examples")]
-        public IActionResult GetDozenByQuantity()
+        public async Task<IActionResult> GetDozenByQuantity()
         {
             try
             {
@@ -87,7 +87,7 @@ namespace LotteryApi.Controllers
         // GET api/duplasena/downloadResultsFromSource
         [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]
         [HttpGet("DownloadResultsFromSource")]
-        public IActionResult DownloadResultsFromSource()
+        public async Task<IActionResult> DownloadResultsFromSource()
         {
             try
             {

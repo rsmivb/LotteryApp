@@ -70,7 +70,7 @@ namespace Lottery.Api.Test
 
             var result = lotoManiaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
@@ -81,7 +81,7 @@ namespace Lottery.Api.Test
 
             var result = lotoManiaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
@@ -91,7 +91,7 @@ namespace Lottery.Api.Test
 
             var result = lotoManiaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
@@ -102,7 +102,7 @@ namespace Lottery.Api.Test
 
             var result = lotoManiaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
@@ -112,7 +112,7 @@ namespace Lottery.Api.Test
 
             var result = lotoManiaControllerTest.GetResults();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
@@ -123,7 +123,7 @@ namespace Lottery.Api.Test
 
             var result = lotoManiaControllerTest.GetResults();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
     }
 }

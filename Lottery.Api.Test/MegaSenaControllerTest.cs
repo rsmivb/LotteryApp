@@ -61,7 +61,7 @@ namespace Lottery.Api.Test
 
             var result = megaSenaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("MegaSenaControllerTest", "Controller Test - MegaSena Lottery")]
@@ -72,7 +72,7 @@ namespace Lottery.Api.Test
 
             var result = megaSenaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("MegaSenaControllerTest", "Controller Test - MegaSena Lottery")]
@@ -82,7 +82,7 @@ namespace Lottery.Api.Test
 
             var result = megaSenaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("MegaSenaControllerTest", "Controller Test - MegaSena Lottery")]
@@ -93,7 +93,7 @@ namespace Lottery.Api.Test
 
             var result = megaSenaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("MegaSenaControllerTest", "Controller Test - MegaSena Lottery")]
@@ -103,7 +103,7 @@ namespace Lottery.Api.Test
 
             var result = megaSenaControllerTest.GetResults();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("MegaSenaControllerTest", "Controller Test - MegaSena Lottery")]
@@ -114,7 +114,7 @@ namespace Lottery.Api.Test
 
             var result = megaSenaControllerTest.GetResults();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
     }
 }

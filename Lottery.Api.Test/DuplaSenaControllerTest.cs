@@ -72,7 +72,7 @@ namespace Lottery.Api.Test
 
             var result = duplaSenaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
             CreateServer _server = new CreateServer();
         }
         [Fact]
@@ -84,7 +84,7 @@ namespace Lottery.Api.Test
 
             var result = duplaSenaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("DuplaSenaControllerTest","Controller Test - DuplaSena Lottery")]
@@ -94,7 +94,7 @@ namespace Lottery.Api.Test
 
             var result = duplaSenaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("DuplaSenaControllerTest","Controller Test - DuplaSena Lottery")]
@@ -105,7 +105,7 @@ namespace Lottery.Api.Test
 
             var result = duplaSenaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("DuplaSenaControllerTest","Controller Test - DuplaSena Lottery")]
@@ -115,7 +115,7 @@ namespace Lottery.Api.Test
 
             var result = duplaSenaControllerTest.GetResults();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("DuplaSenaControllerTest","Controller Test - DuplaSena Lottery")]
@@ -126,7 +126,7 @@ namespace Lottery.Api.Test
 
             var result = duplaSenaControllerTest.GetResults();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
     }
 }

@@ -53,7 +53,7 @@ namespace Lottery.Api.Test
 
             var result = federalControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
@@ -64,7 +64,7 @@ namespace Lottery.Api.Test
 
             var result = federalControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
@@ -74,7 +74,7 @@ namespace Lottery.Api.Test
 
             var result = federalControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
@@ -85,7 +85,7 @@ namespace Lottery.Api.Test
 
             var result = federalControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
@@ -95,7 +95,7 @@ namespace Lottery.Api.Test
 
             var result = federalControllerTest.GetResults();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
@@ -106,7 +106,7 @@ namespace Lottery.Api.Test
 
             var result = federalControllerTest.GetResults();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
     }
 }

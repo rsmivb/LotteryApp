@@ -62,7 +62,7 @@ namespace Lottery.Api.Test
 
             var result = quinaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
@@ -73,7 +73,7 @@ namespace Lottery.Api.Test
 
             var result = quinaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
@@ -83,7 +83,7 @@ namespace Lottery.Api.Test
 
             var result = quinaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
@@ -94,7 +94,7 @@ namespace Lottery.Api.Test
 
             var result = quinaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
@@ -104,7 +104,7 @@ namespace Lottery.Api.Test
 
             var result = quinaControllerTest.GetResults();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
@@ -115,7 +115,7 @@ namespace Lottery.Api.Test
 
             var result = quinaControllerTest.GetResults();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
     }
 }

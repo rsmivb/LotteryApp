@@ -65,7 +65,7 @@ namespace Lottery.Api.Test
 
             var result = timeManiaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
@@ -75,7 +75,7 @@ namespace Lottery.Api.Test
             timeManiaControllerTest = new TimeManiaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
             var result = timeManiaControllerTest.DownloadResultsFromSource();
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
@@ -85,7 +85,7 @@ namespace Lottery.Api.Test
 
             var result = timeManiaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
@@ -96,7 +96,7 @@ namespace Lottery.Api.Test
 
             var result = timeManiaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
@@ -106,7 +106,7 @@ namespace Lottery.Api.Test
 
             var result = timeManiaControllerTest.GetResults();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
@@ -117,7 +117,7 @@ namespace Lottery.Api.Test
 
             var result = timeManiaControllerTest.GetResults();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
     }
 }

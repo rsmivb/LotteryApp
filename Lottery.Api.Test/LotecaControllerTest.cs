@@ -59,7 +59,7 @@ namespace Lottery.Api.Test
 
             var result = lotecaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("LotecaControllerTest","Controller Test - Loteca Lottery")]
@@ -70,7 +70,7 @@ namespace Lottery.Api.Test
 
             var result = lotecaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("LotecaControllerTest","Controller Test - Loteca Lottery")]
@@ -80,7 +80,7 @@ namespace Lottery.Api.Test
 
             var result = lotecaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("LotecaControllerTest","Controller Test - Loteca Lottery")]
@@ -91,7 +91,7 @@ namespace Lottery.Api.Test
 
             var result = lotecaControllerTest.GetDozenByQuantity();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
         [Trait("LotecaControllerTest","Controller Test - Loteca Lottery")]
@@ -101,7 +101,7 @@ namespace Lottery.Api.Test
 
             var result = lotecaControllerTest.GetResults();
 
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
         [Trait("LotecaControllerTest","Controller Test - Loteca Lottery")]
@@ -112,7 +112,7 @@ namespace Lottery.Api.Test
 
             var result = lotecaControllerTest.GetResults();
 
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<NotFoundObjectResult>(result.Result);
         }
     }
 }
