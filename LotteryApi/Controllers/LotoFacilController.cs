@@ -6,6 +6,7 @@ using Lottery.Repository;
 using Lottery.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LotteryApi.Controllers
 {
@@ -27,25 +28,27 @@ namespace LotteryApi.Controllers
             _logger = logger;
             _lotteryService = lotteryService;
         }
-        // GET api/lotofacil/allLoteries
-        [HttpGet("AllLoteries")]
-        public IActionResult GetAllLoteries()
+        // GET api/lotofacil/results
+        [HttpGet("Results")]
+        [SwaggerOperation(Summary = "Gets all results for LotoFacil Lottery", Description = "This is a description examples")]
+        public IActionResult GetResults()
         {
             try
             {
-                _logger.LogInformation("api/lotofacil/allLoteries - Getting data from mongo database");
+                _logger.LogInformation("api/lotofacil/results - Getting data from mongo database");
                 var result = _repository.GetAll();
                 return Ok(result);
             }
             catch (Exception e)
             {
-                _logger.LogError($"api/lotofacil/allLoteries - Error when try to get data from database. -> {e.Message} - {e.StackTrace}");
+                _logger.LogError($"api/lotofacil/results - Error when try to get data from database. -> {e.Message} - {e.StackTrace}");
                 return NotFound("Error getting data.");
             }
         }
 
         // GET api/lotofacil/dozenByQuantity
         [HttpGet("DozenByQuantity")]
+        [SwaggerOperation(Summary = "Gets info from dozens by quantity", Description = "This is a description examples")]
         public IActionResult GetDozenByQuantity()
         {
             try
@@ -68,6 +71,7 @@ namespace LotteryApi.Controllers
         }
         // GET api/lotofacil/downloadResultsFromSource
         [HttpGet("DownloadResultsFromSource")]
+        [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]
         public IActionResult DownloadResultsFromSource()
         {
             try

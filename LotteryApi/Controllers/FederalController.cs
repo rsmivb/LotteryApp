@@ -6,6 +6,7 @@ using Lottery.Repository;
 using Lottery.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LotteryApi.Controllers
 {
@@ -18,9 +19,9 @@ namespace LotteryApi.Controllers
         private readonly ILotteryService _lotteryService;
 
         public FederalController(IProcessLotteryService webService,
-            IRepository<Federal> repository,
-            ILogger<FederalController> logger,
-            ILotteryService lotteryService)
+                                    IRepository<Federal> repository,
+                                    ILogger<FederalController> logger,
+                                    ILotteryService lotteryService)
         {
             _webService = webService;
             _repository = repository;
@@ -28,8 +29,9 @@ namespace LotteryApi.Controllers
             _lotteryService = lotteryService;
         }
         // GET api/loteca/allLoteries
-        [HttpGet("AllLoteries")]
-        public IActionResult GetAllLoteries()
+        [HttpGet("Results")]
+        [SwaggerOperation(Summary = "Gets all results for Federal Lottery", Description = "This is a description examples")]
+        public IActionResult GetResults()
         {
             try
             {
@@ -46,6 +48,7 @@ namespace LotteryApi.Controllers
 
         // GET api/loteca/dozenByQuantity
         [HttpGet("DozenByQuantity")]
+        [SwaggerOperation(Summary = "Gets info from dozens by quantity", Description = "This is a description examples")]
         public IActionResult GetDozenByQuantity()
         {
             try
@@ -67,6 +70,7 @@ namespace LotteryApi.Controllers
         }
         // GET api/loteca/downloadResultsFromSource
         [HttpGet("DownloadResultsFromSource")]
+        [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]
         public IActionResult DownloadResultsFromSource()
         {
             try

@@ -19,9 +19,9 @@ namespace LotteryApi.Controllers
         private readonly ILotteryService _lotteryService;
 
         public DuplaSenaController(IProcessLotteryService webService,
-            IRepository<DuplaSena> repository,
-            ILogger<DuplaSenaController> logger,
-            ILotteryService lotteryService)
+                                    IRepository<DuplaSena> repository,
+                                    ILogger<DuplaSenaController> logger,
+                                    ILotteryService lotteryService)
         {
             _webService = webService;
             _repository = repository;
@@ -33,33 +33,33 @@ namespace LotteryApi.Controllers
         /// It gets information for all DuplaSena results
         /// </summary>
         /// <returns>All DuplaSena results </returns>
-        [HttpGet("AllLoteries")]
-        [SwaggerOperation(Summary = "Gets DuplaSena all results", Description = "This is a description examples")]
-        [SwaggerResponse(200, "I guess everything worked")]
-        [SwaggerResponse(400, "BAD REQUUUUEST")]
-        public IActionResult GetAllLoteries()
+        [HttpGet("Results")]
+        [SwaggerOperation(Summary = "Gets all results for DuplaSena Lottery", Description = "This is a description examples")]
+        //[SwaggerResponse(200, "I guess everything worked")]
+        //[SwaggerResponse(400, "BAD REQUUUUEST")]
+        public IActionResult GetResults()
         {
             try
             {
-                _logger.LogInformation("api/duplasena/allLoteries - Getting data from mongo database");
+                _logger.LogInformation("api/duplasena/results - Getting data from mongo database");
                 var result = _repository.GetAll();
                 return Ok(result);
             }
             catch (Exception e)
             {
-                _logger.LogError($"api/duplasena/allLoteries - Error when try to get data from database. -> {e.Message} - {e.StackTrace}");
+                _logger.LogError($"api/duplasena/results - Error when try to get data from database. -> {e.Message} - {e.StackTrace}");
                 return NotFound("Error getting data.");
             }
         }
 
         // GET api/duplasena/dozenByQuantity
         [HttpGet("DozenByQuantity")]
+        [SwaggerOperation(Summary = "Gets info from dozens by quantity", Description = "This is a description examples")]
         public IActionResult GetDozenByQuantity()
         {
             try
             {
                 _logger.LogInformation("api/duplasena/dozenByQuantity - Getting data from mongo database");
-                var result = _repository.GetAll();
                 var projectNumbers1 = _repository.GetAll() //get all megasena lottery entries
                                     .SelectMany(lottery => lottery.DozensRound1) //select all list of dozens
                                     .GroupBy(dozens => dozens) // group into a new list
@@ -84,11 +84,15 @@ namespace LotteryApi.Controllers
             }
         }
         // GET api/duplasena/downloadResultsFromSource
+        [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]
         [HttpGet("DownloadResultsFromSource")]
         public IActionResult DownloadResultsFromSource()
         {
             try
             {
+                // TODO: move to background job using Hangfire
+                //https://jonhilton.net/simple-background-jobs-with-hangfire-and-aspnet-core/
+                //https://www.hangfire.io/
                 _logger.LogInformation("Get information from CEF server");
                 _webService.ProcessLotteryFile(Constants.DUPLASENA);
                 _logger.LogInformation("Load HTML file into Objects");

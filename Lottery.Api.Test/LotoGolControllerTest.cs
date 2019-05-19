@@ -105,7 +105,7 @@ namespace Lottery.Api.Test
         {
             lotoGolControllerTest = new LotoGolController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
-            var result = lotoGolControllerTest.GetAllLoteries();
+            var result = lotoGolControllerTest.GetResults();
 
             Assert.IsInstanceOfType(result, typeof(OkObjectResult));
         }
@@ -116,7 +116,7 @@ namespace Lottery.Api.Test
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();
             lotoGolControllerTest = new LotoGolController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
-            var result = lotoGolControllerTest.GetAllLoteries();
+            var result = lotoGolControllerTest.GetResults();
 
             Assert.IsInstanceOfType(result, typeof(NotFoundObjectResult));
         }

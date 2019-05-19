@@ -107,7 +107,7 @@ namespace Lottery.Api.Test
         {
             timeManiaControllerTest = new TimeManiaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
-            var result = timeManiaControllerTest.GetAllLoteries();
+            var result = timeManiaControllerTest.GetResults();
 
             Assert.IsInstanceOfType(result, typeof(OkObjectResult));
         }
@@ -118,7 +118,7 @@ namespace Lottery.Api.Test
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();
             timeManiaControllerTest = new TimeManiaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
-            var result = timeManiaControllerTest.GetAllLoteries();
+            var result = timeManiaControllerTest.GetResults();
 
             Assert.IsInstanceOfType(result, typeof(NotFoundObjectResult));
         }

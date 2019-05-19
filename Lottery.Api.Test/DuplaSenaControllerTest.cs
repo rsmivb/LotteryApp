@@ -109,22 +109,22 @@ namespace Lottery.Api.Test
         }
         [TestMethod]
         [TestCategory("Controller Test - DuplaSena Lottery")]
-        public void GetAllLoteries_Test()
+        public void GetResults_Test()
         {
             duplaSenaControllerTest = new DuplaSenaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
-            var result = duplaSenaControllerTest.GetAllLoteries();
+            var result = duplaSenaControllerTest.GetResults();
 
             Assert.IsInstanceOfType(result, typeof(OkObjectResult));
         }
         [TestMethod]
         [TestCategory("Controller Test - DuplaSena Lottery")]
-        public void GetAllLoteries_ThrowsException_Test()
+        public void GetResults_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();
             duplaSenaControllerTest = new DuplaSenaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
-            var result = duplaSenaControllerTest.GetAllLoteries();
+            var result = duplaSenaControllerTest.GetResults();
 
             Assert.IsInstanceOfType(result, typeof(NotFoundObjectResult));
         }

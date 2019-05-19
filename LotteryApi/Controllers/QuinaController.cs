@@ -6,6 +6,7 @@ using Lottery.Repository;
 using Lottery.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LotteryApi.Controllers
 {
@@ -27,9 +28,10 @@ namespace LotteryApi.Controllers
             _logger = logger;
             _lotteryService = lotteryService;
         }
-        // GET api/quina/allLoteries
-        [HttpGet("AllLoteries")]
-        public IActionResult GetAllLoteries()
+        // GET api/quina/results
+        [HttpGet("Results")]
+        [SwaggerOperation(Summary = "Gets all results for Quina Lottery", Description = "This is a description examples")]
+        public IActionResult GetResults()
         {
             try
             {
@@ -46,6 +48,7 @@ namespace LotteryApi.Controllers
 
         // GET api/quina/dozenByQuantity
         [HttpGet("DozenByQuantity")]
+        [SwaggerOperation(Summary = "Gets info from dozens by quantity", Description = "This is a description examples")]
         public IActionResult GetDozenByQuantity()
         {
             try
@@ -68,6 +71,7 @@ namespace LotteryApi.Controllers
         }
         // GET api/quina/downloadResultsFromSource
         [HttpGet("DownloadResultsFromSource")]
+        [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]
         public IActionResult DownloadResultsFromSource()
         {
             try

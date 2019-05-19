@@ -61,7 +61,11 @@ namespace Lottery.Services
             }
             return results;
         }
-
+        /// <summary>
+        /// TODO : to be improved
+        /// </summary>
+        /// <param name="lotteryName"></param>
+        /// <returns></returns>
         public IEnumerable<MongoModel> Load(string lotteryName)
         {
             try

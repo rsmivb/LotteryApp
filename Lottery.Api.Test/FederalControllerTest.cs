@@ -90,22 +90,22 @@ namespace Lottery.Api.Test
         }
         [TestMethod]
         [TestCategory("Controller Test - Federal Lottery")]
-        public void GetAllLoteries_Test()
+        public void GetResults_Test()
         {
             federalControllerTest = new FederalController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
-            var result = federalControllerTest.GetAllLoteries();
+            var result = federalControllerTest.GetResults();
 
             Assert.IsInstanceOfType(result, typeof(OkObjectResult));
         }
         [TestMethod]
         [TestCategory("Controller Test - Federal Lottery")]
-        public void GetAllLoteries_ThrowsException_Test()
+        public void GetResults_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();
             federalControllerTest = new FederalController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
-            var result = federalControllerTest.GetAllLoteries();
+            var result = federalControllerTest.GetResults();
 
             Assert.IsInstanceOfType(result, typeof(NotFoundObjectResult));
         }
