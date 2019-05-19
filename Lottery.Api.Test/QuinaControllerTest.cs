@@ -4,15 +4,14 @@ using Lottery.Services;
 using LotteryApi.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xunit;
 
 namespace Lottery.Api.Test
 {
-    [TestClass]
     public class QuinaControllerTest
     {
         private QuinaController quinaControllerTest;
@@ -22,8 +21,7 @@ namespace Lottery.Api.Test
         private Mock<ILotteryService> mockLotteryService;
         private IEnumerable<MongoModel> listOfLottery;
 
-        [TestInitialize]
-        public void Setup()
+        public QuinaControllerTest()
         {
 
             mockwebService = new Mock<IProcessLotteryService>();
@@ -55,8 +53,8 @@ namespace Lottery.Api.Test
                 }
             };
         }
-        [TestMethod]
-        [TestCategory("Controller Test - Quina Lottery")]
+        [Fact]
+        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
         public void DownloadResultsFromSource_Test()
         {
             mockLotteryService.SetReturnsDefault(listOfLottery);
@@ -64,10 +62,10 @@ namespace Lottery.Api.Test
 
             var result = quinaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+            Assert.IsType<OkObjectResult>(result);
         }
-        [TestMethod]
-        [TestCategory("Controller Test - Quina Lottery")]
+        [Fact]
+        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
         public void DownloadResultsFromSource_ThrowsException_Test()
         {
             mockLotteryService.Setup(s => s.Load("Quina")).Throws<EntryPointNotFoundException>();
@@ -75,20 +73,20 @@ namespace Lottery.Api.Test
 
             var result = quinaControllerTest.DownloadResultsFromSource();
 
-            Assert.IsInstanceOfType(result, typeof(NotFoundObjectResult));
+            Assert.IsType<NotFoundObjectResult>(result);
         }
-        [TestMethod]
-        [TestCategory("Controller Test - Quina Lottery")]
+        [Fact]
+        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
         public void GetDozenByQuantity_Test()
         {
             quinaControllerTest = new QuinaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
             var result = quinaControllerTest.GetDozenByQuantity();
 
-            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+            Assert.IsType<OkObjectResult>(result);
         }
-        [TestMethod]
-        [TestCategory("Controller Test - Quina Lottery")]
+        [Fact]
+        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
         public void GetDozenByQuantity_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();
@@ -96,20 +94,20 @@ namespace Lottery.Api.Test
 
             var result = quinaControllerTest.GetDozenByQuantity();
 
-            Assert.IsInstanceOfType(result, typeof(NotFoundObjectResult));
+            Assert.IsType<NotFoundObjectResult>(result);
         }
-        [TestMethod]
-        [TestCategory("Controller Test - Quina Lottery")]
+        [Fact]
+        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
         public void GetAllLoteries_Test()
         {
             quinaControllerTest = new QuinaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
 
             var result = quinaControllerTest.GetResults();
 
-            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+            Assert.IsType<OkObjectResult>(result);
         }
-        [TestMethod]
-        [TestCategory("Controller Test - Quina Lottery")]
+        [Fact]
+        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
         public void GetAllLoteries_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();
@@ -117,7 +115,7 @@ namespace Lottery.Api.Test
 
             var result = quinaControllerTest.GetResults();
 
-            Assert.IsInstanceOfType(result, typeof(NotFoundObjectResult));
+            Assert.IsType<NotFoundObjectResult>(result);
         }
     }
 }

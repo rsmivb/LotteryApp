@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Lottery.Models;
 using Lottery.Repository;
 using Lottery.Services;
@@ -28,7 +29,7 @@ namespace LotteryApi.Controllers
             _logger = logger;
             _lotteryService = lotteryService;
         }
-        // GET api/duplasena/allLoteries
+        // GET api/duplasena/results
         /// <summary>
         /// It gets information for all DuplaSena results
         /// </summary>
@@ -37,7 +38,7 @@ namespace LotteryApi.Controllers
         [SwaggerOperation(Summary = "Gets all results for DuplaSena Lottery", Description = "This is a description examples")]
         //[SwaggerResponse(200, "I guess everything worked")]
         //[SwaggerResponse(400, "BAD REQUUUUEST")]
-        public IActionResult GetResults()
+        public async Task<IActionResult> GetResults()
         {
             try
             {

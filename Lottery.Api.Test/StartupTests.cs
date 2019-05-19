@@ -6,80 +6,55 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System.IO;
 using System.Net.Http;
 
 
 namespace LotteryApi.Test
 {
-    [TestClass]
+
     public class StartupTest
     {
-        private TestServer _server;
-        private HttpClient _client;
-
-        [TestMethod]
-        [TestCategory("Startup Test - Init .NET core app test")]
+        [Fact]
+        [Trait("StartupTest", "Startup Test - Init .NET core app test")]
         public void Startup_Test()
         {
-            var contentRootPath = GetContentRootPath();
-            var config = new ConfigurationBuilder()
-                        .SetBasePath(contentRootPath)
-                        .AddJsonFile("appsettings.json")
-                        .Build();
-            var builder = new WebHostBuilder()
-                   .UseContentRoot(contentRootPath)
-                   .UseEnvironment("Testing")
-                   .UseConfiguration(config) // load configuration
-                   .ConfigureTestServices(services => services.LoadDependencies()) // load dependecies
-                   .UseStartup<Startup>();  // Uses Start up class from your API Host project to configure the test server
+            CreateServer _server = new CreateServer();
 
-
-            // Create test server
-            _server = new TestServer(builder);
-            Assert.IsNotNull(_server);
-            // create http client
-            _client = _server.CreateClient();
-            Assert.IsNotNull(_client);
+            Assert.NotNull(_server.TestServerCreated);
+            Assert.NotNull(_server.TestClient);
             // test each dependency injection if exists
-            var service = _server.Host.Services.GetService(typeof(IWebServiceService));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IFileHandlerService));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IProcessLotteryService));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IHTMLHandlerService));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(ILotteryService));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IRepository<DuplaSena>));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IRepository<MegaSena>));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IRepository<Loteca>));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IRepository<Federal>));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IRepository<LotoFacil>));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IRepository<LotoGol>));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IRepository<LotoMania>));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IRepository<Quina>));
-            Assert.IsNotNull(service);
-            service = _server.Host.Services.GetService(typeof(IRepository<TimeMania>));
-            Assert.IsNotNull(service);
+            var service = _server.TestServerCreated.Host.Services.GetService(typeof(IWebServiceService));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IFileHandlerService));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IProcessLotteryService));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IHTMLHandlerService));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(ILotteryService));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IRepository<DuplaSena>));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IRepository<MegaSena>));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IRepository<Loteca>));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IRepository<Federal>));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IRepository<LotoFacil>));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IRepository<LotoGol>));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IRepository<LotoMania>));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IRepository<Quina>));
+            Assert.NotNull(service);
+            service = _server.TestServerCreated.Host.Services.GetService(typeof(IRepository<TimeMania>));
+            Assert.NotNull(service);
         }
-        private string GetContentRootPath()
-        {
-            var testProjectPath = PlatformServices.Default.Application.ApplicationBasePath;
 
-            var relativePathToHostProject = @"..\..\..\..\LotteryApi";
-
-            return Path.Combine(testProjectPath, relativePathToHostProject);
-        }
     }
     public static class TestServices
     {
@@ -101,6 +76,39 @@ namespace LotteryApi.Test
             services.AddSingleton<IRepository<Quina>, MongoRepository<Quina>>();
             services.AddSingleton<IRepository<TimeMania>, MongoRepository<TimeMania>>();
             return services;
+        }
+    }
+    public class CreateServer
+    {
+        public TestServer TestServerCreated { get; set; }
+        public HttpClient TestClient { get; set; }
+        public CreateServer()
+        {
+            var contentRootPath = GetContentRootPath();
+            var config = new ConfigurationBuilder()
+                        .SetBasePath(contentRootPath)
+                        .AddJsonFile("appsettings.json")
+                        .Build();
+            var builder = new WebHostBuilder()
+                   .UseContentRoot(contentRootPath)
+                   .UseEnvironment("Testing")
+                   .UseConfiguration(config) // load configuration
+                   .ConfigureTestServices(services => services.LoadDependencies()) // load dependecies
+                   .UseStartup<Startup>();  // Uses Start up class from your API Host project to configure the test server
+
+
+            // Create test server
+            TestServerCreated = new TestServer(builder);
+            // create http client
+            TestClient = TestServerCreated.CreateClient();
+        }
+        public string GetContentRootPath()
+        {
+            var testProjectPath = PlatformServices.Default.Application.ApplicationBasePath;
+
+            var relativePathToHostProject = @"..\..\..\..\LotteryApi";
+
+            return Path.Combine(testProjectPath, relativePathToHostProject);
         }
     }
 }
