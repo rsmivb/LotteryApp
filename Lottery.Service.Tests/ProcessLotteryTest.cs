@@ -11,11 +11,10 @@ namespace Lottery.Service.Tests
     [TestClass]
     public class ProcessLotteryTest
     {
-        private AppSettings _appSettings;
-        private Mock<ILogger<IProcessLotteryService>> _mockLogger;
+        private readonly AppSettings _appSettings;
+        private readonly Mock<ILogger<IProcessLotteryService>> _mockLogger;
 
-        [TestInitialize]
-        public void Setup()
+        public ProcessLotteryTest()
         {
             _appSettings = new AppSettings { TempFilePath = @"\TestPath", Lotteries = new List<LotterySetting> { new LotterySetting { Name = "TestLottery", WebService = "http://www.dummy.com", ZipFileName = "test.zip" } } };
             _mockLogger = new Mock<ILogger<IProcessLotteryService>>();

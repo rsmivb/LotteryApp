@@ -5,6 +5,6 @@ namespace Lottery.Services
 {
     public interface IHTMLHandlerService
     {
-        List<List<string>> LoadHTMLFile(Stream path, int columnLimit);
+        List<List<string>> LoadHTMLFile(string HtmlFilePath, int columnLimit);
     }
 }

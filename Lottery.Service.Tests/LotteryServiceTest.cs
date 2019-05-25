@@ -13,15 +13,14 @@ namespace Lottery.Service.Tests
     [TestClass]
     public class LotteryServiceTest
     {
-        private string content;
-        private List<List<string>> returnListOfListOfStrings;
-        private AppSettings appSettings;
-        private Mock<ILogger<ILotteryService>> _mockLogger;
-        private Mock<IHTMLHandlerService> _mockHtmlService;
-        private LotteryService _lotteryService;
+        private readonly string content;
+        private readonly List<List<string>> returnListOfListOfStrings;
+        private readonly AppSettings appSettings;
+        private readonly Mock<ILogger<ILotteryService>> _mockLogger;
+        private readonly Mock<IHTMLHandlerService> _mockHtmlService;
+        private readonly LotteryService _lotteryService;
 
-        [TestInitialize]
-        public void Setup()
+        public LotteryServiceTest()
         {
             content = @"<html>
                     <head>

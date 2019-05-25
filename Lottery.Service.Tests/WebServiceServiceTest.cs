@@ -9,11 +9,9 @@ namespace Lottery.Service.Tests
     [TestClass]
     public class WebServiceServiceTest
     {
-        private Mock<ILogger<IWebServiceService>> _mockLogger;
-        private WebServiceService _webServiceService;
-
-        [TestInitialize]
-        public void Setup()
+        private readonly Mock<ILogger<IWebServiceService>> _mockLogger;
+        private readonly WebServiceService _webServiceService;
+        public WebServiceServiceTest()
         {
             _mockLogger = new Mock<ILogger<IWebServiceService>>();
             _webServiceService = new WebServiceService(_mockLogger.Object);

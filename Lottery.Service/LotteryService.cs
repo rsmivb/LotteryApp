@@ -25,41 +25,30 @@ namespace Lottery.Services
         public IEnumerable<MongoModel> ChooseLottery(List<List<string>> htmlLines, string lotteryName)
         {
             _logger.LogDebug($"Initializing loading for lottery {lotteryName}");
-            IEnumerable<MongoModel> results;
             switch (lotteryName)
             {
                 case "DuplaSena":
-                    results = DuplaSenaExtensionMethods.Load(htmlLines);
-                    break;
+                    return DuplaSenaExtensionMethods.Load(htmlLines);
                 case "Federal":
-                    results = FederalExtensionMethods.Load(htmlLines);
-                    break;
+                    return FederalExtensionMethods.Load(htmlLines);
                 case "TimeMania":
-                    results = TimeManiaExtensionMethods.Load(htmlLines);
-                    break;
+                    return TimeManiaExtensionMethods.Load(htmlLines);
                 case "Quina":
-                    results = QuinaExtensionMethods.Load(htmlLines);
-                    break;
+                    return QuinaExtensionMethods.Load(htmlLines);
                 case "LotoMania":
-                    results = LotoManiaExtensionMethods.Load(htmlLines);
-                    break;
+                    return LotoManiaExtensionMethods.Load(htmlLines);
                 case "LotoGol":
-                    results = LotoGolExtensionMethods.Load(htmlLines);
-                    break;
+                    return LotoGolExtensionMethods.Load(htmlLines);
                 case "LotoFacil":
-                    results = LotoFacilExtensionMethods.Load(htmlLines);
-                    break;
+                    return LotoFacilExtensionMethods.Load(htmlLines);
                 case "Loteca":
-                    results = LotecaExtensionMethods.Load(htmlLines);
-                    break;
+                    return LotecaExtensionMethods.Load(htmlLines);
                 case "MegaSena":
-                    results = MegaSenaExtensionMethods.Load(htmlLines);
-                    break;
+                    return MegaSenaExtensionMethods.Load(htmlLines);
                 default:
                     _logger.LogError($"Error when try to load lottery {lotteryName}.");
                     throw new NotSupportedException($"Lottery {lotteryName} did not support.");
             }
-            return results;
         }
         /// <summary>
         /// TODO : to be improved
@@ -79,22 +68,18 @@ namespace Lottery.Services
                 }
 
                 IEnumerable<MongoModel> lotteryList = new List<MongoModel>();
-                var path = string.Concat(string.Concat(Environment.CurrentDirectory, _tempFilePath), string.Concat($@"{lottery.Name}\", lottery.HtmlFileName));
-                _logger.LogDebug($"Loading lottery file from path: {path}");
-                if (!System.IO.File.Exists(path))
+                var HTMLFilePath = string.Concat(string.Concat(Environment.CurrentDirectory, _tempFilePath), string.Concat($@"{lottery.Name}\", lottery.HtmlFileName));
+                _logger.LogDebug($"Loading lottery file from path: {HTMLFilePath}");
+                if (!File.Exists(HTMLFilePath))
                 {
-                    var msg = $"The lottery file on path {path} does not exist, please check AppSetting object.";
+                    var msg = $"The lottery file on path {HTMLFilePath} does not exist, please check AppSetting object.";
                     _logger.LogError(msg);
-                    throw new System.IO.FileNotFoundException(msg);
+                    throw new FileNotFoundException(msg);
                 }
-
-                using (FileStream stream = File.Open(path, FileMode.Open, FileAccess.Write, FileShare.ReadWrite))
-                {
-                    var listResult = _htmlService.LoadHTMLFile(stream, lottery.Columns);
-                    _logger.LogDebug($"_htmlService.LoadHTMLFile returned list from LOadHTMLFile with {listResult.Count} rows.");
-                    lotteryList = ChooseLottery(listResult, lottery.Name);
-                    _logger.LogDebug($"ChooseLottery returned list with {lotteryList.Count()} rows.");
-                }
+                var listResult = _htmlService.LoadHTMLFile(HTMLFilePath, lottery.Columns);
+                _logger.LogDebug($"_htmlService.LoadHTMLFile returned list from LOadHTMLFile with {listResult.Count} rows.");
+                lotteryList = ChooseLottery(listResult, lottery.Name);
+                _logger.LogDebug($"ChooseLottery returned list with {lotteryList.Count()} rows.");
                 return lotteryList;
             }
             catch (Exception e)

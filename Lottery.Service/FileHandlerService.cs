@@ -17,6 +17,8 @@ namespace Lottery.Services
         {
             try
             {
+                _logger.LogDebug($"Try to CleanUp remaining folder {tempFile}");
+                CleanUpFolder(tempFile);
                 _logger.LogDebug($"Extracting file {zipPath} to {tempFile}");
                 ZipFile.ExtractToDirectory(zipPath, tempFile);
             }
@@ -56,7 +58,7 @@ namespace Lottery.Services
         {
             try
             {
-                _logger.LogDebug($"Creating file from Stream {filePath}.");
+                _logger.LogDebug($"Creating file from Stream to {filePath}.");
                 using (var responseStream = stream)
                 {
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -67,7 +69,7 @@ namespace Lottery.Services
             }
             catch (Exception e)
             {
-                _logger.LogError($"Error when try to create file from Stream {filePath}. Error -> {e.Message} -> StackTrace -> {e.StackTrace}.");
+                _logger.LogError($"Error when try to create file from Stream to {filePath}. Error -> {e.Message} -> StackTrace -> {e.StackTrace}.");
                 throw e;
             }
         }

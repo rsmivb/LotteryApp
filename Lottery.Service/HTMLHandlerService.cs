@@ -16,16 +16,16 @@ namespace Lottery.Services
         {
             _logger = logger;
         }
-        public List<List<string>> LoadHTMLFile(Stream streamFile, int columnLimit)
+        public List<List<string>> LoadHTMLFile(string htmlFilePath, int columnLimit)
         {
             try
             {
                 var doc = new HtmlDocument();
-                doc.Load(streamFile, Encoding.UTF7);
+                doc.Load(htmlFilePath, Encoding.UTF7);
                 _logger.LogDebug("Trying to load stream.");
                 if (doc != null)
                 {
-                    var trs = doc.DocumentNode.SelectNodes("//tr").Skip(1); //Skip headers on table
+                    var trs = doc.DocumentNode.SelectNodes("//tr").Skip(1);
 
                     List<List<string>> lines = new List<List<string>>();
                     List<string> nodes = new List<string>();
@@ -58,7 +58,7 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error was found. Error: {e.Message} - {e.StackTrace}");
-                throw;
+                throw e;
             }
         }
     }

@@ -13,4 +13,10 @@
     <ProjectReference Include="..\Lottery.Models\Lottery.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\Lottery_Test_file.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

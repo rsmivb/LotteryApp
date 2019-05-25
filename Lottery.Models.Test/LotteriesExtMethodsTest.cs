@@ -84,9 +84,8 @@ namespace Lottery.Models.Test
                 EstimatedPrize = 0.00m,
                 AccumulatedEspecialPascoa = 0.00m
             };
-            var result = DuplaSenaExtensionMethods.Load(listOfValuesDuplaSena).FirstOrDefault();
-
-            Assert.AreEqual(expectedDuplaSena.ToString(), result.ToString());
+            var actualResult = DuplaSenaExtensionMethods.Load(listOfValuesDuplaSena).FirstOrDefault();
+            Assert.AreEqual(expectedDuplaSena.ToString(), actualResult.ToString());
         }
         [TestMethod]
         public void ExtensioMethod_Federal_Test()
@@ -166,9 +165,9 @@ namespace Lottery.Models.Test
                 TotalAmount = 0,
                 EstimatedPrize = 0
             };
-            var result = LotecaExtensionMethods.Load(listOfValuesLoteca).FirstOrDefault();
+            var actualResult = LotecaExtensionMethods.Load(listOfValuesLoteca).FirstOrDefault();
 
-            Assert.AreEqual(expectedLoteca.ToString(), result.ToString());
+            Assert.AreEqual(expectedLoteca.ToString(), actualResult.ToString());
         }
         [TestMethod]
         public void ExtensioMethod_LotoFacil_Test()
@@ -234,9 +233,9 @@ namespace Lottery.Models.Test
                 EstimatedPrize = 0.00m,
                 SpecialAmount = 0.00m
             };
-            var result = LotoFacilExtensionMethods.Load(listOfValuesLotoFacil).FirstOrDefault();
+            var actualResult = LotoFacilExtensionMethods.Load(listOfValuesLotoFacil).FirstOrDefault();
 
-            Assert.AreEqual(expectedLotoFacil.ToString(), result.ToString());
+            Assert.AreEqual(expectedLotoFacil.ToString(), actualResult.ToString());
         }
         [TestMethod]
         public void ExtensioMethod_LotoGol_Test()
@@ -297,9 +296,9 @@ namespace Lottery.Models.Test
                 TotalAmount = 0.00m,
                 EstimatedPrize = 0.00m
             };
-            var result = LotoGolExtensionMethods.Load(listOfValuesLotoGol).FirstOrDefault();
+            var actualResult = LotoGolExtensionMethods.Load(listOfValuesLotoGol).FirstOrDefault();
 
-            Assert.AreEqual(expectedLotoGol.ToString(), result.ToString());
+            Assert.AreEqual(expectedLotoGol.ToString(), actualResult.ToString());
         }
         [TestMethod]
         public void ExtensioMethod_LotoMania_Test()
@@ -384,9 +383,9 @@ namespace Lottery.Models.Test
                 PrizeEstimated = 0.00m,
                 SpecialPrizeEstimated = 0m
             };
-            var result = LotoManiaExtensionMethods.Load(listOfValuesLotoMania).FirstOrDefault();
+            var actualResult = LotoManiaExtensionMethods.Load(listOfValuesLotoMania).FirstOrDefault();
 
-            Assert.AreEqual(expectedLotoMania.ToString(), result.ToString());
+            Assert.AreEqual(expectedLotoMania.ToString(), actualResult.ToString());
         }
         [TestMethod]
         public void ExtensioMethod_MegaSena_Test()
@@ -437,9 +436,9 @@ namespace Lottery.Models.Test
                 EstimatedPrize = 0.00m,
                 AccumulatedMegaSenaVirada = 0.00m
             };
-            var result = MegaSenaExtensionMethods.Load(listOfValuesMegaSena).FirstOrDefault();
+            var actualResult = MegaSenaExtensionMethods.Load(listOfValuesMegaSena).FirstOrDefault();
 
-            Assert.AreEqual(expectedMegaSena.ToString(), result.ToString());
+            Assert.AreEqual(expectedMegaSena.ToString(), actualResult.ToString());
         }
 
         [TestMethod]
@@ -494,9 +493,9 @@ namespace Lottery.Models.Test
                 EstimatePrize = 0.00m,
                 AccumulatedSorteioSaoJoao = 0.00m
             };
-            var result = QuinaExtensionMethods.Load(listOfValuesQuina).FirstOrDefault();
+            var actualResult = QuinaExtensionMethods.Load(listOfValuesQuina).FirstOrDefault();
 
-            Assert.AreEqual(expectedQuina.ToString(), result.ToString());
+            Assert.AreEqual(expectedQuina.ToString(), actualResult.ToString());
         }
         [TestMethod]
         public void ExtensioMethod_TimeMania_Test()
@@ -558,9 +557,9 @@ namespace Lottery.Models.Test
                 AccumulatedValue = 479279.20m,
                 EstimatedPrize = 1000000.00m
             };
-            var result = TimeManiaExtensionMethods.Load(listOfValuesTimeMania).FirstOrDefault();
+            var actualResult = TimeManiaExtensionMethods.Load(listOfValuesTimeMania).FirstOrDefault();
 
-            Assert.AreEqual(expectedTimeMania.ToString(), result.ToString());
+            Assert.AreEqual(expectedTimeMania.ToString(), actualResult.ToString());
         }
     }
 }
