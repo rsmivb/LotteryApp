@@ -3,8 +3,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Lottery.Service.Tests
 {
@@ -18,7 +16,7 @@ namespace Lottery.Service.Tests
         public void Setup()
         {
             _mockLogger = new Mock<ILogger<IWebServiceService>>();
-            _webServiceService = new WebServiceService (_mockLogger.Object);
+            _webServiceService = new WebServiceService(_mockLogger.Object);
         }
 
         [TestCategory("Web Service Service Test")]

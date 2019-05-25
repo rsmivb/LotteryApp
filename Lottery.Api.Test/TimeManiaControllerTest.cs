@@ -15,11 +15,11 @@ namespace Lottery.Api.Test
     public class TimeManiaControllerTest
     {
         private TimeManiaController timeManiaControllerTest;
-        private Mock<IRepository<TimeMania>> mockRepo;
-        private Mock<IProcessLotteryService> mockwebService;
-        private Mock<ILogger<TimeManiaController>> mockLog;
-        private Mock<ILotteryService> mockLotteryService;
-        private IEnumerable<MongoModel> listOfLottery;
+        private readonly Mock<IRepository<TimeMania>> mockRepo;
+        private readonly Mock<IProcessLotteryService> mockwebService;
+        private readonly Mock<ILogger<TimeManiaController>> mockLog;
+        private readonly Mock<ILotteryService> mockLotteryService;
+        private readonly IEnumerable<MongoModel> listOfLottery;
 
         public TimeManiaControllerTest()
         {
@@ -57,7 +57,7 @@ namespace Lottery.Api.Test
             };
         }
         [Fact]
-        [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
+        [Trait("TimeManiaControllerTest", "Controller Test - TimeMania Lottery")]
         public void DownloadResultsFromSource_Test()
         {
             mockLotteryService.SetReturnsDefault(listOfLottery);
@@ -68,7 +68,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
+        [Trait("TimeManiaControllerTest", "Controller Test - TimeMania Lottery")]
         public void DownloadResultsFromSource_ThrowsException_Test()
         {
             mockLotteryService.Setup(s => s.Load("TimeMania")).Throws<EntryPointNotFoundException>();
@@ -78,7 +78,7 @@ namespace Lottery.Api.Test
             Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
+        [Trait("TimeManiaControllerTest", "Controller Test - TimeMania Lottery")]
         public void GetDozenByQuantity_Test()
         {
             timeManiaControllerTest = new TimeManiaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
@@ -88,7 +88,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
+        [Trait("TimeManiaControllerTest", "Controller Test - TimeMania Lottery")]
         public void GetDozenByQuantity_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();
@@ -99,7 +99,7 @@ namespace Lottery.Api.Test
             Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
+        [Trait("TimeManiaControllerTest", "Controller Test - TimeMania Lottery")]
         public void GetAllLoteries_Test()
         {
             timeManiaControllerTest = new TimeManiaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
@@ -109,7 +109,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("TimeManiaControllerTest","Controller Test - TimeMania Lottery")]
+        [Trait("TimeManiaControllerTest", "Controller Test - TimeMania Lottery")]
         public void GetAllLoteries_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();

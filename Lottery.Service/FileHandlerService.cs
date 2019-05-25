@@ -7,7 +7,7 @@ namespace Lottery.Services
 {
     public class FileHandlerService : IFileHandlerService
     {
-        private ILogger<IFileHandlerService> _logger;
+        private readonly ILogger<IFileHandlerService> _logger;
 
         public FileHandlerService(ILogger<IFileHandlerService> logger)
         {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Lottery.Models
@@ -11,7 +10,7 @@ namespace Lottery.Models
         public DateTime DateRealized { get; set; }
         public List<int> Dozens { get; set; }
         public decimal TotalCollection { get; set; }
-        public int Winners6Numbers  { get; set; }
+        public int Winners6Numbers { get; set; }
         public string City { get; set; }
         public string UF { get; set; }
         public decimal Average6Numbers { get; set; }
@@ -25,7 +24,11 @@ namespace Lottery.Models
         public decimal AccumulatedMegaSenaVirada { get; set; }
         public override string ToString()
         {
-            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-{TotalCollection}-{Winners6Numbers}-{City}-{UF}-{Average6Numbers}-{Winners5Numbers}-{Average5Numbers}-{Winners4Numbers}-{Average4Numbers}-{IsAccumulated}-{AccumulatedPrize}-{EstimatedPrize}-{AccumulatedMegaSenaVirada} }}";
+            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
+                   $"{TotalCollection}-{Winners6Numbers}-{City}-{UF}-" +
+                   $"{Average6Numbers}-{Winners5Numbers}-{Average5Numbers}-" +
+                   $"{Winners4Numbers}-{Average4Numbers}-{IsAccumulated}-" +
+                   $"{AccumulatedPrize}-{EstimatedPrize}-{AccumulatedMegaSenaVirada} }}";
         }
     }
 

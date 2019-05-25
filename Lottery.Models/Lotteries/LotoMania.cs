@@ -34,7 +34,14 @@ namespace Lottery.Models
         public decimal SpecialPrizeEstimated { get; set; }
         public override string ToString()
         {
-            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-{TotalValue}-{TotalWinners20}-{City}-{UF}-{TotalWinners19}-{TotalWinners18}-{TotalWinners17}-{TotalWinners16}-{TotalWinnersNoNumbers}-{TotalValueNumbers20}-{TotalValueNumbers19}-{TotalValueNumbers18}-{TotalValueNumbers17}-{TotalValueNumbers16}-{TotalValueNoNumbers}-{Acumulated20}-{Acumulated19}-{Acumulated18}-{Acumulated17}-{Acumulated16}-{AcumulatedNoNumbers}-{PrizeEstimated}-{SpecialPrizeEstimated} }}";
+            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
+                   $"{TotalValue}-{TotalWinners20}-{City}-{UF}-" +
+                   $"{TotalWinners19}-{TotalWinners18}-{TotalWinners17}-{TotalWinners16}-" +
+                   $"{TotalWinnersNoNumbers}-{TotalValueNumbers20}-{TotalValueNumbers19}-" +
+                   $"{TotalValueNumbers18}-{TotalValueNumbers17}-{TotalValueNumbers16}-" +
+                   $"{TotalValueNoNumbers}-{Acumulated20}-{Acumulated19}-{Acumulated18}-" +
+                   $"{Acumulated17}-{Acumulated16}-{AcumulatedNoNumbers}-" +
+                   $"{PrizeEstimated}-{SpecialPrizeEstimated} }}";
         }
     }
 

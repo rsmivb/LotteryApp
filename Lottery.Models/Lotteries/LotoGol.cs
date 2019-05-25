@@ -27,7 +27,11 @@ namespace Lottery.Models
         public decimal EstimatedPrize { get; set; }
         public override string ToString()
         {
-            return $"{{ {LotteryId}-{DateRealized}-{City}-{UF}-{Winners5}-{Average5}-{IsAcumlated5}-{Acumulated5}-{Winners4}-{Average4}-{IsAcumlated4}-{Acumulated4}-{Winners3}-{Average3}-{IsAcumlated3}-{Acumulated3}-[{string.Join(",", Dozens)}]-{TotalAmount}-{EstimatedPrize} }}";
+            return $"{{ {LotteryId}-{DateRealized}-{City}-{UF}-" +
+                   $"{Winners5}-{Average5}-{IsAcumlated5}-{Acumulated5}-" +
+                   $"{Winners4}-{Average4}-{IsAcumlated4}-{Acumulated4}-" +
+                   $"{Winners3}-{Average3}-{IsAcumlated3}-{Acumulated3}-" +
+                   $"[{string.Join(",", Dozens)}]-{TotalAmount}-{EstimatedPrize} }}";
         }
     }
     public static class LotoGolExtensionMethods

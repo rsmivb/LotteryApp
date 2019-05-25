@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Lottery.Models;
+﻿using Lottery.Models;
 using Lottery.Repository;
 using Lottery.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LotteryApi.Controllers
 {
@@ -19,7 +19,7 @@ namespace LotteryApi.Controllers
         private readonly ILogger<QuinaController> _logger;
         private readonly ILotteryService _lotteryService;
 
-        public QuinaController( IProcessLotteryService webService,
+        public QuinaController(IProcessLotteryService webService,
             IRepository<Quina> repository,
             ILogger<QuinaController> logger,
             ILotteryService lotteryService)

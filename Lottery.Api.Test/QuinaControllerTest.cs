@@ -15,11 +15,11 @@ namespace Lottery.Api.Test
     public class QuinaControllerTest
     {
         private QuinaController quinaControllerTest;
-        private Mock<IRepository<Quina>> mockRepo;
-        private Mock<IProcessLotteryService> mockwebService;
-        private Mock<ILogger<QuinaController>> mockLog;
-        private Mock<ILotteryService> mockLotteryService;
-        private IEnumerable<MongoModel> listOfLottery;
+        private readonly Mock<IRepository<Quina>> mockRepo;
+        private readonly Mock<IProcessLotteryService> mockwebService;
+        private readonly Mock<ILogger<QuinaController>> mockLog;
+        private readonly Mock<ILotteryService> mockLotteryService;
+        private readonly IEnumerable<MongoModel> listOfLottery;
 
         public QuinaControllerTest()
         {
@@ -54,7 +54,7 @@ namespace Lottery.Api.Test
             };
         }
         [Fact]
-        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
+        [Trait("QuinaControllerTest", "Controller Test - Quina Lottery")]
         public void DownloadResultsFromSource_Test()
         {
             mockLotteryService.SetReturnsDefault(listOfLottery);
@@ -65,7 +65,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
+        [Trait("QuinaControllerTest", "Controller Test - Quina Lottery")]
         public void DownloadResultsFromSource_ThrowsException_Test()
         {
             mockLotteryService.Setup(s => s.Load("Quina")).Throws<EntryPointNotFoundException>();
@@ -76,7 +76,7 @@ namespace Lottery.Api.Test
             Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
+        [Trait("QuinaControllerTest", "Controller Test - Quina Lottery")]
         public void GetDozenByQuantity_Test()
         {
             quinaControllerTest = new QuinaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
@@ -86,7 +86,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
+        [Trait("QuinaControllerTest", "Controller Test - Quina Lottery")]
         public void GetDozenByQuantity_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();
@@ -97,7 +97,7 @@ namespace Lottery.Api.Test
             Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
+        [Trait("QuinaControllerTest", "Controller Test - Quina Lottery")]
         public void GetAllLoteries_Test()
         {
             quinaControllerTest = new QuinaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
@@ -107,7 +107,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("QuinaControllerTest","Controller Test - Quina Lottery")]
+        [Trait("QuinaControllerTest", "Controller Test - Quina Lottery")]
         public void GetAllLoteries_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();

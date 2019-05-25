@@ -7,7 +7,7 @@ namespace Lottery.Services
 {
     public class WebServiceService : IWebServiceService
     {
-        private ILogger<IWebServiceService> _logger;
+        private readonly ILogger<IWebServiceService> _logger;
 
         public WebServiceService(ILogger<IWebServiceService> logger)
         {

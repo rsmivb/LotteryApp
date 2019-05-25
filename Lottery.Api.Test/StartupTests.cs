@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
-using Xunit;
 using System.IO;
 using System.Net.Http;
+using Xunit;
 
 
 namespace LotteryApi.Test

@@ -26,7 +26,12 @@ namespace Lottery.Models
         public decimal AccumulatedSorteioSaoJoao { get; set; }
         public override string ToString()
         {
-            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-{TotalAmount}-{Winners5}-{City}-{UF}-{Average5Numbers}-{Winners4}-{Average4Numbers}-{Winners3}-{Average3Numbers}-{Winners2}-{Average2Numbers}-{IsAccumulated}-{AccumulatedValue}-{EstimatePrize}-{AccumulatedSorteioSaoJoao} }}";
+            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
+                   $"{TotalAmount}-{Winners5}-{City}-{UF}-" +
+                   $"{Average5Numbers}-{Winners4}-{Average4Numbers}-" +
+                   $"{Winners3}-{Average3Numbers}-{Winners2}-{Average2Numbers}-" +
+                   $"{IsAccumulated}-{AccumulatedValue}-" +
+                   $"{EstimatePrize}-{AccumulatedSorteioSaoJoao} }}";
         }
     }
 

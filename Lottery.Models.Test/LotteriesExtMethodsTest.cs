@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Lottery.Models.Test
 {
@@ -149,23 +148,23 @@ namespace Lottery.Models.Test
                     " - "
                 }
             };
-            var expectedLoteca =  new Loteca
-                {
-                    LotteryId = 1,
-                    DateRealized = new DateTime(2002,02,18),
-                    Winners14 = 2,
-                    City = string.Empty,
-                    UF = "BA",
-                    Average14 = 55985.99m,
-                    IsAcumulated = false,
-                    AmountValue14 = 0.00m,
-                    Winners13 = 44,
-                    AmountValue13 = 2544.81m,
-                    Winners12 = 1028,
-                    AmountValue12 = 144.68m,
-                    Dozens = new List<char> { '2','1','1','2','1','2','x','1','x','1','1','2','1','1',}.OrderBy(c => c).ToList(),
-                    TotalAmount = 0,
-                    EstimatedPrize = 0
+            var expectedLoteca = new Loteca
+            {
+                LotteryId = 1,
+                DateRealized = new DateTime(2002, 02, 18),
+                Winners14 = 2,
+                City = string.Empty,
+                UF = "BA",
+                Average14 = 55985.99m,
+                IsAcumulated = false,
+                AmountValue14 = 0.00m,
+                Winners13 = 44,
+                AmountValue13 = 2544.81m,
+                Winners12 = 1028,
+                AmountValue12 = 144.68m,
+                Dozens = new List<char> { '2', '1', '1', '2', '1', '2', 'x', '1', 'x', '1', '1', '2', '1', '1', }.OrderBy(c => c).ToList(),
+                TotalAmount = 0,
+                EstimatedPrize = 0
             };
             var result = LotecaExtensionMethods.Load(listOfValuesLoteca).FirstOrDefault();
 
@@ -217,7 +216,7 @@ namespace Lottery.Models.Test
             {
                 LotteryId = 1,
                 DateRealized = new DateTime(2003, 09, 29),
-                Dozens = new List<int> { 18,20,25,23,10,11,24,14,06,02,13,09,05,16,03 }.OrderBy(c => c).ToList(),
+                Dozens = new List<int> { 18, 20, 25, 23, 10, 11, 24, 14, 06, 02, 13, 09, 05, 16, 03 }.OrderBy(c => c).ToList(),
                 TotalAmount = 0.00m,
                 Winners15 = 5,
                 City = string.Empty,
@@ -294,7 +293,7 @@ namespace Lottery.Models.Test
                 Average3 = 20.38m,
                 IsAcumlated3 = false,
                 Acumulated3 = 0.00m,
-                Dozens = new List<char> { '2','+','3','0','2','1','1','+','+','0' }.OrderBy(c => c).ToList(),
+                Dozens = new List<char> { '2', '+', '3', '0', '2', '1', '1', '+', '+', '0' }.OrderBy(c => c).ToList(),
                 TotalAmount = 0.00m,
                 EstimatedPrize = 0.00m
             };
@@ -360,7 +359,7 @@ namespace Lottery.Models.Test
             {
                 LotteryId = 1,
                 DateRealized = new DateTime(1999, 10, 02),
-                Dozens = new List<int> { 16,11,88,32,25,00,70,78,73,61,90,89,46,95,06,33,34,21,14,22}.OrderBy(c => c).ToList(),
+                Dozens = new List<int> { 16, 11, 88, 32, 25, 00, 70, 78, 73, 61, 90, 89, 46, 95, 06, 33, 34, 21, 14, 22 }.OrderBy(c => c).ToList(),
                 TotalValue = 0.00m,
                 TotalWinners20 = 0,
                 City = string.Empty,
@@ -423,7 +422,7 @@ namespace Lottery.Models.Test
             {
                 LotteryId = 1,
                 DateRealized = new DateTime(1996, 03, 11),
-                Dozens = new List<int> { 41,05,04,52,30,33 }.OrderBy(c => c).ToList(),
+                Dozens = new List<int> { 41, 05, 04, 52, 30, 33 }.OrderBy(c => c).ToList(),
                 TotalCollection = 0.00m,
                 Winners6Numbers = 0,
                 City = string.Empty,
@@ -478,7 +477,7 @@ namespace Lottery.Models.Test
             {
                 LotteryId = 1,
                 DateRealized = new DateTime(1994, 03, 13),
-                Dozens = new List<int> { 25,45,60,76,79 }.OrderBy(c => c).ToList(),
+                Dozens = new List<int> { 25, 45, 60, 76, 79 }.OrderBy(c => c).ToList(),
                 TotalAmount = 0.00m,
                 Winners5 = 3,
                 City = string.Empty,
@@ -539,7 +538,7 @@ namespace Lottery.Models.Test
             {
                 LotteryId = 1,
                 DateRealized = new DateTime(2008, 03, 01),
-                Dozens = new List<int> { 71,51,63,57,24,80,31 }.OrderBy(c => c).ToList(),
+                Dozens = new List<int> { 71, 51, 63, 57, 24, 80, 31 }.OrderBy(c => c).ToList(),
                 Team = "PALMAS/TO",
                 TotalValue = 0.00m,
                 TotalWinners7 = 0,
@@ -550,7 +549,7 @@ namespace Lottery.Models.Test
                 TotalWinners4 = 6032,
                 TotalWinners3 = 60403,
                 WinnersTeam = 13122,
-                TotalValueNumbers7 =0.00m ,
+                TotalValueNumbers7 = 0.00m,
                 TotalValueNumbers6 = 59909.90m,
                 TotalValueNumbers5 = 730.61m,
                 TotalValueNumbers4 = 6.00m,

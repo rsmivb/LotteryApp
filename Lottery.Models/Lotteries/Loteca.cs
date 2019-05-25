@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Lottery.Models
@@ -24,7 +23,10 @@ namespace Lottery.Models
         public decimal EstimatedPrize { get; set; }
         public override string ToString()
         {
-            return $"{{ {LotteryId}-{DateRealized}-{Winners14}-{City}-{UF}-{Average14}-{IsAcumulated}-{AmountValue14}-{Winners13}-{AmountValue13}-{Winners12}-{AmountValue12}-[{string.Join(",", Dozens)}]-{TotalAmount}{EstimatedPrize} }}";
+            return $"{{ {LotteryId}-{DateRealized}-{Winners14}-{City}-{UF}-" +
+                   $"{Average14}-{IsAcumulated}-{AmountValue14}-{Winners13}-" +
+                   $"{AmountValue13}-{Winners12}-{AmountValue12}-[{string.Join(",", Dozens)}]-" +
+                   $"{TotalAmount}{EstimatedPrize} }}";
         }
     }
 

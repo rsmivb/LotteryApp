@@ -1,16 +1,16 @@
 ﻿using HtmlAgilityPack;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Microsoft.Extensions.Logging;
 
 namespace Lottery.Services
 {
     public class HTMLHandlerService : IHTMLHandlerService
     {
-        private ILogger<IHTMLHandlerService> _logger;
+        private readonly ILogger<IHTMLHandlerService> _logger;
 
         public HTMLHandlerService(ILogger<IHTMLHandlerService> logger)
         {

@@ -15,11 +15,11 @@ namespace Lottery.Api.Test
     public class LotoManiaControllerTest
     {
         private LotoManiaController lotoManiaControllerTest;
-        private Mock<IRepository<LotoMania>> mockRepo;
-        private Mock<IProcessLotteryService> mockwebService;
-        private Mock<ILogger<LotoManiaController>> mockLog;
-        private Mock<ILotteryService> mockLotteryService;
-        private IEnumerable<MongoModel> listOfLottery;
+        private readonly Mock<IRepository<LotoMania>> mockRepo;
+        private readonly Mock<IProcessLotteryService> mockwebService;
+        private readonly Mock<ILogger<LotoManiaController>> mockLog;
+        private readonly Mock<ILotteryService> mockLotteryService;
+        private readonly IEnumerable<MongoModel> listOfLottery;
 
         public LotoManiaControllerTest()
         {
@@ -62,7 +62,7 @@ namespace Lottery.Api.Test
             };
         }
         [Fact]
-        [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
+        [Trait("LotoManiaControllerTest", "Controller Test - LotoMania Lottery")]
         public void DownloadResultsFromSource_Test()
         {
             mockLotteryService.SetReturnsDefault(listOfLottery);
@@ -73,7 +73,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
+        [Trait("LotoManiaControllerTest", "Controller Test - LotoMania Lottery")]
         public void DownloadResultsFromSource_ThrowsException_Test()
         {
             mockLotteryService.Setup(s => s.Load("LotoMania")).Throws<EntryPointNotFoundException>();
@@ -84,7 +84,7 @@ namespace Lottery.Api.Test
             Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
+        [Trait("LotoManiaControllerTest", "Controller Test - LotoMania Lottery")]
         public void GetDozenByQuantity_Test()
         {
             lotoManiaControllerTest = new LotoManiaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
@@ -94,7 +94,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
+        [Trait("LotoManiaControllerTest", "Controller Test - LotoMania Lottery")]
         public void GetDozenByQuantity_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();
@@ -105,7 +105,7 @@ namespace Lottery.Api.Test
             Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
+        [Trait("LotoManiaControllerTest", "Controller Test - LotoMania Lottery")]
         public void GetAllLoteries_Test()
         {
             lotoManiaControllerTest = new LotoManiaController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
@@ -115,7 +115,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("LotoManiaControllerTest","Controller Test - LotoMania Lottery")]
+        [Trait("LotoManiaControllerTest", "Controller Test - LotoMania Lottery")]
         public void GetAllLoteries_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();

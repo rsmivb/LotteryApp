@@ -28,7 +28,11 @@ namespace Lottery.Models
 
         public override string ToString()
         {
-            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-{TotalAmount}-{Winners15}-{City}-{UF}-{Winners14}-{Winners13}-{Winners12}-{Winners11}-{AverageAmount15}-{AverageAmount14}-{AverageAmount13}-{AverageAmount12}-{AverageAmount11}-{Accumulated15}-{EstimatedPrize}-{SpecialAmount} }}";
+            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
+                   $"{TotalAmount}-{Winners15}-{City}-{UF}-{Winners14}-{Winners13}-" +
+                   $"{Winners12}-{Winners11}-{AverageAmount15}-{AverageAmount14}-" +
+                   $"{AverageAmount13}-{AverageAmount12}-{AverageAmount11}-" +
+                   $"{Accumulated15}-{EstimatedPrize}-{SpecialAmount} }}";
         }
     }
 

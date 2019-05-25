@@ -29,7 +29,13 @@ namespace Lottery.Models
         public decimal EstimatedPrize { get; set; }
         public override string ToString()
         {
-            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-{Team}-{TotalValue}-{TotalWinners7}-{City}-{UF}-{TotalWinners6}-{TotalWinners5}-{TotalWinners4}-{TotalWinners3}-{WinnersTeam}-{TotalValueNumbers7}-{TotalValueNumbers6}-{TotalValueNumbers5}-{TotalValueNumbers4}-{TotalValueNumbers3}-{TeamValue}-{AccumulatedValue}-{EstimatedPrize} }}";
+            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
+                   $"{Team}-{TotalValue}-{TotalWinners7}-{City}-{UF}-" +
+                   $"{TotalWinners6}-{TotalWinners5}-{TotalWinners4}-" +
+                   $"{TotalWinners3}-{WinnersTeam}-{TotalValueNumbers7}-" +
+                   $"{TotalValueNumbers6}-{TotalValueNumbers5}-" +
+                   $"{TotalValueNumbers4}-{TotalValueNumbers3}-" +
+                   $"{TeamValue}-{AccumulatedValue}-{EstimatedPrize} }}";
         }
     }
     public static class TimeManiaExtensionMethods

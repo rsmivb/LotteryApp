@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Xunit;
 
@@ -16,11 +15,11 @@ namespace Lottery.Api.Test
     public class FederalControllerTest
     {
         private FederalController federalControllerTest;
-        private Mock<IRepository<Federal>> mockRepo;
-        private Mock<IProcessLotteryService> mockwebService;
-        private Mock<ILogger<FederalController>> mockLog;
-        private Mock<ILotteryService> mockLotteryService;
-        private IEnumerable<MongoModel> listOfLottery;
+        private readonly Mock<IRepository<Federal>> mockRepo;
+        private readonly Mock<IProcessLotteryService> mockwebService;
+        private readonly Mock<ILogger<FederalController>> mockLog;
+        private readonly Mock<ILotteryService> mockLotteryService;
+        private readonly IEnumerable<MongoModel> listOfLottery;
 
         public FederalControllerTest()
         {
@@ -45,7 +44,7 @@ namespace Lottery.Api.Test
             };
         }
         [Fact]
-        [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
+        [Trait("FederalControllerTest", "Controller Test - Federal Lottery")]
         public void DownloadResultsFromSource_Test()
         {
             mockLotteryService.SetReturnsDefault(listOfLottery);
@@ -56,7 +55,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
+        [Trait("FederalControllerTest", "Controller Test - Federal Lottery")]
         public void DownloadResultsFromSource_ThrowsException_Test()
         {
             mockLotteryService.Setup(s => s.Load("Federal")).Throws<EntryPointNotFoundException>();
@@ -67,7 +66,7 @@ namespace Lottery.Api.Test
             Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
+        [Trait("FederalControllerTest", "Controller Test - Federal Lottery")]
         public void GetDozenByQuantity_Test()
         {
             federalControllerTest = new FederalController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
@@ -77,7 +76,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
+        [Trait("FederalControllerTest", "Controller Test - Federal Lottery")]
         public void GetDozenByQuantity_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();
@@ -88,7 +87,7 @@ namespace Lottery.Api.Test
             Assert.IsType<NotFoundObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
+        [Trait("FederalControllerTest", "Controller Test - Federal Lottery")]
         public void GetResults_Test()
         {
             federalControllerTest = new FederalController(mockwebService.Object, mockRepo.Object, mockLog.Object, mockLotteryService.Object);
@@ -98,7 +97,7 @@ namespace Lottery.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
         [Fact]
-        [Trait("FederalControllerTest","Controller Test - Federal Lottery")]
+        [Trait("FederalControllerTest", "Controller Test - Federal Lottery")]
         public void GetResults_ThrowsException_Test()
         {
             mockRepo.Setup(m => m.GetAll()).Throws<Exception>();

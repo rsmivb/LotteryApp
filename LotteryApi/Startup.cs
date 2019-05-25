@@ -36,17 +36,18 @@ namespace LotteryApi
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1",
-                    new Info {
-                                Title = "Lottery Api",
-                                Description = "API which consumes data from Loterias Caixa and provides all lotteries results.",
-                                Version = "v1",
-                                Contact = new Contact
-                                {
-                                    Name = "Rafael Mesquita",
-                                    Email = "mesquita.cob@gmail.com",
-                                    Url = "https://github.com/rsmivb/LotteryApp"
-                                }
-                            });
+                    new Info
+                    {
+                        Title = "Lottery Api",
+                        Description = "API which consumes data from Loterias Caixa and provides all lotteries results.",
+                        Version = "v1",
+                        Contact = new Contact
+                        {
+                            Name = "Rafael Mesquita",
+                            Email = "mesquita.cob@gmail.com",
+                            Url = "https://github.com/rsmivb/LotteryApp"
+                        }
+                    });
                 //Swagger documentation: https://medium.com/tableless/documenta%C3%A7%C3%A3o-de-apis-com-swagger-no-asp-net-core-e7bc3caa9185
                 var applicationBasePath = PlatformServices.Default.Application.ApplicationBasePath;
                 var applicationName = PlatformServices.Default.Application.ApplicationName;

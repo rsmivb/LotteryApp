@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Lottery.Models;
+﻿using Lottery.Models;
 using Lottery.Repository;
 using Lottery.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LotteryApi.Controllers
 {
@@ -60,7 +60,7 @@ namespace LotteryApi.Controllers
                                     .GroupBy(dozens => dozens) // group into a new list
                                     .Select(s => new { Dozen = s.Key, Quantity = s.Count() }) // runs each number and count it
                                     .OrderBy(o => o.Dozen); //order by ascending
-                                    //.ToDictionary(d => d.Number, d => d.Quantity); // project into dictionary list
+                                                            //.ToDictionary(d => d.Number, d => d.Quantity); // project into dictionary list
                 return Ok(projectNumbers);
             }
             catch (Exception e)

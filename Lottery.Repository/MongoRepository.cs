@@ -13,8 +13,8 @@ namespace Lottery.Repository
     /// <typeparam name="T"></typeparam>
     public class MongoRepository<T> : IRepository<T> where T : class, new()
     {
-        private string _collectionName;
-        private IMongoDatabase _db;
+        private readonly string _collectionName;
+        private readonly IMongoDatabase _db;
 
         protected IMongoCollection<T> Collection
         {

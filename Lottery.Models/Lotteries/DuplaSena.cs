@@ -36,7 +36,13 @@ namespace Lottery.Models
 
         public override string ToString()
         {
-            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",",DozensRound1)}]-{TotalAmount}-{Winners6NumbersRound1}-{City}-{UF}-{Average6NumbersRound1}-{IsAccumulated}-{AccumulatedValueRound1}-{Winners5NumbersRound1}-{Average5NumbersRound1}-{Winners4NumbersRound1}-{Average4NumbersRound1}-{Winners3NumbersRound1}-{Average3NumbersRound1}-[{string.Join(",",DozensRound2)}]-{Winners6NumbersRound2}-{Average6NumbersRound2}-{Winners5NumbersRound2}-{Average5NumbersRound2}-{Winners4NumbersRound2}-{Average4NumbersRound2}-{Winners3NumbersRound2}-{Average3NumbersRound2}-{EstimatedPrize}-{AccumulatedEspecialPascoa} }}";
+            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", DozensRound1)}]-" +
+                $"{TotalAmount}-{Winners6NumbersRound1}-{City}-{UF}-{Average6NumbersRound1}-" +
+                $"{IsAccumulated}-{AccumulatedValueRound1}-{Winners5NumbersRound1}-{Average5NumbersRound1}-" +
+                $"{Winners4NumbersRound1}-{Average4NumbersRound1}-{Winners3NumbersRound1}-{Average3NumbersRound1}-" +
+                $"[{string.Join(",", DozensRound2)}]-{Winners6NumbersRound2}-{Average6NumbersRound2}-{Winners5NumbersRound2}-" +
+                $"{Average5NumbersRound2}-{Winners4NumbersRound2}-{Average4NumbersRound2}-{Winners3NumbersRound2}-" +
+                $"{Average3NumbersRound2}-{EstimatedPrize}-{AccumulatedEspecialPascoa} }}";
         }
     }
 

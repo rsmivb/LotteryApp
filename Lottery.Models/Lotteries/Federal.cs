@@ -17,7 +17,8 @@ namespace Lottery.Models
 
         public override string ToString()
         {
-            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-{Prize1}-{Prize2}-{Prize3}-{Prize4}-{Prize5} }}";
+            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
+                    $"{Prize1}-{Prize2}-{Prize3}-{Prize4}-{Prize5} }}";
         }
     }
 

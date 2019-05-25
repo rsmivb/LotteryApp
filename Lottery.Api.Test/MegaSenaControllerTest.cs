@@ -16,11 +16,11 @@ namespace Lottery.Api.Test
     public class MegaSenaControllerTest
     {
         private MegaSenaController megaSenaControllerTest;
-        private Mock<IRepository<MegaSena>> mockRepo;
-        private Mock<IProcessLotteryService> mockwebService;
-        private Mock<ILogger<MegaSenaController>> mockLog;
-        private Mock<ILotteryService> mockLotteryService;
-        private IEnumerable<MongoModel> listOfLottery;
+        private readonly Mock<IRepository<MegaSena>> mockRepo;
+        private readonly Mock<IProcessLotteryService> mockwebService;
+        private readonly Mock<ILogger<MegaSenaController>> mockLog;
+        private readonly Mock<ILotteryService> mockLotteryService;
+        private readonly IEnumerable<MongoModel> listOfLottery;
 
         public MegaSenaControllerTest()
         {

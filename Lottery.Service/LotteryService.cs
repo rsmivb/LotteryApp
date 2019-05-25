@@ -9,10 +9,10 @@ namespace Lottery.Services
 {
     public class LotteryService : ILotteryService
     {
-        private IHTMLHandlerService _htmlService;
-        private IEnumerable<LotterySetting> _lotterySetting;
-        private string _tempFilePath;
-        private ILogger<ILotteryService> _logger;
+        private readonly IHTMLHandlerService _htmlService;
+        private readonly IEnumerable<LotterySetting> _lotterySetting;
+        private readonly string _tempFilePath;
+        private readonly ILogger<ILotteryService> _logger;
 
         public LotteryService(IHTMLHandlerService htmlService, AppSettings settings, ILogger<ILotteryService> logger)
         {
