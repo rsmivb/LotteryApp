@@ -36,7 +36,7 @@ namespace Lottery.Service.Tests
             };
 
             // Act
-            var path = $"{string.Concat(Environment.CurrentDirectory, @"\Resources\Lottery_Test_file.htm")}";
+            var path = $"{string.Concat(Environment.CurrentDirectory, @"/Resources/Lottery_Test_file.htm")}";
             List<List<string>> result;
                 result = _service.LoadHTMLFile(path, 26);
             // Assert
