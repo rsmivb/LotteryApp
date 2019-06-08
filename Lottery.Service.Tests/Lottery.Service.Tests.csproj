@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Lottery_Test_file.htm" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Resources\Lottery_Test_file.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
