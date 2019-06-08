@@ -1,14 +1,15 @@
 sudo: required
 language: csharp
-dist: trusty
+dist: xenial
 mono: none
-dotnet: 2.1.502
+dotnet: 2.2
 os:
 - linux
 solution: LotteryApp.sln
 install:
 - dotnet restore
 script:
+  - dotnet restore
   - dotnet build
   - dotnet test Lottery.Models.Test/Lottery.Models.Test.csproj
   - dotnet test Lottery.Service.Tests/Lottery.Service.Tests.csproj
