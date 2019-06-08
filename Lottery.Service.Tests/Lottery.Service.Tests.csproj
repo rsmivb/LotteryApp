@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Lottery.Service\Lottery.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MegaSena\" />
+  </ItemGroup>
+
 </Project>

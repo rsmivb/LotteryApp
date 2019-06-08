@@ -217,7 +217,7 @@ namespace Lottery.Service.Tests
                 using (FileStream fs = File.Create(filePath))
                 {
                     // Add some text to file
-                    Byte[] title = new UTF8Encoding(true).GetBytes(content);
+                    var title = new UTF8Encoding(true).GetBytes(content);
                     fs.Write(title, 0, title.Length);
                 }
             }

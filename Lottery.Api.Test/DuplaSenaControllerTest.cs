@@ -2,7 +2,6 @@ using Lottery.Models;
 using Lottery.Repository;
 using Lottery.Services;
 using LotteryApi.Controllers;
-using LotteryApi.Test;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;

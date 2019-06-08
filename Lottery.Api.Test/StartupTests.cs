@@ -4,12 +4,9 @@ using Lottery.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using System.IO;
-using System.Net.Http;
 using Xunit;
-
 
 namespace LotteryApi.Test
 {
