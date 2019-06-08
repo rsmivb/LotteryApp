@@ -73,7 +73,6 @@ namespace Lottery.Api.Test
             var result = duplaSenaControllerTest.DownloadResultsFromSource();
 
             Assert.IsType<OkObjectResult>(result.Result);
-            CreateServer _server = new CreateServer();
         }
         [Fact]
         [Trait("DuplaSenaControllerTest", "Controller Test - DuplaSena Lottery")]
