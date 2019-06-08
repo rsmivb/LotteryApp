@@ -73,7 +73,7 @@ namespace LotteryApi.Test
         {
             var testProjectPath = PlatformServices.Default.Application.ApplicationBasePath;
 
-            var relativePathToHostProject = @"..\..\..\..\LotteryApi";
+            var relativePathToHostProject = @"../../../../LotteryApi";
 
             return Path.Combine(testProjectPath, relativePathToHostProject);
         }
