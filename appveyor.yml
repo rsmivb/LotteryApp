@@ -2,18 +2,21 @@
 image: Visual Studio 2017
 
 before_build:
-- nuget restore
-- choco install opencover.portable
-- choco install codecov
-
+  - nuget restore
+  - choco install visualstudio2015testagents
+  - choco install opencover.portable
+  - choco install codecov
 build:
   project: LotteryApi.sln
   verbosity: minimal
-
 test_script:
-  - OpenCover.Console.exe -register:rsmivb -target:"xunit.console.x86.exe" -targetargs:".\Lottery.Models.Test\bin\Debug\Lottery.Models.Test.dll -noshadow"  -output:".\Lottery.Models.Test.xml"
+  - OpenCover.Console.exe -register:rsmivb -target:"xunit.console.x86.exe" -targetargs:".\Lottery.Models.Test\bin\Debug\netcoreapp2.2\Lottery.Models.Test.dll -noshadow" -oldstyle -output:".\Lottery.Models.Test.xml"
+  - OpenCover.Console.exe -register:rsmivb -target:"xunit.console.x86.exe" -targetargs:".\Lottery.Service.Test\bin\Debug\netcoreapp2.2\Lottery.Service.Test.dll -noshadow" -oldstyle -output:".\Lottery.Service.Test.xml"
+  - OpenCover.Console.exe -register:rsmivb -target:"xunit.console.x86.exe" -targetargs:".\Lottery.Api.Test\bin\Debug\netcoreapp2.2\Lottery.Api.Test.dll -noshadow" -oldstyle -output:".\Lottery.Api.Test.xml"
 after_test:
   - ps: |
       $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
       Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
-      bash codecov.sh -f ".\Lottery.Models.Test.xml" -t $env:CODECOV_TOKEN
+      bash codecov.sh -f ".\Lottery.Models.Test.xml"
+      bash codecov.sh -f ".\Lottery.Service.Test.xml"
+      bash codecov.sh -f ".\Lottery.Api.Test.xml"
