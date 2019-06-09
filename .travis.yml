@@ -22,3 +22,5 @@ script:
   - dotnet test Lottery.Models.Test/Lottery.Models.Test.csproj
   - dotnet test Lottery.Service.Tests/Lottery.Service.Tests.csproj
   - dotnet test Lottery.Api.Test/LotteryApi.Test.csproj
+after_script:
+  - bash <(curl -s https://codecov.io/bash)
