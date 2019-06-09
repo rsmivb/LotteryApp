@@ -1,16 +1,28 @@
-    
+
 image: Visual Studio 2017
+
+branches:
+  only:
+  - master
+  
+skip_commits:
+  files:
+  - README.md
 
 before_build:
   - nuget restore
   - choco install opencover.portable
   - choco install codecov
+
 build:
   project: LotteryApi.sln
   verbosity: minimal
+
 test_script:
+  - cd packages
   - cd
   - OpenCover.Console.exe -register:rsmivb -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\Lottery.Api.Test\bin\Debug\netcoreapp2.2\LotteryApi.Test.dll -noshadow" -output:".\Lottery.Api.Test.xml" -filter:"+[Lottery.Api*]* -[Lottery.Api.Test*]*"
+
 after_test:
   - ps: |
       $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
