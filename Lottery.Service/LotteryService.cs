@@ -68,7 +68,7 @@ namespace Lottery.Services
                 }
 
                 IEnumerable<MongoModel> lotteryList = new List<MongoModel>();
-                var HTMLFilePath = string.Concat(string.Concat(Environment.CurrentDirectory, _tempFilePath), string.Concat($@"{lottery.Name}\", lottery.HtmlFileName));
+                var HTMLFilePath = string.Concat(string.Concat(Environment.CurrentDirectory, _tempFilePath), string.Concat($@"{lottery.Name}/", lottery.HtmlFileName));
                 _logger.LogDebug($"Loading lottery file from path: {HTMLFilePath}");
                 if (!File.Exists(HTMLFilePath))
                 {

@@ -116,7 +116,7 @@ namespace Lottery.Service.Tests
             };
             appSettings = new AppSettings
             {
-                TempFilePath = @"\",
+                TempFilePath = @"/../../../",
                 Database = new Database
                 {
                     Name = string.Empty,
@@ -208,7 +208,7 @@ namespace Lottery.Service.Tests
         public void LoadLottery_Test()
         {
             var lotteryName = "MegaSena";
-            var path = Path.Combine( Environment.CurrentDirectory,@"../../../{lotteryName}/");
+            var path = Path.Combine( Environment.CurrentDirectory, $@"../../../{lotteryName}/" );
             var fileName = "anyFile.htm";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             var filePath = Path.Combine(path, fileName);
@@ -236,18 +236,16 @@ namespace Lottery.Service.Tests
         public void LoadLottery_Throws_FileNotFoundException_Test()
         {
             var lotteryName = "DuplaSena";
-            var pathError = $@"{Environment.CurrentDirectory}\{lotteryName}\error.txt";
+            var pathError = $@"{Environment.CurrentDirectory}/{lotteryName}/error.txt";
             var expectedErrorMessage = $"The lottery file on path {pathError} does not exist, please check AppSetting object.";
-            System.IO.FileNotFoundException ex = Assert.ThrowsException<System.IO.FileNotFoundException>(() => _lotteryService.Load(lotteryName));
-            Assert.AreEqual(expectedErrorMessage, ex.Message);
+            Assert.ThrowsException<FileNotFoundException>(() => _lotteryService.Load(lotteryName));
         }
         [TestMethod]
         public void LoadLottery_Throws_EntryPointNotFoundException_Test()
         {
             var lotteryName = "Lottery_Doesn't_Exist";
             var expectedMsgReturned = $"The lottery name {lotteryName} did not found on appSettigs, please check AppSetting object.";
-            EntryPointNotFoundException ex = Assert.ThrowsException<EntryPointNotFoundException>(() => _lotteryService.Load(lotteryName));
-            Assert.AreEqual(expectedMsgReturned, ex.Message);
+            Assert.ThrowsException<EntryPointNotFoundException>(() => _lotteryService.Load(lotteryName));
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Lottery.Services
             {
                 _logger.LogDebug($"Connecting with web service url: {lotteryWebServiceUrl}.");
                 CookieContainer myContainer = new CookieContainer();
-                var request = (HttpWebRequest)WebRequest.Create(lotteryWebServiceUrl);
+                var request = WebRequest.CreateHttp(lotteryWebServiceUrl);
                 request.MaximumAutomaticRedirections = 1;
                 request.AllowAutoRedirect = true;
                 request.CookieContainer = myContainer;
