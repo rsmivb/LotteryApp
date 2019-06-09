@@ -16,13 +16,9 @@ env:
     - DOTNET_CLI_TELEMETRY_OPTOUT=1
 services:
   - xvfb
-before_script:
-  - sleep 5 # give xvfb some time to start
-  - rackup  # start a Web server
-  - sleep 5 # give Web server some time to bind to sockets, etc
 script:
   - dotnet restore
-  - dotnet build --configuration Release
+  - dotnet build
   - dotnet test Lottery.Models.Test/Lottery.Models.Test.csproj
   - dotnet test Lottery.Service.Tests/Lottery.Service.Tests.csproj
   - dotnet test Lottery.Api.Test/LotteryApi.Test.csproj
