@@ -19,8 +19,7 @@ build:
   verbosity: minimal
 
 test_script:
-  - cd packages
-  - cd
+  - dir
   - OpenCover.Console.exe -register:rsmivb -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\Lottery.Api.Test\bin\Debug\netcoreapp2.2\LotteryApi.Test.dll -noshadow" -output:".\Lottery.Api.Test.xml" -filter:"+[Lottery.Api*]* -[Lottery.Api.Test*]*"
 
 after_test:
