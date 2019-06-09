@@ -21,7 +21,7 @@ namespace Lottery.Service.Tests
         [TestMethod]
         public void GetStreamFileFromWebService_Test()
         {
-            var lotteryNameTest = "http://www.d.u.m.m.y.com";
+            var lotteryNameTest = "http://localhost";
             var result = _webServiceService.GetStreamFileFromWebService(lotteryNameTest);
             Assert.IsTrue(result.CanRead);
         }
