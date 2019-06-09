@@ -9,7 +9,8 @@ build:
   project: LotteryApi.sln
   verbosity: minimal
 test_script:
-  - OpenCover.Console.exe -register:rsmivb -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"Lottery.Api.Test.dll" -output:"Lottery.Api.Test.xml"
+  - cd
+  - OpenCover.Console.exe -register:rsmivb -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"Lottery.Api.Test.dll -noshadow" -output:"Lottery.Api.Test.xml" -filter:"+[Lottery.Api*]* -[Lottery.Api.Test*]*"
 after_test:
   - ps: |
       $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
