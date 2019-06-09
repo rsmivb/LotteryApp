@@ -10,9 +10,9 @@ build:
   verbosity: minimal
 test_script:
   - cd
-  - OpenCover.Console.exe -register:rsmivb -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"Lottery.Api.Test.dll -noshadow" -output:"Lottery.Api.Test.xml" -filter:"+[Lottery.Api*]* -[Lottery.Api.Test*]*"
+  - OpenCover.Console.exe -register:rsmivb -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\Lottery.Api.Test\bin\Debug\netcoreapp2.2\LotteryApi.Test.dll -noshadow" -output:".\Lottery.Api.Test.xml" -filter:"+[Lottery.Api*]* -[Lottery.Api.Test*]*"
 after_test:
   - ps: |
       $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
       Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
-      bash codecov.sh -f "Lottery.Api.Test.xml"
+      bash codecov.sh -f ".\Lottery.Api.Test.xml"
