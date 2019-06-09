@@ -16,7 +16,7 @@ namespace Lottery.Service.Tests
             _mockLogger = new Mock<ILogger<IWebServiceService>>();
             _webServiceService = new WebServiceService(_mockLogger.Object);
         }
-        [Ignore]
+        //[Ignore]
         [TestCategory("Web Service Service Test")]
         [TestMethod]
         public void GetStreamFileFromWebService_Test()
