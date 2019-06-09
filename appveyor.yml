@@ -7,7 +7,7 @@ before_build:
 - choco install codecov
 
 build:
-  project: LotteryApp.sln
+  project: LotteryApi.sln
   verbosity: minimal
 
 test_script:
