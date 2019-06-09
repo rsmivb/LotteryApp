@@ -208,7 +208,7 @@ namespace Lottery.Service.Tests
         public void LoadLottery_Test()
         {
             var lotteryName = "MegaSena";
-            var path = $@"{Environment.CurrentDirectory}/{lotteryName}/";
+            var path = Path.Combine( Environment.CurrentDirectory,@"../../../{lotteryName}/");
             var fileName = "anyFile.htm";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             var filePath = Path.Combine(path, fileName);
