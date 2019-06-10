@@ -13,7 +13,7 @@ before_build:
   - nuget restore
   - choco install opencover.portable
   - choco install codecov
-#  - choco install sonarscanner-msbuild-netcoreapp2.0
+#  - choco install "sonarscanner-msbuild-net46" -y
 
 build:
   project: LotteryApi.sln
@@ -21,7 +21,8 @@ build:
 
 after_build:
   - dotnet tool install -g dotnet-sonarscanner
-  - dotnet-sonarscanner begin /k:"rsmivb_LotteryApp" /d:sonar.organization="rsmivb-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="751cba444e171fd0f60d7e49fd145225537b74f4"
+  - dotnet-sonarscanner begin /k:"rsmivb_LotteryApp" /o:"rsmivb-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="751cba444e171fd0f60d7e49fd145225537b74f4"
+  -  
   - dotnet build LotteryApp.sln
   - dotnet-sonarscanner end /d:sonar.login="751cba444e171fd0f60d7e49fd145225537b74f4"
 test_script:
