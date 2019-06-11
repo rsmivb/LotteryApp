@@ -4,7 +4,10 @@ image: Visual Studio 2019
 branches:
   only:
   - master
-  
+environment:
+  SONAR_TOKEN:
+    secure: 1le4hKhDyj6UuukBpuVK6a7LQT98MINrDKnDilQI8HhW5sYHWKzZnROmphFDHc2/
+
 skip_commits:
   files:
   - README.md
