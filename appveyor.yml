@@ -28,10 +28,5 @@ after_build:
   - dotnet build .\LotteryApi\LotteryApi.csproj
   - ps: dotnet-sonarscanner end /d:sonar.login="$env:SONAR_TOKEN"
 test_script:
-  - OpenCover.Console.exe -register:rsmivb -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\Lottery.Api.Test\bin\Debug\netcoreapp2.2\LotteryApi.Test.dll" -output:".\Lottery.Api.Test.xml"
-
-after_test:
-  - ps: |
-      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
-      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
-      bash codecov.sh -f ".\Lottery.Api.Test.xml"
+  - OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Api.Test\bin\Debug\netcoreapp2.2\LotteryApi.Test.dll -noshadow" -oldStyle -output:".\coverage.xml" -coverbytest:"XUnit"
+  - codecov -f .\coverage.xml -t 2df170bb-1daf-4eac-923a-9454b8b1ed35
