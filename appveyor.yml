@@ -32,7 +32,7 @@ after_build:
 test_script:
   - OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Api.Test\bin\Debug\netcoreapp2.2\LotteryApi.Test.dll -noshadow" -oldStyle -output:".\LotteryApi.Test.xml" -coverbytest:"XUnit"
   - ps: codecov -f .\LotteryApi.Test.xml -t $env:CODECOV_TOKEN
-  - OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Models.Test\bin\Debug\netcoreapp2.2\Lottery.Models.Test.dll -noshadow" -oldStyle -output:".\Lottery.Models.Test.xml" -coverbytest:"XUnit"
+  - OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Models.Test\bin\Debug\netcoreapp2.2\Lottery.Models.Test.dll -noshadow" -oldStyle -output:".\Lottery.Models.Test.xml" -coverbytest:"MSTest"
   - ps: codecov -f .\Lottery.Models.Test.xml -t $env:CODECOV_TOKEN
-  - OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Service.Tests\bin\Debug\netcoreapp2.2\Lottery.Service.Tests.dll -noshadow" -oldStyle -output:".\Lottery.Service.Tests.xml" -coverbytest:"XUnit"
+  - OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Service.Tests\bin\Debug\netcoreapp2.2\Lottery.Service.Tests.dll -noshadow" -oldStyle -output:".\Lottery.Service.Tests.xml" -coverbytest:"MSTest"
   - ps: codecov -f .\Lottery.Service.Tests.xml -t $env:CODECOV_TOKEN
