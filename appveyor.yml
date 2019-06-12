@@ -30,6 +30,7 @@ after_build:
   - dotnet build .\LotteryApi\LotteryApi.csproj
   - ps: dotnet-sonarscanner end /d:sonar.login="$env:SONAR_TOKEN"
 test_script:
+  - dotnet clean
   - OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Api.Test\bin\Debug\netcoreapp2.2\LotteryApi.Test.dll -noshadow" -oldStyle -output:".\LotteryApi.Test.xml" -coverbytest:"XUnit"
   - ps: codecov -f .\LotteryApi.Test.xml -t $env:CODECOV_TOKEN
   - OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Models.Test\bin\Debug\netcoreapp2.2\Lottery.Models.Test.dll -noshadow" -oldStyle -output:".\Lottery.Models.Test.xml" -coverbytest:"MSTest"
