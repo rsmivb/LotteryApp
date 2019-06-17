@@ -17,7 +17,7 @@ namespace Lottery.Service.Tests
         private readonly List<List<string>> returnListOfListOfStrings;
         private readonly AppSettings appSettings;
         private readonly Mock<ILogger<ILotteryService>> _mockLogger;
-        private readonly Mock<IHTMLHandlerService> _mockHtmlService;
+        private readonly Mock<IHtmlHandlerService> _mockHtmlService;
         private readonly LotteryService _lotteryService;
 
         public LotteryServiceTest()
@@ -143,7 +143,7 @@ namespace Lottery.Service.Tests
                 }
             };
             _mockLogger = new Mock<ILogger<ILotteryService>>();
-            _mockHtmlService = new Mock<IHTMLHandlerService>();
+            _mockHtmlService = new Mock<IHtmlHandlerService>();
             _lotteryService = new LotteryService(_mockHtmlService.Object, appSettings, _mockLogger.Object);
         }
         [TestMethod]

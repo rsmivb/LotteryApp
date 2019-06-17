@@ -8,15 +8,15 @@ using System.Text;
 
 namespace Lottery.Services
 {
-    public class HTMLHandlerService : IHTMLHandlerService
+    public class HtmlHandlerService : IHtmlHandlerService
     {
-        private readonly ILogger<IHTMLHandlerService> _logger;
+        private readonly ILogger<IHtmlHandlerService> _logger;
 
-        public HTMLHandlerService(ILogger<IHTMLHandlerService> logger)
+        public HtmlHandlerService(ILogger<IHtmlHandlerService> logger)
         {
             _logger = logger;
         }
-        public List<List<string>> LoadHTMLFile(string htmlFilePath, int columnLimit)
+        public List<List<string>> LoadHtmlFile(string htmlFilePath, int columnLimit)
         {
             try
             {

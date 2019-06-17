@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace LotteryApi.Controllers
 {
+    /// <summary>
+    ///
+    /// </summary>
     [Route("api/[controller]")]
     public class MegaSenaController : Controller
     {
@@ -18,7 +21,13 @@ namespace LotteryApi.Controllers
         private readonly IRepository<MegaSena> _repository;
         private readonly ILogger<MegaSenaController> _logger;
         private readonly ILotteryService _lotteryService;
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="webService"></param>
+        /// <param name="repository"></param>
+        /// <param name="logger"></param>
+        /// <param name="lotteryService"></param>
         public MegaSenaController(IProcessLotteryService webService,
             IRepository<MegaSena> repository,
             ILogger<MegaSenaController> logger,
@@ -29,6 +38,10 @@ namespace LotteryApi.Controllers
             _logger = logger;
             _lotteryService = lotteryService;
         }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         // GET api/megasena/results
         [HttpGet("Results")]
         [SwaggerOperation(Summary = "Gets all results for MegaSena Lottery", Description = "This is a description examples")]
@@ -46,7 +59,10 @@ namespace LotteryApi.Controllers
                 return NotFound("Error getting data.");
             }
         }
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         // GET api/megasena/dozenByQuantity
         [HttpGet("DozenByQuantity")]
         [SwaggerOperation(Summary = "Gets info from dozens by quantity", Description = "This is a description examples")]
@@ -69,6 +85,10 @@ namespace LotteryApi.Controllers
                 return NotFound("Error getting data.");
             }
         }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         // GET api/megasena/downloadResultsFromSource
         [HttpGet("DownloadResultsFromSource")]
         [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]

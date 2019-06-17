@@ -3,8 +3,8 @@ using System.IO;
 
 namespace Lottery.Services
 {
-    public interface IHTMLHandlerService
+    public interface IHtmlHandlerService
     {
-        List<List<string>> LoadHTMLFile(string HtmlFilePath, int columnLimit);
+        List<List<string>> LoadHtmlFile(string HtmlFilePath, int columnLimit);
     }
 }

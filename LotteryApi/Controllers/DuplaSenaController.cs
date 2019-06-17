@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace LotteryApi.Controllers
 {
+    /// <summary>
+    ///
+    /// </summary>
     [Route("api/[controller]")]
     public class DuplaSenaController : Controller
     {
@@ -18,7 +21,13 @@ namespace LotteryApi.Controllers
         private readonly IRepository<DuplaSena> _repository;
         private readonly ILogger<DuplaSenaController> _logger;
         private readonly ILotteryService _lotteryService;
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="webService"></param>
+        /// <param name="repository"></param>
+        /// <param name="logger"></param>
+        /// <param name="lotteryService"></param>
         public DuplaSenaController(IProcessLotteryService webService,
                                     IRepository<DuplaSena> repository,
                                     ILogger<DuplaSenaController> logger,
@@ -52,7 +61,10 @@ namespace LotteryApi.Controllers
                 return NotFound("Error getting data.");
             }
         }
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         // GET api/duplasena/dozenByQuantity
         [HttpGet("DozenByQuantity")]
         [SwaggerOperation(Summary = "Gets info from dozens by quantity", Description = "This is a description examples")]
@@ -85,6 +97,10 @@ namespace LotteryApi.Controllers
             }
         }
         // GET api/duplasena/downloadResultsFromSource
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]
         [HttpGet("DownloadResultsFromSource")]
         public async Task<IActionResult> DownloadResultsFromSource()

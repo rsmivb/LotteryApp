@@ -7,41 +7,28 @@ namespace Lottery.Models.Test
     public class ExtensionsMethodsTest
     {
         [TestMethod]
-        public void ConvertEmptyToString_Test()
+        [DataRow("", "&nbsp")]
+        [DataRow("", "    ")]
+        public void ConvertEmptyToString_Test(string expected, string toBeTested)
         {
-            string expected = string.Empty;
-            string toBeTested = "&nbsp";
             var result = toBeTested.ConvertEmptyToString();
             Assert.AreEqual(expected, result);
-            toBeTested = "   ";
-            result = toBeTested.ConvertEmptyToString();
-            Assert.AreEqual(expected, result);
         }
         [TestMethod]
-        public void ConvertWithMetaChatToString_Test()
+        [DataRow("", "&nbsp")]
+        [DataRow("", "\r")]
+        public void ConvertWithMetaChatToString_Test(string expected, string toBeTested)
         {
-            string expected = string.Empty;
-            string toBeTested = "&nbsp";
             var result = toBeTested.ConvertWithMetaChatToString();
             Assert.AreEqual(expected, result);
-            toBeTested = "\r";
-            result = toBeTested.ConvertEmptyToString();
-            Assert.AreEqual(expected, result);
         }
         [TestMethod]
-        public void ConvertToDecimal_Test()
+        [DataRow(0, "")]
+        [DataRow(2.0, "2,0")]
+        [DataRow(0, "-")]
+        public void ConvertToDecimal_Test(decimal expected, string toBeTested)
         {
-            decimal expected = 0;
-            string toBeTested = "";
             var result = toBeTested.ConvertToDecimal();
-            Assert.AreEqual(expected, result);
-            expected = 2.0m;
-            toBeTested = "2,0";
-            result = toBeTested.ConvertToDecimal();
-            Assert.AreEqual(expected, result);
-            expected = 0;
-            toBeTested = "-";
-            result = toBeTested.ConvertToDecimal();
             Assert.AreEqual(expected, result);
         }
         [TestMethod]
@@ -53,41 +40,28 @@ namespace Lottery.Models.Test
             Assert.AreEqual(expected, result);
         }
         [TestMethod]
-        public void ConvertToInt_Test()
+        [DataRow(0, "     ")]
+        [DataRow(1, "1")]
+        public void ConvertToInt_Test(int expected, string toBeTested)
         {
-            int expected = 0;
-            string toBeTested = "     ";
             var result = toBeTested.ConvertToInt();
             Assert.AreEqual(expected, result);
-            expected = 1;
-            toBeTested = "1";
-            result = toBeTested.ConvertToInt();
-            Assert.AreEqual(expected, result);
         }
         [TestMethod]
-        public void ConvertToBoolean_Test()
+        [DataRow(true, "SIM")]
+        [DataRow(false, "S")]
+        public void ConvertToBoolean_Test(bool expected, string toBeTested)
         {
-            bool expected = true;
-            string toBeTested = "SIM";
             var result = toBeTested.ConvertToBoolean();
             Assert.AreEqual(expected, result);
-            expected = false;
-            toBeTested = "S";
-            result = toBeTested.ConvertToBoolean();
-            Assert.AreEqual(expected, result);
         }
         [TestMethod]
-        public void ConvertToChar_Test()
+        [DataRow('1',"1")]
+        [DataRow('x', "x")]
+        public void ConvertToChar_Test(char expected, string toBeTested)
         {
-            char expected = '1';
-            string toBeTested = "1";
             var result = toBeTested.ConvertToChar();
             Assert.AreEqual(expected, result);
-            expected = 'x';
-            toBeTested = "x";
-            result = toBeTested.ConvertToChar();
-            Assert.AreEqual(expected, result);
         }
-
     }
 }

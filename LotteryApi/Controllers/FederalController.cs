@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace LotteryApi.Controllers
 {
+    /// <summary>
+    ///
+    /// </summary>
     [Route("api/[controller]")]
     public class FederalController : Controller
     {
@@ -18,7 +21,13 @@ namespace LotteryApi.Controllers
         private readonly IRepository<Federal> _repository;
         private readonly ILogger<FederalController> _logger;
         private readonly ILotteryService _lotteryService;
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="webService"></param>
+        /// <param name="repository"></param>
+        /// <param name="logger"></param>
+        /// <param name="lotteryService"></param>
         public FederalController(IProcessLotteryService webService,
                                     IRepository<Federal> repository,
                                     ILogger<FederalController> logger,
@@ -30,6 +39,10 @@ namespace LotteryApi.Controllers
             _lotteryService = lotteryService;
         }
         // GET api/loteca/allLoteries
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("Results")]
         [SwaggerOperation(Summary = "Gets all results for Federal Lottery", Description = "This is a description examples")]
         public async Task<IActionResult> GetResults()
@@ -48,6 +61,10 @@ namespace LotteryApi.Controllers
         }
 
         // GET api/loteca/dozenByQuantity
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("DozenByQuantity")]
         [SwaggerOperation(Summary = "Gets info from dozens by quantity", Description = "This is a description examples")]
         public async Task<IActionResult> GetDozenByQuantity()
@@ -70,6 +87,10 @@ namespace LotteryApi.Controllers
             }
         }
         // GET api/loteca/downloadResultsFromSource
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("DownloadResultsFromSource")]
         [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]
         public async Task<IActionResult> DownloadResultsFromSource()

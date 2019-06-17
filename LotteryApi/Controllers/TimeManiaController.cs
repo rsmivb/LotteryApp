@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace LotteryApi.Controllers
 {
+    /// <summary>
+    ///
+    /// </summary>
     [Route("api/[controller]")]
     public class TimeManiaController : Controller
     {
@@ -18,7 +21,13 @@ namespace LotteryApi.Controllers
         private readonly IRepository<TimeMania> _repository;
         private readonly ILogger<TimeManiaController> _logger;
         private readonly ILotteryService _lotteryService;
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="webService"></param>
+        /// <param name="repository"></param>
+        /// <param name="logger"></param>
+        /// <param name="lotteryService"></param>
         public TimeManiaController(IProcessLotteryService webService,
             IRepository<TimeMania> repository,
             ILogger<TimeManiaController> logger,
@@ -29,6 +38,10 @@ namespace LotteryApi.Controllers
             _logger = logger;
             _lotteryService = lotteryService;
         }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         // GET api/timemania/results
         [HttpGet("Results")]
         [SwaggerOperation(Summary = "Gets all results for TimeMania Lottery", Description = "This is a description examples")]
@@ -46,7 +59,10 @@ namespace LotteryApi.Controllers
                 return NotFound("Error getting data.");
             }
         }
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         // GET api/timemania/dozenByQuantity
         [HttpGet("DozenByQuantity")]
         [SwaggerOperation(Summary = "Gets info from dozens by quantity", Description = "This is a description examples")]
@@ -79,6 +95,10 @@ namespace LotteryApi.Controllers
                 return NotFound("Error getting data.");
             }
         }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         // GET api/timemania/downloadResultsFromSource
         [HttpGet("DownloadResultsFromSource")]
         [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]

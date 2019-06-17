@@ -11,13 +11,13 @@ namespace Lottery.Service.Tests
     [TestClass]
     public class HTMLHandlerServiceTest
     {
-        private readonly Mock<ILogger<HTMLHandlerService>> _mockLogger;
-        private readonly HTMLHandlerService _service;
+        private readonly Mock<ILogger<HtmlHandlerService>> _mockLogger;
+        private readonly HtmlHandlerService _service;
 
         public HTMLHandlerServiceTest()
         {
-            _mockLogger = new Mock<ILogger<HTMLHandlerService>>();
-            _service = new HTMLHandlerService(_mockLogger.Object);
+            _mockLogger = new Mock<ILogger<HtmlHandlerService>>();
+            _service = new HtmlHandlerService(_mockLogger.Object);
         }
         [TestMethod]
         public void LoadHTMLFile_Test()
@@ -38,7 +38,7 @@ namespace Lottery.Service.Tests
             // Act
             var path = $"{string.Concat(Environment.CurrentDirectory, @"/Resources/Lottery_Test_file.htm")}";
             List<List<string>> result;
-                result = _service.LoadHTMLFile(path, 26);
+                result = _service.LoadHtmlFile(path, 26);
             // Assert
             CollectionAssert.Equals(expectedListString, result);
         }
@@ -50,7 +50,7 @@ namespace Lottery.Service.Tests
 
             // Act
             // Assert
-            Assert.ThrowsException<FileNotFoundException>(() => _service.LoadHTMLFile(path, 26));
+            Assert.ThrowsException<FileNotFoundException>(() => _service.LoadHtmlFile(path, 26));
         }
     }
 }

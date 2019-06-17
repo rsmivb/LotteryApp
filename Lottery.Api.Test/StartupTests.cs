@@ -43,7 +43,7 @@ namespace LotteryApi.Test
             Assert.NotNull(service);
             service = _server.Host.Services.GetService(typeof(IProcessLotteryService));
             Assert.NotNull(service);
-            service = _server.Host.Services.GetService(typeof(IHTMLHandlerService));
+            service = _server.Host.Services.GetService(typeof(IHtmlHandlerService));
             Assert.NotNull(service);
             service = _server.Host.Services.GetService(typeof(ILotteryService));
             Assert.NotNull(service);

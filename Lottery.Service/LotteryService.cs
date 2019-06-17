@@ -9,12 +9,12 @@ namespace Lottery.Services
 {
     public class LotteryService : ILotteryService
     {
-        private readonly IHTMLHandlerService _htmlService;
+        private readonly IHtmlHandlerService _htmlService;
         private readonly IEnumerable<LotterySetting> _lotterySetting;
         private readonly string _tempFilePath;
         private readonly ILogger<ILotteryService> _logger;
 
-        public LotteryService(IHTMLHandlerService htmlService, AppSettings settings, ILogger<ILotteryService> logger)
+        public LotteryService(IHtmlHandlerService htmlService, AppSettings settings, ILogger<ILotteryService> logger)
         {
             _htmlService = htmlService;
             _lotterySetting = settings.Lotteries;
@@ -76,7 +76,7 @@ namespace Lottery.Services
                     _logger.LogError(msg);
                     throw new FileNotFoundException(msg);
                 }
-                var listResult = _htmlService.LoadHTMLFile(HTMLFilePath, lottery.Columns);
+                var listResult = _htmlService.LoadHtmlFile(HTMLFilePath, lottery.Columns);
                 _logger.LogDebug($"_htmlService.LoadHTMLFile returned list from LOadHTMLFile with {listResult.Count} rows.");
                 lotteryList = ChooseLottery(listResult, lottery.Name);
                 _logger.LogDebug($"ChooseLottery returned list with {lotteryList.Count()} rows.");

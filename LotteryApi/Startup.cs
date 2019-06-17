@@ -11,8 +11,15 @@ using System.IO;
 
 namespace LotteryApi
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="env"></param>
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -22,9 +29,14 @@ namespace LotteryApi
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
-
+        /// <summary>
+        ///
+        /// </summary>
         public IConfiguration Configuration { get; }
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="services"></param>
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -63,7 +75,11 @@ namespace LotteryApi
             });
             services.AddMvc();
         }
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -81,16 +97,23 @@ namespace LotteryApi
             app.UseMvc();
         }
     }
-
+    /// <summary>
+    ///
+    /// </summary>
     public static class ServicextensionMethods
     {
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection LoadDependencies(this IServiceCollection services)
         {
             //add all dependencies
             services.AddTransient<IWebServiceService, WebServiceService>();
             services.AddTransient<IFileHandlerService, FileHandlerService>();
             services.AddTransient<IProcessLotteryService, ProcessLotteryService>();
-            services.AddTransient<IHTMLHandlerService, HTMLHandlerService>();
+            services.AddTransient<IHtmlHandlerService, HtmlHandlerService>();
             services.AddTransient<ILotteryService, LotteryService>();
 
             services.AddSingleton<IRepository<DuplaSena>, MongoRepository<DuplaSena>>();
@@ -104,7 +127,12 @@ namespace LotteryApi
             services.AddSingleton<IRepository<TimeMania>, MongoRepository<TimeMania>>();
             return services;
         }
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="Configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection LoadConfiguration(this IServiceCollection services, IConfiguration Configuration)
         {
             // add config from appsettings.json to class
