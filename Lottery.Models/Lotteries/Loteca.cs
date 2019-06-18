@@ -42,7 +42,7 @@ namespace Lottery.Models
                    AmountValue13 == other.AmountValue13 &&
                    Winners12 == other.Winners12 &&
                    AmountValue12 == other.AmountValue12 &&
-                   EqualityComparer<List<string>>.Default.Equals(Dozens, other.Dozens) &&
+                   Dozens.SequenceEqual(other.Dozens) &&
                    TotalAmount == other.TotalAmount &&
                    EstimatedPrize == other.EstimatedPrize;
         }

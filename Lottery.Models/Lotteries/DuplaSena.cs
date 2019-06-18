@@ -44,7 +44,7 @@ namespace Lottery.Models
             return other != null &&
                    LotteryId == other.LotteryId &&
                    DateRealized == other.DateRealized &&
-                   EqualityComparer<List<int>>.Default.Equals(DozensRound1, other.DozensRound1) &&
+                   DozensRound1.SequenceEqual(other.DozensRound1) &&
                    TotalAmount == other.TotalAmount &&
                    Winners6NumbersRound1 == other.Winners6NumbersRound1 &&
                    City == other.City &&
@@ -58,7 +58,7 @@ namespace Lottery.Models
                    Average4NumbersRound1 == other.Average4NumbersRound1 &&
                    Winners3NumbersRound1 == other.Winners3NumbersRound1 &&
                    Average3NumbersRound1 == other.Average3NumbersRound1 &&
-                   EqualityComparer<List<int>>.Default.Equals(DozensRound2, other.DozensRound2) &&
+                   DozensRound2.SequenceEqual(other.DozensRound2) &&
                    Winners6NumbersRound2 == other.Winners6NumbersRound2 &&
                    Average6NumbersRound2 == other.Average6NumbersRound2 &&
                    Winners5NumbersRound2 == other.Winners5NumbersRound2 &&

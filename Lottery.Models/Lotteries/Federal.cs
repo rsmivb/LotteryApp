@@ -25,7 +25,7 @@ namespace Lottery.Models
             return other != null &&
                    LotteryId == other.LotteryId &&
                    DateRealized == other.DateRealized &&
-                   EqualityComparer<List<int>>.Default.Equals(Dozens, other.Dozens) &&
+                   Dozens.SequenceEqual(other.Dozens) &&
                    Prize1 == other.Prize1 &&
                    Prize2 == other.Prize2 &&
                    Prize3 == other.Prize3 &&

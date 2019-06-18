@@ -25,18 +25,16 @@ namespace Lottery.Models
         public decimal Accumulated15 { get; set; }
         public decimal EstimatedPrize { get; set; }
         public decimal SpecialAmount { get; set; }
-
         public override bool Equals(object obj)
         {
             return Equals(obj as LotoFacil);
         }
-
         public bool Equals(LotoFacil other)
         {
             return other != null &&
                    LotteryId == other.LotteryId &&
                    DateRealized == other.DateRealized &&
-                   EqualityComparer<List<int>>.Default.Equals(Dozens, other.Dozens) &&
+                   Dozens.SequenceEqual(other.Dozens) &&
                    TotalAmount == other.TotalAmount &&
                    Winners15 == other.Winners15 &&
                    City == other.City &&
@@ -54,7 +52,6 @@ namespace Lottery.Models
                    EstimatedPrize == other.EstimatedPrize &&
                    SpecialAmount == other.SpecialAmount;
         }
-
         public override int GetHashCode()
         {
             var hashCode = 1711522462;
@@ -79,7 +76,6 @@ namespace Lottery.Models
             hashCode = hashCode * -1521134295 + SpecialAmount.GetHashCode();
             return hashCode;
         }
-
         public override string ToString()
         {
             return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
