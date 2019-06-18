@@ -87,10 +87,11 @@ namespace Lottery.Models.Test
                     AccumulatedEspecialPascoa = 0.00m
                 }
             };
+
             var actualResult = DuplaSenaExtensionMethods.Load(listOfValuesDuplaSena).ToList();
 
-            Assert.AreEqual(expectedDuplaSena.ToString(), actualResult.ToString());
             CollectionAssert.AreEqual(expectedDuplaSena, actualResult);
+            Assert.AreEqual(expectedDuplaSena.First().ToString(), actualResult.First().ToString());
         }
         [TestMethod]
         public void ExtensioMethod_Federal_Test()

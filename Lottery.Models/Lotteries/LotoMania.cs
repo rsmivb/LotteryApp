@@ -67,39 +67,6 @@ namespace Lottery.Models
                    PrizeEstimated == other.PrizeEstimated &&
                    SpecialPrizeEstimated == other.SpecialPrizeEstimated;
         }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -94129212;
-            hashCode = hashCode * -1521134295 + LotteryId.GetHashCode();
-            hashCode = hashCode * -1521134295 + DateRealized.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<int>>.Default.GetHashCode(Dozens);
-            hashCode = hashCode * -1521134295 + TotalValue.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners20.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UF);
-            hashCode = hashCode * -1521134295 + TotalWinners19.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners18.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners17.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners16.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinnersNoNumbers.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers20.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers19.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers18.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers17.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers16.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNoNumbers.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated20.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated19.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated18.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated17.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated16.GetHashCode();
-            hashCode = hashCode * -1521134295 + AcumulatedNoNumbers.GetHashCode();
-            hashCode = hashCode * -1521134295 + PrizeEstimated.GetHashCode();
-            hashCode = hashCode * -1521134295 + SpecialPrizeEstimated.GetHashCode();
-            return hashCode;
-        }
-
         public override string ToString()
         {
             return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +

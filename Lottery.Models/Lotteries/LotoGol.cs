@@ -53,32 +53,6 @@ namespace Lottery.Models
                    TotalAmount == other.TotalAmount &&
                    EstimatedPrize == other.EstimatedPrize;
         }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -710035858;
-            hashCode = hashCode * -1521134295 + LotteryId.GetHashCode();
-            hashCode = hashCode * -1521134295 + DateRealized.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UF);
-            hashCode = hashCode * -1521134295 + Winners5.GetHashCode();
-            hashCode = hashCode * -1521134295 + Average5.GetHashCode();
-            hashCode = hashCode * -1521134295 + IsAcumlated5.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated5.GetHashCode();
-            hashCode = hashCode * -1521134295 + Winners4.GetHashCode();
-            hashCode = hashCode * -1521134295 + Average4.GetHashCode();
-            hashCode = hashCode * -1521134295 + IsAcumlated4.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated4.GetHashCode();
-            hashCode = hashCode * -1521134295 + Winners3.GetHashCode();
-            hashCode = hashCode * -1521134295 + Average3.GetHashCode();
-            hashCode = hashCode * -1521134295 + IsAcumlated3.GetHashCode();
-            hashCode = hashCode * -1521134295 + Acumulated3.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(Dozens);
-            hashCode = hashCode * -1521134295 + TotalAmount.GetHashCode();
-            hashCode = hashCode * -1521134295 + EstimatedPrize.GetHashCode();
-            return hashCode;
-        }
-
         public override string ToString()
         {
             return $"{{ {LotteryId}-{DateRealized}-{City}-{UF}-" +

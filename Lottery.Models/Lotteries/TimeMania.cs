@@ -58,34 +58,6 @@ namespace Lottery.Models
                    AccumulatedValue == other.AccumulatedValue &&
                    EstimatedPrize == other.EstimatedPrize;
         }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -1788079105;
-            hashCode = hashCode * -1521134295 + LotteryId.GetHashCode();
-            hashCode = hashCode * -1521134295 + DateRealized.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<int>>.Default.GetHashCode(Dozens);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Team);
-            hashCode = hashCode * -1521134295 + TotalValue.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners7.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UF);
-            hashCode = hashCode * -1521134295 + TotalWinners6.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners5.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners4.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalWinners3.GetHashCode();
-            hashCode = hashCode * -1521134295 + WinnersTeam.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers7.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers6.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers5.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers4.GetHashCode();
-            hashCode = hashCode * -1521134295 + TotalValueNumbers3.GetHashCode();
-            hashCode = hashCode * -1521134295 + TeamValue.GetHashCode();
-            hashCode = hashCode * -1521134295 + AccumulatedValue.GetHashCode();
-            hashCode = hashCode * -1521134295 + EstimatedPrize.GetHashCode();
-            return hashCode;
-        }
-
         public override string ToString()
         {
             return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +

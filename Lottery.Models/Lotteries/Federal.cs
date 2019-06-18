@@ -32,21 +32,6 @@ namespace Lottery.Models
                    Prize4 == other.Prize4 &&
                    Prize5 == other.Prize5;
         }
-
-        public override int GetHashCode()
-        {
-            var hashCode = 2146608948;
-            hashCode = hashCode * -1521134295 + LotteryId.GetHashCode();
-            hashCode = hashCode * -1521134295 + DateRealized.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<int>>.Default.GetHashCode(Dozens);
-            hashCode = hashCode * -1521134295 + Prize1.GetHashCode();
-            hashCode = hashCode * -1521134295 + Prize2.GetHashCode();
-            hashCode = hashCode * -1521134295 + Prize3.GetHashCode();
-            hashCode = hashCode * -1521134295 + Prize4.GetHashCode();
-            hashCode = hashCode * -1521134295 + Prize5.GetHashCode();
-            return hashCode;
-        }
-
         public override string ToString()
         {
             return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
