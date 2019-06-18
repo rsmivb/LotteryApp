@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 
 namespace Lottery.Services
 {
@@ -26,7 +27,7 @@ namespace Lottery.Services
             try
             {
                 _logger.LogDebug($"Getting data from AppSettings for lottery {lotteryName}.");
-                var _setting = _settings.Lotteries.Where(l => l.Name.Equals(lotteryName)).FirstOrDefault();
+                var _setting = _settings.Lotteries.FirstOrDefault(l => l.Name.Equals(lotteryName));
                 if (_setting == null) throw new ArgumentNullException("Object Lottery setting must not be null.");
                 string path = string.Concat(Environment.CurrentDirectory, _settings.TempFilePath);
 
@@ -42,7 +43,7 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error during downloading file process. Lottery {lotteryName}, error message - {e.Message}, stacktrace - {e.StackTrace} - inner exception - {e.InnerException?.Message}.");
-                throw;
+                throw ;
             }
         }
     }

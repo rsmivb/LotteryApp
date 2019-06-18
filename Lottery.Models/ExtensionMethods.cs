@@ -14,7 +14,7 @@ namespace Lottery.Models
 
         public static int ConvertToInt(this string node) => node.Trim().Equals(string.Empty) ? Constants.ZERO : Int32.Parse(node);
 
-        public static bool ConvertToBoolean(this string node) => node.Trim().ToUpper().Equals(Constants.YES) ? true : false;
+        public static bool ConvertToBoolean(this string node) => node.Trim().ToUpper().Equals(Constants.YES);
 
         public static string ConvertToAChar(this string node)
         {

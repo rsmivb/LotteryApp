@@ -71,7 +71,6 @@ namespace LotteryApi.Controllers
             try
             {
                 _logger.LogInformation("Getting data from mongo database");
-                var result = _repository.GetAll();
                 var projectNumbers = _repository.GetAll() //get all megasena lottery entries
                                     .SelectMany(lottery => lottery.Dozens) //select all list of dozens
                                     .GroupBy(dozens => dozens) // group into a new list

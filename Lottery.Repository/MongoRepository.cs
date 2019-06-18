@@ -31,7 +31,7 @@ namespace Lottery.Repository
         public MongoRepository(AppSettings settings)
         {
             _db = new MongoClient(settings.Database.Url).GetDatabase(settings.Database.Name);
-            _collectionName = settings.Lotteries.Where(lottery => lottery.Name.Equals(typeof(T).Name)).FirstOrDefault().Name;
+            _collectionName = settings.Lotteries.FirstOrDefault(lottery => lottery.Name.Equals(typeof(T).Name)).Name;
         }
         public T GetOne(FilterDefinition<T> filter)
         {
