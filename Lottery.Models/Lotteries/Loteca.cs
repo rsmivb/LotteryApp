@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lottery.Models
 {
-    public class Loteca : MongoModel
+    public class Loteca : MongoModel, IEquatable<Loteca>
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -21,6 +21,53 @@ namespace Lottery.Models
         public List<string> Dozens { get; set; }
         public decimal TotalAmount { get; set; }
         public decimal EstimatedPrize { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Loteca);
+        }
+
+        public bool Equals(Loteca other)
+        {
+            return other != null &&
+                   LotteryId == other.LotteryId &&
+                   DateRealized == other.DateRealized &&
+                   Winners14 == other.Winners14 &&
+                   City == other.City &&
+                   UF == other.UF &&
+                   Average14 == other.Average14 &&
+                   IsAcumulated == other.IsAcumulated &&
+                   AmountValue14 == other.AmountValue14 &&
+                   Winners13 == other.Winners13 &&
+                   AmountValue13 == other.AmountValue13 &&
+                   Winners12 == other.Winners12 &&
+                   AmountValue12 == other.AmountValue12 &&
+                   EqualityComparer<List<string>>.Default.Equals(Dozens, other.Dozens) &&
+                   TotalAmount == other.TotalAmount &&
+                   EstimatedPrize == other.EstimatedPrize;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1465743342;
+            hashCode = hashCode * -1521134295 + LotteryId.GetHashCode();
+            hashCode = hashCode * -1521134295 + DateRealized.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners14.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UF);
+            hashCode = hashCode * -1521134295 + Average14.GetHashCode();
+            hashCode = hashCode * -1521134295 + IsAcumulated.GetHashCode();
+            hashCode = hashCode * -1521134295 + AmountValue14.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners13.GetHashCode();
+            hashCode = hashCode * -1521134295 + AmountValue13.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners12.GetHashCode();
+            hashCode = hashCode * -1521134295 + AmountValue12.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(Dozens);
+            hashCode = hashCode * -1521134295 + TotalAmount.GetHashCode();
+            hashCode = hashCode * -1521134295 + EstimatedPrize.GetHashCode();
+            return hashCode;
+        }
+
         public override string ToString()
         {
             return $"{{ {LotteryId}-{DateRealized}-{Winners14}-{City}-{UF}-" +

@@ -10,7 +10,7 @@ namespace Lottery.Models
         public const char METACHAR_R = '\r';
         public const string DASH = "-";
         public const int ZERO = 0;
-        public static CultureInfo Info = new CultureInfo("pt-BR");
+        public readonly static CultureInfo Info = new CultureInfo("pt-BR");
         public const string LOTOMANIA = "LotoMania";
         public const string MEGASENA = "MegaSena";
         public const string LOTECA = "Loteca";

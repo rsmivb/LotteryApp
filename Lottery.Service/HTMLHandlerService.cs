@@ -58,7 +58,7 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error was found. Error: {e.Message} - {e.StackTrace}");
-                throw e;
+                throw;
             }
         }
     }

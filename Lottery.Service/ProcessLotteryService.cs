@@ -42,7 +42,7 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error during downloading file process. Lottery {lotteryName}, error message - {e.Message}, stacktrace - {e.StackTrace} - inner exception - {e.InnerException?.Message}.");
-                throw e;
+                throw;
             }
         }
     }

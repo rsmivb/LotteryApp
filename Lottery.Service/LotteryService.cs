@@ -85,7 +85,7 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error when Load lottery: {lotteryName}. Message: {e.Message} - StackTrace: {e.StackTrace}.");
-                throw e;
+                throw;
             }
         }
     }

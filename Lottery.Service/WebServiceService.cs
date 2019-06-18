@@ -28,7 +28,7 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error when try to get file from url {lotteryWebServiceUrl}. Message -> {e.Message}. StackTrace -> {e.StackTrace}.");
-                throw e;
+                throw;
             }
         }
     }

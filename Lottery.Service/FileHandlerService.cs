@@ -25,7 +25,7 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error when try to extract from {zipPath}. Error -> {e.Message} -> StackTrace -> {e.StackTrace}.");
-                throw e;
+                throw;
             }
         }
         public void CleanUpFolder(string path)
@@ -38,7 +38,7 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error when try to Cleanup folder {path}. Error -> {e.Message} -> StackTrace -> {e.StackTrace}.");
-                throw e;
+                throw;
             }
         }
         public void CreateFolder(string path)
@@ -51,7 +51,7 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error when try to create folder from {path}. Error -> {e.Message} -> StackTrace -> {e.StackTrace}.");
-                throw e;
+                throw;
             }
         }
         public void CreateFileFromStream(string filePath, Stream stream)
@@ -70,7 +70,7 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error when try to create file from Stream to {filePath}. Error -> {e.Message} -> StackTrace -> {e.StackTrace}.");
-                throw e;
+                throw;
             }
         }
     }
