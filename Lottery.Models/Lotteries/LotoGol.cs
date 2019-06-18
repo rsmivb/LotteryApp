@@ -22,7 +22,7 @@ namespace Lottery.Models
         public decimal Average3 { get; set; }
         public bool IsAcumlated3 { get; set; }
         public decimal Acumulated3 { get; set; }
-        public List<char> Dozens { get; set; }
+        public List<string> Dozens { get; set; }
         public decimal TotalAmount { get; set; }
         public decimal EstimatedPrize { get; set; }
         public override string ToString()
@@ -58,9 +58,9 @@ namespace Lottery.Models
                     Average3 = item[13].ConvertToDecimal(),
                     IsAcumlated3 = item[14].ConvertToBoolean(),
                     Acumulated3 = item[15].ConvertToDecimal(),
-                    Dozens = new List<char> { item[16].ConvertToChar(), item[17].ConvertToChar(), item[18].ConvertToChar(), item[19].ConvertToChar(),
-                                      item[20].ConvertToChar(), item[21].ConvertToChar(), item[22].ConvertToChar(), item[23].ConvertToChar(),
-                                      item[24].ConvertToChar(), item[25].ConvertToChar() }.OrderBy(c => c).ToList(),
+                    Dozens = new List<string> { item[16].ConvertToAChar(), item[17].ConvertToAChar(), item[18].ConvertToAChar(), item[19].ConvertToAChar(),
+                                      item[20].ConvertToAChar(), item[21].ConvertToAChar(), item[22].ConvertToAChar(), item[23].ConvertToAChar(),
+                                      item[24].ConvertToAChar(), item[25].ConvertToAChar() }.OrderBy(c => c).ToList(),
                     TotalAmount = item[26].ConvertToDecimal(),
                     EstimatedPrize = item[27].ConvertToDecimal()
                 };

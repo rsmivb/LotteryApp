@@ -18,7 +18,7 @@ namespace Lottery.Models
         public decimal AmountValue13 { get; set; }
         public decimal Winners12 { get; set; }
         public decimal AmountValue12 { get; set; }
-        public List<char> Dozens { get; set; }
+        public List<string> Dozens { get; set; }
         public decimal TotalAmount { get; set; }
         public decimal EstimatedPrize { get; set; }
         public override string ToString()
@@ -50,10 +50,10 @@ namespace Lottery.Models
                     AmountValue13 = item[9].ConvertToDecimal(),
                     Winners12 = item[10].ConvertToInt(),
                     AmountValue12 = item[11].ConvertToDecimal(),
-                    Dozens = new List<char> { item[12].ConvertToChar(), item[13].ConvertToChar(), item[14].ConvertToChar(), item[15].ConvertToChar(),
-                                      item[16].ConvertToChar(), item[17].ConvertToChar(), item[18].ConvertToChar(), item[19].ConvertToChar(),
-                                      item[20].ConvertToChar(), item[21].ConvertToChar(), item[22].ConvertToChar(), item[23].ConvertToChar(),
-                                      item[24].ConvertToChar(), item[25].ConvertToChar()}.OrderBy(c => c).ToList(),
+                    Dozens = new List<string> { item[12].ConvertToAChar(), item[13].ConvertToAChar(), item[14].ConvertToAChar(), item[15].ConvertToAChar(),
+                                      item[16].ConvertToAChar(), item[17].ConvertToAChar(), item[18].ConvertToAChar(), item[19].ConvertToAChar(),
+                                      item[20].ConvertToAChar(), item[21].ConvertToAChar(), item[22].ConvertToAChar(), item[23].ConvertToAChar(),
+                                      item[24].ConvertToAChar(), item[25].ConvertToAChar()}.OrderBy(c => c).ToList(),
                     TotalAmount = item[26].ConvertToDecimal(),
                     EstimatedPrize = item[27].ConvertToDecimal()
                 };

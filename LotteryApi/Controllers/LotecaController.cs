@@ -51,7 +51,7 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("api/loteca/allLoteries - Getting data from mongo database");
                 var result = _repository.GetAll();
-                return await Ok(result);
+                return Ok(result);
             }
             catch (Exception e)
             {

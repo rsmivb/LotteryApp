@@ -16,15 +16,15 @@ namespace Lottery.Models
 
         public static bool ConvertToBoolean(this string node) => node.Trim().ToUpper().Equals(Constants.YES) ? true : false;
 
-        public static char ConvertToChar(this string node)
+        public static string ConvertToAChar(this string node)
         {
             try
             {
-                return Char.Parse(node.Trim());
+                return node.Substring(0,1);
             }
             catch (Exception)
             {
-                return Char.Parse(string.Empty);
+                return string.Empty;
             }
         }
     }

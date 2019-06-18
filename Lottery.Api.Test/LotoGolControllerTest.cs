@@ -48,7 +48,7 @@ namespace Lottery.Api.Test
                     Average3 = 20.38m,
                     IsAcumlated3 = false,
                     Acumulated3 = 0.00m,
-                    Dozens = new List<char> { '2','+','3','0','2','1','1','+','+','0' }.OrderBy(c => c).ToList(),
+                    Dozens = new List<string> { "2", "+", "3", "0", "2", "1", "1", "+", "+", "0" }.OrderBy(c => c).ToList(),
                     TotalAmount = 0.00m,
                     EstimatedPrize = 0.00m
                 }

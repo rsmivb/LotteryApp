@@ -44,7 +44,7 @@ namespace Lottery.Api.Test
                     AmountValue13 = 2544.81m,
                     Winners12 = 1028,
                     AmountValue12 = 144.68m,
-                    Dozens = new List<char> { '2','1','1','2','1','2','x','1','x','1','1','2','1','1',}.OrderBy(c => c).ToList(),
+                    Dozens = new List<string> { "2", "1", "1", "2", "1", "2", "x", "1", "x", "1", "1", "2", "1", "1" }.OrderBy(c => c).ToList(),
                     TotalAmount = 0,
                     EstimatedPrize = 0
                 }

@@ -26,9 +26,10 @@ namespace Lottery.Models.Test
         [DataRow(0, "")]
         [DataRow(2.0, "2,0")]
         [DataRow(0, "-")]
-        public void ConvertToDecimal_Test(decimal expected, string toBeTested)
+        public void ConvertToDecimal_Test(double value, string toBeTested)
         {
             var result = toBeTested.ConvertToDecimal();
+            var expected = Convert.ToDecimal(value);
             Assert.AreEqual(expected, result);
         }
         [TestMethod]
@@ -56,12 +57,20 @@ namespace Lottery.Models.Test
             Assert.AreEqual(expected, result);
         }
         [TestMethod]
-        [DataRow('1',"1")]
-        [DataRow('x', "x")]
-        public void ConvertToChar_Test(char expected, string toBeTested)
+        [DataRow("1","112")]
+        [DataRow("x", "xasd")]
+        public void ConvertToChar_Test(string expected, string toBeTested)
         {
-            var result = toBeTested.ConvertToChar();
+            var result = toBeTested.ConvertToAChar();
             Assert.AreEqual(expected, result);
+        }
+        [TestMethod]
+        public void ConvertToCharException_Test()
+        {
+            var toBeTested = string.Empty;
+            var expectedResult = string.Empty;
+            var result = toBeTested.ConvertToAChar();
+            Assert.AreEqual(expectedResult, result);
         }
     }
 }
