@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lottery.Models
 {
-    public class Quina : MongoModel
+    public class Quina : MongoModel, IEquatable<Quina>
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }

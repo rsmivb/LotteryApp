@@ -10,6 +10,15 @@ environment:
   CODECOV_TOKEN:
     secure: Aq9F+tLDv0Jh091xMqqa+bve7b6FgoXllUJ2pPRLHafcvHH9euNb478dOeuEsTLi
 
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+
 services: iis
 
 skip_commits:
