@@ -92,6 +92,7 @@ namespace Lottery.Models.Test
 
             CollectionAssert.AreEqual(expectedDuplaSena, actualResult);
             Assert.AreEqual(expectedDuplaSena.First().ToString(), actualResult.First().ToString());
+            Assert.AreNotEqual(expectedDuplaSena.First().GetHashCode(), actualResult.First().GetHashCode());
         }
         [TestMethod]
         public void ExtensioMethod_Federal_Test()
@@ -117,6 +118,7 @@ namespace Lottery.Models.Test
 
             Assert.AreEqual(expectedFederal.ToString(), actualResult.ToString());
             CollectionAssert.AreEqual(expectedFederal, actualResult);
+            Assert.AreNotEqual(expectedFederal.First().GetHashCode(), actualResult.First().GetHashCode());
         }
         [TestMethod]
         public void ExtensioMethod_Loteca_Test()
@@ -180,6 +182,7 @@ namespace Lottery.Models.Test
 
             Assert.AreEqual(expectedLoteca.ToString(), actualResult.ToString());
             CollectionAssert.AreEqual(expectedLoteca, actualResult);
+            Assert.AreNotEqual(expectedLoteca.First().GetHashCode(), actualResult.First().GetHashCode());
         }
         [TestMethod]
         public void ExtensioMethod_LotoFacil_Test()
@@ -253,6 +256,7 @@ namespace Lottery.Models.Test
 
             Assert.AreEqual(expectedLotoFacil.ToString(), actualResult.ToString());
             CollectionAssert.AreEqual(expectedLotoFacil, actualResult);
+            Assert.AreNotEqual(expectedLotoFacil.First().GetHashCode(), actualResult.First().GetHashCode());
         }
         [TestMethod]
         public void ExtensioMethod_LotoGol_Test()
@@ -320,6 +324,7 @@ namespace Lottery.Models.Test
 
             Assert.AreEqual(expectedLotoGol.ToString(), actualResult.ToString());
             CollectionAssert.AreEqual(expectedLotoGol, actualResult);
+            Assert.AreNotEqual(expectedLotoGol.First().GetHashCode(), actualResult.First().GetHashCode());
         }
         [TestMethod]
         public void ExtensioMethod_LotoMania_Test()
@@ -411,6 +416,7 @@ namespace Lottery.Models.Test
 
             Assert.AreEqual(expectedLotoMania.ToString(), actualResult.ToString());
             CollectionAssert.AreEqual(expectedLotoMania, actualResult);
+            Assert.AreNotEqual(expectedLotoMania.First().GetHashCode(), actualResult.First().GetHashCode());
         }
         [TestMethod]
         public void ExtensioMethod_MegaSena_Test()
@@ -469,6 +475,7 @@ namespace Lottery.Models.Test
 
             Assert.AreEqual(expectedMegaSena.ToString(), actualResult.ToString());
             CollectionAssert.AreEqual(expectedMegaSena, actualResult);
+            Assert.AreNotEqual(expectedMegaSena.First().GetHashCode(), actualResult.First().GetHashCode());
         }
 
         [TestMethod]
@@ -531,6 +538,7 @@ namespace Lottery.Models.Test
 
             Assert.AreEqual(expectedQuina.ToString(), actualResult.ToString());
             CollectionAssert.AreEqual(expectedQuina, actualResult);
+            Assert.AreNotEqual(expectedQuina.First().GetHashCode(), actualResult.First().GetHashCode());
         }
         [TestMethod]
         public void ExtensioMethod_TimeMania_Test()
@@ -600,6 +608,7 @@ namespace Lottery.Models.Test
 
             Assert.AreEqual(expectedTimeMania.ToString(), actualResult.ToString());
             CollectionAssert.AreEqual(expectedTimeMania, actualResult);
+            Assert.AreNotEqual(expectedTimeMania.First().GetHashCode(), actualResult.First().GetHashCode());
         }
     }
 }

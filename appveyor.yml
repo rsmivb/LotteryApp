@@ -1,5 +1,5 @@
 
-image: Visual Studio 2017
+image: Visual Studio 2019
 
 branches:
   only:
@@ -10,38 +10,25 @@ environment:
   CODECOV_TOKEN:
     secure: Aq9F+tLDv0Jh091xMqqa+bve7b6FgoXllUJ2pPRLHafcvHH9euNb478dOeuEsTLi
 
-services: iis
-
 skip_commits:
   files:
   - README.md
 
 before_build:
-  #- choco install opencover.portable
   - choco install codecov
-  - choco install xunit
+  #- choco install xunit
   - dotnet tool install -g dotnet-sonarscanner
   - dotnet tool install --global coverlet.console
   - nuget restore
-  #- choco install reportgenerator.portable
 
 build:
-  project: LotteryApi.sln
+  project: CICDTools.sln
   verbosity: minimal
 
 after_build:
-  - ps: dotnet-sonarscanner begin /k:"rsmivb_LotteryApp" /o:"rsmivb-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$env:SONAR_TOKEN"
-  - dotnet build .\LotteryApi\LotteryApi.csproj
+  - ps: dotnet-sonarscanner begin /k:"rsmivb_CICDTools" /o:"rsmivb-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$env:SONAR_TOKEN"
+  - dotnet build .\CICDTools\CICDTools.csproj
   - ps: dotnet-sonarscanner end /d:sonar.login="$env:SONAR_TOKEN"
 test_script:
-  #- OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Api.Test\bin\Debug\netcoreapp2.2\LotteryApi.Test.dll -noshadow" -oldStyle -output:".\LotteryApi.Test.xml" -coverbytest:"XUnit"
-  - coverlet ./Lottery.Models.Test/bin/Debug/netcoreapp2.2/Lottery.Models.Test.dll --target "dotnet" --targetargs "test ./Lottery.Models.Test/Lottery.Models.Test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Model.xml
-  - ps: codecov -f .\testResults\lotteryApp.Model.xml -t $env:CODECOV_TOKEN
-  - coverlet ./Lottery.Api.Test/bin/Debug/netcoreapp2.2/LotteryApi.Test.dll --target "dotnet" --targetargs "test ./Lottery.Api.Test/LotteryApi.Test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Api.xml
-  - ps: codecov -f .\testResults\lotteryApp.Api.xml -t $env:CODECOV_TOKEN
-  - coverlet ./Lottery.Service.Tests/bin/Debug/netcoreapp2.2/Lottery.Service.Tests.dll --target "dotnet" --targetargs "test ./Lottery.Service.Tests/Lottery.Service.Tests.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Service.xml
-  - ps: codecov -f .\testResults\lotteryApp.Service.xml -t $env:CODECOV_TOKEN
-  #- OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Models.Test\bin\Debug\netcoreapp2.2\Lottery.Models.Test.dll -noshadow" -oldStyle -output:".\Lottery.Models.Test.xml" -coverbytest:"MSTest"
-  #- ps: codecov -f .\Lottery.Models.Test.xml -t $env:CODECOV_TOKEN
-  #- OpenCover.Console.exe -register:rsmivb -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"Lottery.Service.Tests\bin\Debug\netcoreapp2.2\Lottery.Service.Tests.dll -noshadow" -oldStyle -output:".\Lottery.Service.Tests.xml" -coverbytest:"MSTest"
-  #- ps: codecov -f .\Lottery.Service.Tests.xml -t $env:CODECOV_TOKEN
+  - coverlet ./CICDTools.Tests/bin/Debug/netcoreapp2.2/CICDTools.Tests.dll --target "dotnet" --targetargs "test ./CICDTools.Tests/CICDTools.Tests.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/CICDTools.Tests.xml
+  - ps: codecov -f .\testResults\CICDTools.Tests.xml -t $env:CODECOV_TOKEN

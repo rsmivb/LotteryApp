@@ -70,6 +70,40 @@ namespace Lottery.Models
                    EstimatedPrize == other.EstimatedPrize &&
                    AccumulatedEspecialPascoa == other.AccumulatedEspecialPascoa;
         }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 553043719;
+            hashCode = hashCode * -1521134295 + LotteryId.GetHashCode();
+            hashCode = hashCode * -1521134295 + DateRealized.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<int>>.Default.GetHashCode(DozensRound1);
+            hashCode = hashCode * -1521134295 + TotalAmount.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners6NumbersRound1.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UF);
+            hashCode = hashCode * -1521134295 + Average6NumbersRound1.GetHashCode();
+            hashCode = hashCode * -1521134295 + IsAccumulated.GetHashCode();
+            hashCode = hashCode * -1521134295 + AccumulatedValueRound1.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners5NumbersRound1.GetHashCode();
+            hashCode = hashCode * -1521134295 + Average5NumbersRound1.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners4NumbersRound1.GetHashCode();
+            hashCode = hashCode * -1521134295 + Average4NumbersRound1.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners3NumbersRound1.GetHashCode();
+            hashCode = hashCode * -1521134295 + Average3NumbersRound1.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<int>>.Default.GetHashCode(DozensRound2);
+            hashCode = hashCode * -1521134295 + Winners6NumbersRound2.GetHashCode();
+            hashCode = hashCode * -1521134295 + Average6NumbersRound2.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners5NumbersRound2.GetHashCode();
+            hashCode = hashCode * -1521134295 + Average5NumbersRound2.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners4NumbersRound2.GetHashCode();
+            hashCode = hashCode * -1521134295 + Average4NumbersRound2.GetHashCode();
+            hashCode = hashCode * -1521134295 + Winners3NumbersRound2.GetHashCode();
+            hashCode = hashCode * -1521134295 + Average3NumbersRound2.GetHashCode();
+            hashCode = hashCode * -1521134295 + EstimatedPrize.GetHashCode();
+            hashCode = hashCode * -1521134295 + AccumulatedEspecialPascoa.GetHashCode();
+            return hashCode;
+        }
+
         public override string ToString()
         {
             return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", DozensRound1)}]-" +
