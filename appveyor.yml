@@ -19,8 +19,6 @@ dotnet_csproj:
   file_version: '{version}'
   informational_version: '{version}'
 
-services: iis
-
 skip_commits:
   files:
   - README.md
@@ -31,6 +29,13 @@ before_build:
   - dotnet tool install -g dotnet-sonarscanner
   - dotnet tool install --global coverlet.console
   - nuget restore
+  - Set-Service IISADMIN -StartupType Manual
+  - Set-Service NetMsmqActivator -StartupType Manual
+  - Set-Service NetPipeActivator -StartupType Manual
+  - Set-Service NetTcpActivator -StartupType Manual
+  - Set-Service NetTcpPortSharing -StartupType Manual
+  - Set-Service WAS -StartupType Manual
+  - Start-Service W3SVC
 
 build:
   project: LotteryApi.sln
