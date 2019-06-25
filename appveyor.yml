@@ -24,12 +24,16 @@ skip_commits:
   - README.md
 
 before_build:
-  - choco install codecov
-  - choco install xunit
-  - dotnet tool install -g dotnet-sonarscanner
-  - dotnet tool install --global coverlet.console
-  - nuget restore
 - ps: >-
+    choco install codecov
+     
+    choco install xunit
+   
+    dotnet tool install -g dotnet-sonarscanner
+    
+    dotnet tool install --global coverlet.console
+    
+    nuget restore
     
     Set-Service IISADMIN -StartupType Manual
     
