@@ -13,11 +13,6 @@ environment:
   CODECOV_TOKEN:
     secure: Aq9F+tLDv0Jh091xMqqa+bve7b6FgoXllUJ2pPRLHafcvHH9euNb478dOeuEsTLi
 
-environment:
-  matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      JAVA_HOME: C:\Program Files\Java\jdk1.8.0
-
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
