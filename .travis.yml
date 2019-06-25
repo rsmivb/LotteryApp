@@ -7,10 +7,11 @@ os: linux
 solution: LotteryApp.sln
 install:
   - dotnet restore
-  - choco install codecov
-  - choco install xunit
   - dotnet tool install -g dotnet-sonarscanner
   - dotnet tool install --global coverlet.console
+  - Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+  - choco install codecov
+  - choco install xunit
 branches:
   only:
     - master
@@ -21,18 +22,15 @@ env:
 services:
   - xvfb
 script:
-  - ps: dotnet-sonarscanner begin /k:"rsmivb_LotteryApp" /o:"rsmivb-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$env:SONAR_TOKEN"
+  - dotnet-sonarscanner begin /k:"rsmivb_LotteryApp" /o:"rsmivb-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$env:SONAR_TOKEN"
   - dotnet build
   - dotnet test Lottery.Models.Test/Lottery.Models.Test.csproj
   - dotnet test Lottery.Service.Tests/Lottery.Service.Tests.csproj
   - dotnet test Lottery.Api.Test/LotteryApi.Test.csproj
-  - ps: dotnet-sonarscanner end /d:sonar.login="$env:SONAR_TOKEN"
+  - dotnet-sonarscanner end /d:sonar.login="$env:SONAR_TOKEN"
   - coverlet ./Lottery.Models.Test/bin/Debug/netcoreapp2.2/Lottery.Models.Test.dll --target "dotnet" --targetargs "test ./Lottery.Models.Test/Lottery.Models.Test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Model.xml
-  - ps: codecov -f .\testResults\lotteryApp.Model.xml -t $env:CODECOV_TOKEN
+  - codecov -f .\testResults\lotteryApp.Model.xml -t $env:CODECOV_TOKEN
   - coverlet ./Lottery.Api.Test/bin/Debug/netcoreapp2.2/LotteryApi.Test.dll --target "dotnet" --targetargs "test ./Lottery.Api.Test/LotteryApi.Test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Api.xml
-  - ps: codecov -f .\testResults\lotteryApp.Api.xml -t $env:CODECOV_TOKEN
+  - codecov -f .\testResults\lotteryApp.Api.xml -t $env:CODECOV_TOKEN
   - coverlet ./Lottery.Service.Tests/bin/Debug/netcoreapp2.2/Lottery.Service.Tests.dll --target "dotnet" --targetargs "test ./Lottery.Service.Tests/Lottery.Service.Tests.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Service.xml
-  - ps: codecov -f .\testResults\lotteryApp.Service.xml -t $env:CODECOV_TOKEN
-  
-after_script:
-  - bash <(curl -s https://codecov.io/bash)
+  - codecov -f .\testResults\lotteryApp.Service.xml -t $env:CODECOV_TOKEN
