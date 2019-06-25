@@ -19,9 +19,6 @@ dotnet_csproj:
   file_version: '{version}'
   informational_version: '{version}'
 
-services:
-  - iis
-
 skip_commits:
   files:
   - README.md
