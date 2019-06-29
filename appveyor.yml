@@ -29,7 +29,7 @@ before_build:
    - choco install xunit
    - dotnet tool install -g dotnet-sonarscanner
    - dotnet tool install --global coverlet.console
-   - nuget restore
+   - nuget restore --verbosity quiet
 build:
   project: LotteryApi.sln
   verbosity: minimal
