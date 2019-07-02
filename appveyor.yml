@@ -12,6 +12,7 @@ environment:
   COVERALLS_REPO_TOKEN:
     secure: HA9iKpbIqpfwP7HV8XDUjx303Ejz0J/cJexzmfsf3i5+1RkMPbqOUtELMcgx1QKa
 
+
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
