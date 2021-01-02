@@ -1,8 +1,8 @@
 sudo: required
 language: csharp
 dist: xenial
+dotnet: 5.0
 mono: none
-dotnet: 2.2
 os: linux
 solution: LotteryApp.sln
 addons:
