@@ -42,12 +42,12 @@ build:
 test_script:
   - dotnet-sonarscanner begin /k:"rsmivb_LotteryApp" /o:"rsmivb-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="751cba444e171fd0f60d7e49fd145225537b74f4"
   - dotnet build .\LotteryApi\LotteryApi.csproj
-  - coverlet ./Lottery.Models.Test/bin/Debug/netcoreapp2.2/Lottery.Models.Test.dll --target "dotnet" --targetargs "test ./Lottery.Models.Test/Lottery.Models.Test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Model.xml
+  - coverlet ./Lottery.Models.Test/bin/Debug/net5.0/Lottery.Models.Test.dll --target "dotnet" --targetargs "test ./Lottery.Models.Test/Lottery.Models.Test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Model.xml
   - ps: codecov -f .\testResults\lotteryApp.Model.xml -t $env:CODECOV_TOKEN
-  - coverlet ./Lottery.Api.Test/bin/Debug/netcoreapp2.2/LotteryApi.Test.dll --target "dotnet" --targetargs "test ./Lottery.Api.Test/LotteryApi.Test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Api.xml
+  - coverlet ./Lottery.Api.Test/bin/Debug/net5.0/LotteryApi.Test.dll --target "dotnet" --targetargs "test ./Lottery.Api.Test/LotteryApi.Test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Api.xml
   - ps: codecov -f .\testResults\lotteryApp.Api.xml -t $env:CODECOV_TOKEN
   - dotnet-sonarscanner end /d:sonar.login="751cba444e171fd0f60d7e49fd145225537b74f4"
-  - coverlet ./Lottery.Service.Tests/bin/Debug/netcoreapp2.2/Lottery.Service.Tests.dll --target "dotnet" --targetargs "test ./Lottery.Service.Tests/Lottery.Service.Tests.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Service.xml
+  - coverlet ./Lottery.Service.Tests/bin/Debug/net5.0/Lottery.Service.Tests.dll --target "dotnet" --targetargs "test ./Lottery.Service.Tests/Lottery.Service.Tests.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Service.xml
   - ps: codecov -f .\testResults\lotteryApp.Service.xml -t $env:CODECOV_TOKEN
   - ps: csmacnz.coveralls --opencover -i .\testResults\lotteryApp.Service.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
   - ps: csmacnz.coveralls --opencover -i .\testResults\lotteryApp.Api.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
