@@ -1,15 +1,14 @@
 using Lottery.Services;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
+using Xunit;
 
 namespace Lottery.Service.Tests
 {
-    [TestClass]
     public class FileHandlerServiceTest
     {
         private readonly FileHandlerService _fileHandler;
@@ -19,18 +18,20 @@ namespace Lottery.Service.Tests
             var mockLogger = new Mock<ILogger<FileHandlerService>>();
             _fileHandler = new FileHandlerService(mockLogger.Object);
         }
-        [TestCategory("File Handler Service Test")]
-        [TestMethod]
+
+        [Fact(DisplayName="Create and delete folder")]
+        [Trait("FileHandler", "Service")]
         public void CreateAndDeleteFolder_Test()
         {
             var folderPath = @"C:\TempFolderTest";
             _fileHandler.CreateFolder(folderPath);
-            Assert.IsTrue(Directory.Exists(folderPath));
+            Assert.True(Directory.Exists(folderPath));
             _fileHandler.CleanUpFolder(folderPath);
-            Assert.IsFalse(Directory.Exists(folderPath));
+            Assert.False(Directory.Exists(folderPath));
         }
-        [TestCategory("File Handler Service Test")]
-        [TestMethod]
+
+        [Fact(DisplayName = "Create file from a stream")]
+        [Trait("FileHandler", "Service")]
         public void CreateFileFromStream_Test()
         {
             var expected = "response content";
@@ -49,29 +50,31 @@ namespace Lottery.Service.Tests
             {
                 valueLoaded = streamReader.ReadToEnd();
             }
-            Assert.AreEqual(expected, valueLoaded);
+            Assert.Equal(expected, valueLoaded);
 
             _fileHandler.CleanUpFolder(folderTest);
 
-            Assert.IsFalse(File.Exists(fileToBeTested));
+            Assert.False(File.Exists(fileToBeTested));
         }
-        [TestCategory("File Handler Service Test")]
-        [TestMethod]
+
+        [Fact(DisplayName = "Create file from stream throwing exception")]
+        [Trait("FileHandler", "Service")]
         public void CreateFileFromStream_ThrowsException_Test()
         {
             var folderTest = @"C:\TempFolderTest";
             var testPath = string.Empty;
 
-            Assert.ThrowsException<ArgumentException>(() => _fileHandler.CreateFileFromStream(testPath, new MemoryStream()));
+            Assert.Throws<ArgumentException>(() => _fileHandler.CreateFileFromStream(testPath, new MemoryStream()));
 
             testPath = Path.Combine(folderTest, "test.txt");
             _fileHandler.CreateFolder(folderTest);
-            Assert.ThrowsException<NullReferenceException>(() => _fileHandler.CreateFileFromStream(testPath, null));
+            Assert.Throws<NullReferenceException>(() => _fileHandler.CreateFileFromStream(testPath, null));
             _fileHandler.CleanUpFolder(folderTest);
-            Assert.IsFalse(File.Exists(testPath));
+            Assert.False(File.Exists(testPath));
         }
-        [TestCategory("File Handler Service Test")]
-        [TestMethod]
+
+        [Fact(DisplayName = "UnZip file to folder")]
+        [Trait("FileHandler", "Service")]
         public void UnZipFolder_Test()
         {
             var expectedZipFile = @"C:\TempFolderTest\testZip.zip";
@@ -82,14 +85,15 @@ namespace Lottery.Service.Tests
             var folderPath = $@"C:\TempFolderTest";
             _fileHandler.CreateFolder(folderToZip);
             CreateZipTestFile();
-            Assert.IsTrue(File.Exists(expectedZipFile));
+            Assert.True(File.Exists(expectedZipFile));
 
             _fileHandler.ExtractFile(zipFile, folderToZip);
-            Assert.IsTrue(File.Exists(expectedFile));
+            Assert.True(File.Exists(expectedFile));
 
             _fileHandler.CleanUpFolder(folderPath);
-            Assert.IsFalse(Directory.Exists(folderPath));
+            Assert.False(Directory.Exists(folderPath));
         }
+
         private void CreateZipTestFile()
         {
             var folderToZip = $@"C:\TempFolderTest\ZipFileTest\";

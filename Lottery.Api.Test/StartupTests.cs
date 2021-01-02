@@ -4,7 +4,7 @@ using Lottery.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.PlatformAbstractions;
+using System;
 using System.IO;
 using Xunit;
 
@@ -68,7 +68,7 @@ namespace LotteryApi.Test
         }
         private string GetContentRootPath()
         {
-            var testProjectPath = PlatformServices.Default.Application.ApplicationBasePath;
+            var testProjectPath = Environment.CurrentDirectory;
 
             var relativePathToHostProject = @"../../../../LotteryApi";
 
