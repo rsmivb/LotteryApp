@@ -1,5 +1,5 @@
 
-image: Visual Studio 2019 preview
+image: Previous Visual Studio 2019
 
 branches:
   only:
@@ -29,7 +29,7 @@ skip_commits:
   - README.md
 
 before_build:
-   - choco install codecov  
+   - choco install codecov
    - choco install xunit
    - dotnet tool install -g coveralls.net
    - dotnet tool install -g dotnet-sonarscanner
