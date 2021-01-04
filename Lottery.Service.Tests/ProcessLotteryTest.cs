@@ -16,7 +16,7 @@ namespace Lottery.Service.Tests
 
         public ProcessLotteryTest()
         {
-            _appSettings = new AppSettings { TempFilePath = @"\TestPath", Lotteries = new List<LotterySetting> { new LotterySetting { Name = "TestLottery", WebService = "http://www.dummy.com", ZipFileName = "test.zip" } } };
+            _appSettings = new AppSettings { TempFilePath = @"\TestPath", DefaultURL= "http://www.dummy.com", Lotteries = new List<LotterySetting> { new LotterySetting { Name = "TestLottery", WebFileName = "lottery.zip" } } };
             _mockLogger = new Mock<ILogger<IProcessLotteryService>>();
         }
         [TestCategory("Process Lottery Service Test")]

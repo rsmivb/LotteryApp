@@ -117,6 +117,7 @@ namespace Lottery.Service.Tests
             appSettings = new AppSettings
             {
                 TempFilePath = @"/../../../",
+                DefaultURL = "http://www.dummy.com",
                 Database = new Database
                 {
                     Name = string.Empty,
@@ -129,16 +130,14 @@ namespace Lottery.Service.Tests
                         Columns = 21,
                         HtmlFileName = "anyFile.htm",
                         Name = "MegaSena",
-                        WebService = string.Empty,
-                        ZipFileName = "MegaSena.zip"
+                        WebFileName = string.Empty
                     },
                     new LotterySetting
                     {
                         Columns = 0,
                         HtmlFileName = "error.txt",
                         Name = "DuplaSena",
-                        WebService = string.Empty,
-                        ZipFileName = string.Empty
+                        WebFileName = string.Empty
                     }
                 }
             };

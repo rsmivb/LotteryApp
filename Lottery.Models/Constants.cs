@@ -20,5 +20,6 @@ namespace Lottery.Models
         public const string TIMEMANIA = "TimeMania";
         public const string QUINA = "Quina";
         public const string FEDERAL = "Federal";
+        public const string ZIP = ".zip";
     }
 }

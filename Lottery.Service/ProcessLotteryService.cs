@@ -32,9 +32,9 @@ namespace Lottery.Services
                 string path = string.Concat(Environment.CurrentDirectory, _settings.TempFilePath);
 
                 _fileHandler.CreateFolder(path);
-                var filePath = Path.Combine(path, _setting.ZipFileName);
+                var filePath = Path.Combine(path, $"{_setting.Name}{Constants.ZIP}");
                 var destinationPath = Path.Combine(path, _setting.Name);
-                var streamResponse = _webService.GetStreamFileFromWebService(_setting.WebService);
+                var streamResponse = _webService.GetStreamFileFromWebService($"{_settings.DefaultURL}{_setting.WebFileName}");
                 _fileHandler.CreateFileFromStream(filePath, streamResponse);
                 _fileHandler.ExtractFile(filePath, destinationPath);
                 _logger.LogInformation($"Finished DownloadFile for {lotteryName}.");
