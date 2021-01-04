@@ -29,7 +29,7 @@ skip_commits:
   - README.md
 
 build_script:
- - set JAVA_HOME=C:\Program Files\Java\jdk11
+ - set JAVA_HOME=%ProgramFiles%\Java\jdk15
  - set PATH=%JAVA_HOME%\bin;%PATH%
 
 before_build:
