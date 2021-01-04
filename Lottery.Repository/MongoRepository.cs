@@ -1,6 +1,5 @@
 ﻿using Lottery.Models;
 using MongoDB.Driver;
-using MongoDB.Driver.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 namespace Lottery.Repository
 {
     /// <summary>
-    /// Class repoistory resposible to manage all lottery data from database
+    /// Class repository responsible to manage all lottery data from Mongo DB
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class MongoRepository<T> : IRepository<T> where T : class, new()
