@@ -1,5 +1,9 @@
 
-image: Previous Visual Studio 2019
+image: Visual Studio 2019
+
+init:
+  - set JAVA_HOME=%ProgramFiles%\Java\jdk15
+  - set PATH=%JAVA_HOME%\bin;%PATH%
 
 branches:
   only:
@@ -28,10 +32,6 @@ skip_commits:
   files:
   - README.md
 
-build_script:
- - set JAVA_HOME=%ProgramFiles%\Java\jdk15
- - set PATH=%JAVA_HOME%\bin;%PATH%
-
 before_build:
    - choco install codecov
    - choco install xunit
@@ -44,6 +44,7 @@ build:
   verbosity: quiet
 
 test_script:
+  - java -version
   - dotnet-sonarscanner begin /k:"rsmivb_LotteryApp" /o:"rsmivb-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="751cba444e171fd0f60d7e49fd145225537b74f4"
   - dotnet build .\LotteryApi\LotteryApi.csproj
   - coverlet ./Lottery.Models.Test/bin/Debug/net5.0/Lottery.Models.Test.dll --target "dotnet" --targetargs "test ./Lottery.Models.Test/Lottery.Models.Test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Model.xml
