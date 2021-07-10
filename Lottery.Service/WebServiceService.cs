@@ -13,11 +13,11 @@ namespace Lottery.Services
         {
             _logger = logger;
         }
-        public Stream GetStreamFileFromWebService(string lotteryWebServiceUrl)
+        public Stream GetStreamFileFromWebService(Uri lotteryWebServiceUrl)
         {
             try
             {
-                _logger.LogDebug($"Connecting with web service url: {lotteryWebServiceUrl}.");
+                _logger.LogDebug($"Connecting with web service: {lotteryWebServiceUrl}.");
                 CookieContainer myContainer = new CookieContainer();
                 var request = WebRequest.CreateHttp(lotteryWebServiceUrl);
                 request.MaximumAutomaticRedirections = 1;
@@ -27,7 +27,7 @@ namespace Lottery.Services
             }
             catch (Exception e)
             {
-                _logger.LogError($"Error when try to get file from url {lotteryWebServiceUrl}. Message -> {e.Message}. StackTrace -> {e.StackTrace}.");
+                _logger.LogError($"Error when try to get file from {lotteryWebServiceUrl}. Message -> {e.Message}. StackTrace -> {e.StackTrace}.");
                 throw;
             }
         }

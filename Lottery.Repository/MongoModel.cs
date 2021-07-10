@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Lottery.Models
+namespace Lottery.Repository
 {
     public abstract class MongoModel
     {

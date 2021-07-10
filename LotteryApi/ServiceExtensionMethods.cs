@@ -34,8 +34,11 @@ namespace LotteryApi
         {
             // add config from appsettings.json to class
             var config = new AppSettings();
+            var mongoDb = new MongoConfiguration();
             Configuration.Bind("AppSettings", config);
+            Configuration.Bind("MongoConfiguration", mongoDb);
             services.AddSingleton<AppSettings>(config);
+            services.AddSingleton<MongoConfiguration>(mongoDb);
 
             return services;
         }

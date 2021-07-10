@@ -1,9 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Lottery.Services
 {
     public interface IWebServiceService
     {
-        Stream GetStreamFileFromWebService(string lotteryWebServiceUrl);
+        Stream GetStreamFileFromWebService(Uri lotteryWebServiceUrl);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using Lottery.Models.Lotteries;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -15,44 +16,38 @@ namespace Lottery.Services
         {
             _logger = logger;
         }
-        public List<List<string>> LoadHtmlFile(string htmlFilePath, int columnLimit)
+        public List<List<string>> ConvertHtmlTo(LotteryData lottery)
         {
             try
             {
                 var doc = new HtmlDocument();
-                doc.Load(htmlFilePath, Encoding.UTF7);
+                doc.Load(lottery.HtmlFilePath, Encoding.UTF7);
                 _logger.LogDebug("Trying to load stream.");
-                if (doc != null)
-                {
-                    var trs = doc.DocumentNode.SelectNodes("//tr").Skip(1);
+                if (doc is null) throw new HtmlWebException("HTML file is empty.");
 
-                    List<List<string>> lines = new List<List<string>>();
-                    List<string> nodes = new List<string>();
-                    foreach (var tr in trs)
-                    {
-                        foreach (var td in tr.ChildNodes)
-                        {
-                            if (!td.InnerText.Equals("\r\r\n") &&
-                                !td.InnerText.Equals("\r\n") &&
-                                !td.InnerText.Equals("\r"))
-                            {
-                                nodes.Add(td.InnerText.Trim());
-                            }
-                        }
-                        if (nodes.Count == columnLimit)
-                        {
-                            lines.Add(nodes);
-                        }
-                        nodes = new List<string>();
-                    }
-                    _logger.LogDebug($"Loaded all lines on HTML file -> {lines.Count} lines");
-                    return lines;
-                }
-                else
+                var trs = doc.DocumentNode.SelectNodes("//tr").Skip(1);
+
+                List<List<string>> lines = new List<List<string>>();
+                List<string> nodes = new List<string>();
+                foreach (var tr in trs)
                 {
-                    _logger.LogError("Error reading HTML stream file.");
-                    throw new Exception("HTML file is empty.");
+                    foreach (var td in tr.ChildNodes)
+                    {
+                        if (!td.InnerText.Equals("\r\r\n") &&
+                            !td.InnerText.Equals("\r\n") &&
+                            !td.InnerText.Equals("\r"))
+                        {
+                            nodes.Add(td.InnerText.Trim());
+                        }
+                    }
+                    if (nodes.Count == lottery.Columns)
+                    {
+                        lines.Add(nodes);
+                    }
+                    nodes = new List<string>();
                 }
+                _logger.LogDebug($"Loaded all lines on HTML file -> {lines.Count} lines");
+                return lines;
             }
             catch (Exception e)
             {

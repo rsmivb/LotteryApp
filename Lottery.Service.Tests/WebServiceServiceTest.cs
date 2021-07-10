@@ -21,7 +21,7 @@ namespace Lottery.Service.Tests
         [TestCategory("WebServiceService")]
         public void GetStreamFileFromWebService_Test()
         {
-            var lotteryNameTest = "http://127.0.0.1";
+            var lotteryNameTest = new Uri("http://127.0.0.1");
             var result = _webServiceService.GetStreamFileFromWebService(lotteryNameTest);
             Assert.IsTrue(result.CanRead);
         }
@@ -30,7 +30,7 @@ namespace Lottery.Service.Tests
         [TestCategory("WebServiceService")]
         public void GetStreamFileFromWebService_ThrowsNotSupportedException_Test()
         {
-            var invalidUrl = "htp://invalid.url";
+            var invalidUrl = new Uri("htp://invalid.url");
             Assert.ThrowsException<NotSupportedException>(() => _webServiceService.GetStreamFileFromWebService(invalidUrl));
         }
     }

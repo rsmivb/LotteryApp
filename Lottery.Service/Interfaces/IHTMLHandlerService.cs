@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Lottery.Models.Lotteries;
+using System.Collections.Generic;
 
 namespace Lottery.Services
 {
     public interface IHtmlHandlerService
     {
-        List<List<string>> LoadHtmlFile(string HtmlFilePath, int columnLimit);
+        List<List<string>> ConvertHtmlTo(LotteryData lottery);
     }
 }

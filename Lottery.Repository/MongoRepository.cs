@@ -1,5 +1,4 @@
-﻿using Lottery.Models;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,12 +9,12 @@ namespace Lottery.Repository
     /// Class repository responsible to manage all lottery data from Mongo DB
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MongoRepository<T> : IRepository<T> where T : class, new()
+    public class MongoRepository<T> : IRepository<T> where T : MongoModel, new()
     {
         private readonly string _collectionName;
         private readonly IMongoDatabase _db;
 
-        protected IMongoCollection<T> Collection
+        public IMongoCollection<T> Collection
         {
             get
             {
@@ -27,10 +26,10 @@ namespace Lottery.Repository
             }
         }
 
-        public MongoRepository(AppSettings settings)
+        public MongoRepository(MongoConfiguration settings)
         {
-            _db = new MongoClient(settings.Database.Url).GetDatabase(settings.Database.Name);
-            _collectionName = settings.Lotteries.FirstOrDefault(lottery => lottery.Name.Equals(typeof(T).Name)).Name;
+            _db = new MongoClient(settings.Url).GetDatabase(settings.Name);
+            _collectionName = typeof(T).Name;
         }
         public T GetOne(FilterDefinition<T> filter)
         {
@@ -74,8 +73,8 @@ namespace Lottery.Repository
 
         public void CreateDatabase()
         {
-            var collection = _db.GetCollection<T>(_collectionName).EstimatedDocumentCount();
-            if (collection > 0)
+            var collection = _db.GetCollection<T>(_collectionName);
+            if (collection != null)
             {
                 _db.DropCollection(_collectionName);
             }

@@ -1,4 +1,5 @@
-﻿using Lottery.Services;
+﻿using Lottery.Models.Lotteries;
+using Lottery.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -25,6 +26,12 @@ namespace Lottery.Service.Tests
         public void LoadHTMLFile_Test()
         {
             // Arrange
+            var lotteryData = new LotteryData
+            {
+                Columns = 26,
+                HtmlFilePath = $"{string.Concat(Environment.CurrentDirectory, @"/Resources/Lottery_Test_file.htm")}"
+            };
+
             var expectedListString = new List<List<string>>
             {
                 new List<string>
@@ -38,23 +45,24 @@ namespace Lottery.Service.Tests
             };
 
             // Act
-            var path = $"{string.Concat(Environment.CurrentDirectory, @"/Resources/Lottery_Test_file.htm")}";
-            List<List<string>> result;
-                result = _service.LoadHtmlFile(path, 26);
+            var result = _service.ConvertHtmlTo(lotteryData);
             // Assert
             CollectionAssert.Equals(expectedListString, result);
         }
 
-        [TestMethod("Load Html file and throwa an Exception")]
+        [TestMethod("Load Html file and throws an Exception")]
         [TestCategory("HTMLHandlerService")]
         public void LoadHTMLFile_ThrowsException_Test()
         {
             // Arrange
-            var path = $"{string.Concat(Environment.CurrentDirectory, @"\Resources\html_file_doesnt_exist.htm")}";
+            var lotteryData = new LotteryData
+            {
+                Columns = 26,
+                HtmlFilePath = $"{string.Concat(Environment.CurrentDirectory, @"\Resources\html_file_doesnt_exist.htm")}"
+            };
 
-            // Act
             // Assert
-            Assert.ThrowsException<FileNotFoundException>(() => _service.LoadHtmlFile(path, 26));
+            Assert.ThrowsException<FileNotFoundException>(() => _service.ConvertHtmlTo(lotteryData));
         }
     }
 }

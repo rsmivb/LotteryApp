@@ -13,14 +13,18 @@ namespace Lottery.Services
         {
             _logger = logger;
         }
+
+        public void ProcessToFile(Stream stream, string zipPath, string tempFile)
+        {
+            CreateFileFromStream(zipPath, stream);
+            ExtractFile(zipPath, tempFile);
+        }
         public void ExtractFile(string zipPath, string tempFile)
         {
             try
             {
-                _logger.LogDebug($"Try to CleanUp remaining folder {tempFile}");
-                CleanUpFolder(tempFile);
                 _logger.LogDebug($"Extracting file {zipPath} to {tempFile}");
-                ZipFile.ExtractToDirectory(zipPath, tempFile);
+                ZipFile.ExtractToDirectory(zipPath, tempFile,true);
             }
             catch (Exception e)
             {
@@ -28,6 +32,7 @@ namespace Lottery.Services
                 throw;
             }
         }
+
         public void CleanUpFolder(string path)
         {
             try
@@ -44,30 +49,17 @@ namespace Lottery.Services
                 throw;
             }
         }
-        public void CreateFolder(string path)
-        {
-            try
-            {
-                _logger.LogDebug($"Creating folder {path}.");
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.LogError($"Error when try to create folder from {path}. Error -> {e.Message} -> StackTrace -> {e.StackTrace}.");
-                throw;
-            }
-        }
+
         public void CreateFileFromStream(string filePath, Stream stream)
         {
             try
             {
                 _logger.LogDebug($"Creating file from Stream to {filePath}.");
+                FileInfo fileInfo = new FileInfo(filePath);
+                CreateFolder(fileInfo.Directory);
                 using (var responseStream = stream)
                 {
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    using (var fileStream = new FileStream(fileInfo.FullName, FileMode.Create))
                     {
                         responseStream.CopyTo(fileStream);
                     }
@@ -76,6 +68,23 @@ namespace Lottery.Services
             catch (Exception e)
             {
                 _logger.LogError($"Error when try to create file from Stream to {filePath}. Error -> {e.Message} -> StackTrace -> {e.StackTrace}.");
+                throw;
+            }
+        }
+
+        private void CreateFolder(DirectoryInfo directory)
+        {
+            try
+            {
+                if (!directory.Exists)
+                {
+                    _logger.LogDebug($"Creating folder {directory.FullName}.");
+                    directory.Create();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error when try to create folder from {directory.FullName}. Error -> {e.Message} -> StackTrace -> {e.StackTrace}.");
                 throw;
             }
         }

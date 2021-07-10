@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lottery.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 

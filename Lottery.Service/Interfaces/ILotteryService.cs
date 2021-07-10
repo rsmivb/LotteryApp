@@ -1,11 +1,9 @@
-﻿using Lottery.Models;
-using System.Collections.Generic;
+﻿using Lottery.Models.Lotteries;
 
 namespace Lottery.Services
 {
     public interface ILotteryService
     {
-        IEnumerable<MongoModel> ChooseLottery(List<List<string>> htmlLines, string lotteryName);
-        IEnumerable<MongoModel> Load(string lotteryName);
+        LotteryData Load(LotteryData lottery);
     }
 }

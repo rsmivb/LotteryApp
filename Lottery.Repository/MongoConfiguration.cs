@@ -1,6 +1,6 @@
-﻿namespace Lottery.Models
+﻿namespace Lottery.Repository
 {
-    public class Database
+    public class MongoConfiguration
     {
         public string Url { get; set; }
         public string Name { get; set; }
