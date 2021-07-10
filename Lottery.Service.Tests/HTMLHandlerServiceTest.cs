@@ -19,7 +19,9 @@ namespace Lottery.Service.Tests
             _mockLogger = new Mock<ILogger<HtmlHandlerService>>();
             _service = new HtmlHandlerService(_mockLogger.Object);
         }
-        [TestMethod]
+
+        [TestMethod("Load Html file")]
+        [TestCategory("HTMLHandlerService")]
         public void LoadHTMLFile_Test()
         {
             // Arrange
@@ -42,7 +44,9 @@ namespace Lottery.Service.Tests
             // Assert
             CollectionAssert.Equals(expectedListString, result);
         }
-        [TestMethod]
+
+        [TestMethod("Load Html file and throwa an Exception")]
+        [TestCategory("HTMLHandlerService")]
         public void LoadHTMLFile_ThrowsException_Test()
         {
             // Arrange

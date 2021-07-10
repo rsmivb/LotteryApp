@@ -19,18 +19,9 @@ namespace Lottery.Service.Tests
             _appSettings = new AppSettings { TempFilePath = @"\TestPath", DefaultURL= "http://www.dummy.com", Lotteries = new List<LotterySetting> { new LotterySetting { Name = "TestLottery", WebFileName = "lottery.zip" } } };
             _mockLogger = new Mock<ILogger<IProcessLotteryService>>();
         }
-        [TestCategory("Process Lottery Service Test")]
-        [TestMethod]
-        public void DownloadFile_LotteryNameWrong_ThrowsArgumentNullException_Test()
-        {
-            var testLotteryName = "WrongLotteryName";
-            var mockFileHandler = new Mock<IFileHandlerService>();
-            var mockWebService = new Mock<IWebServiceService>();
-            var _webService = new ProcessLotteryService(mockFileHandler.Object, _appSettings, mockWebService.Object, _mockLogger.Object);
-            Assert.ThrowsException<ArgumentNullException>(() => _webService.ProcessLotteryFile(testLotteryName));
-        }
-        [TestCategory("Process Lottery Service Test")]
-        [TestMethod]
+
+        [TestMethod("Process file to a lottery")]
+        [TestCategory("ProcessLotteryService")]
         public void DownloadFile_Test()
         {
             var testLotteryName = "TestLottery";
@@ -41,8 +32,8 @@ namespace Lottery.Service.Tests
             Assert.IsTrue(returnedValue);
         }
 
-        [TestCategory("Process Lottery Service Test")]
-        [TestMethod]
+        [TestMethod("Process file to a lottery throws an ArgumentNullException")]
+        [TestCategory("ProcessLotteryService")]
         public void DownloadFile_InvalidLotteryName_ThrowsArgumentNullException_Test()
         {
             var testLotteryName = "WrongLotteryName";

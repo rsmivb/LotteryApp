@@ -145,15 +145,9 @@ namespace Lottery.Service.Tests
             _mockHtmlService = new Mock<IHtmlHandlerService>();
             _lotteryService = new LotteryService(_mockHtmlService.Object, appSettings, _mockLogger.Object);
         }
-        [TestMethod]
-        public void ChooseLottery_ReturnsThrowException_Test()
-        {
-            var lotteryName = "Not Exists";
-            var expectedExceptionMessage = $"Lottery {lotteryName} did not support.";
-            NotSupportedException ex = Assert.ThrowsException<NotSupportedException>(() => _lotteryService.ChooseLottery(new List<List<string>>(), lotteryName));
-            Assert.AreEqual(expectedExceptionMessage, ex.Message);
-        }
-        [TestMethod]
+
+        [TestMethod("Choose lottery based on listOfStrings")]
+        [TestCategory("LotteryService")]
         public void ChooseLottery_Test()
         {
             var listOfStrings = new List<List<string>>();
@@ -203,7 +197,19 @@ namespace Lottery.Service.Tests
             Assert.IsInstanceOfType(returnedListOfValues, typeof(IEnumerable<TimeMania>));
             Assert.IsNotInstanceOfType(returnedListOfValues, typeof(IEnumerable<MegaSena>));
         }
-        [TestMethod]
+
+        [TestMethod("Choose lottery based on listOfStrings and it throws an Exception")]
+        [TestCategory("LotteryService")]
+        public void ChooseLottery_ReturnsThrowException_Test()
+        {
+            var lotteryName = "Not Exists";
+            var expectedExceptionMessage = $"Lottery {lotteryName} did not support.";
+            NotSupportedException ex = Assert.ThrowsException<NotSupportedException>(() => _lotteryService.ChooseLottery(new List<List<string>>(), lotteryName));
+            Assert.AreEqual(expectedExceptionMessage, ex.Message);
+        }
+
+        [TestMethod("Load lottery")]
+        [TestCategory("LotteryService")]
         public void LoadLottery_Test()
         {
             var lotteryName = "MegaSena";
@@ -235,7 +241,8 @@ namespace Lottery.Service.Tests
             Assert.IsFalse(Directory.Exists(path));
         }
 
-        [TestMethod]
+        [TestMethod("Load lottery throws an FileNotFoundExceptio")]
+        [TestCategory("LotteryService")]
         public void LoadLottery_Throws_FileNotFoundException_Test()
         {
             var lotteryName = "DuplaSena";
@@ -243,7 +250,9 @@ namespace Lottery.Service.Tests
             var expectedErrorMessage = $"The lottery file on path {pathError} does not exist, please check AppSetting object.";
             Assert.ThrowsException<FileNotFoundException>(() => _lotteryService.Load(lotteryName));
         }
-        [TestMethod]
+
+        [TestMethod("Load lottery throws an EntryPointNotFoundException")]
+        [TestCategory("LotteryService")]
         public void LoadLottery_Throws_EntryPointNotFoundException_Test()
         {
             var lotteryName = "Lottery_Doesn't_Exist";

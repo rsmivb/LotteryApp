@@ -16,16 +16,18 @@ namespace Lottery.Service.Tests
             _mockLogger = new Mock<ILogger<IWebServiceService>>();
             _webServiceService = new WebServiceService(_mockLogger.Object);
         }
-        [TestCategory("Web Service Service Test")]
-        [TestMethod]
+
+        [TestMethod("Get stream based on http end point")]
+        [TestCategory("WebServiceService")]
         public void GetStreamFileFromWebService_Test()
         {
             var lotteryNameTest = "http://127.0.0.1";
             var result = _webServiceService.GetStreamFileFromWebService(lotteryNameTest);
             Assert.IsTrue(result.CanRead);
         }
-        [TestCategory("Web Service Service Test")]
-        [TestMethod]
+
+        [TestMethod("Get stream file and it throws a NotSupportedException")]
+        [TestCategory("WebServiceService")]
         public void GetStreamFileFromWebService_ThrowsNotSupportedException_Test()
         {
             var invalidUrl = "htp://invalid.url";

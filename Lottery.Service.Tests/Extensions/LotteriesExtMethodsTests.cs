@@ -10,7 +10,9 @@ namespace Lottery.Service.Tests
     [TestClass]
     public class LotteriesExtMethodsTests
     {
-        [TestMethod]
+
+        [TestMethod("Build a DuplaSena objects based on list of list of strings")]
+        [TestCategory("LotteriesExtensionMethods")]
         public void ExtensioMethod_DuplaSena_Test()
         {
             var listOfValuesDuplaSena = new List<List<string>>
@@ -96,7 +98,9 @@ namespace Lottery.Service.Tests
             Assert.AreEqual(expectedDuplaSena.First().ToString(), actualResult.First().ToString());
             Assert.AreNotEqual(expectedDuplaSena.First().GetHashCode(), actualResult.First().GetHashCode());
         }
-        [TestMethod]
+
+        [TestMethod("Build a Federal objects based on list of list of strings")]
+        [TestCategory("LotteriesExtensionMethods")]
         public void ExtensioMethod_Federal_Test()
         {
             var listOfValuesFederal = new List<List<string>>
@@ -122,7 +126,9 @@ namespace Lottery.Service.Tests
             CollectionAssert.AreEqual(expectedFederal, actualResult);
             Assert.AreNotEqual(expectedFederal.First().GetHashCode(), actualResult.First().GetHashCode());
         }
-        [TestMethod]
+
+        [TestMethod("Build a Loteca objects based on list of list of strings")]
+        [TestCategory("LotteriesExtensionMethods")]
         public void ExtensioMethod_Loteca_Test()
         {
             var listOfValuesLoteca = new List<List<string>>
@@ -186,7 +192,9 @@ namespace Lottery.Service.Tests
             CollectionAssert.AreEqual(expectedLoteca, actualResult);
             Assert.AreNotEqual(expectedLoteca.First().GetHashCode(), actualResult.First().GetHashCode());
         }
-        [TestMethod]
+
+        [TestMethod("Build a LotoFacil objects based on list of list of strings")]
+        [TestCategory("LotteriesExtensionMethods")]
         public void ExtensioMethod_LotoFacil_Test()
         {
             var listOfValuesLotoFacil = new List<List<string>>
@@ -260,7 +268,9 @@ namespace Lottery.Service.Tests
             CollectionAssert.AreEqual(expectedLotoFacil, actualResult);
             Assert.AreNotEqual(expectedLotoFacil.First().GetHashCode(), actualResult.First().GetHashCode());
         }
-        [TestMethod]
+
+        [TestMethod("Build a LotoGol objects based on list of list of strings")]
+        [TestCategory("LotteriesExtensionMethods")]
         public void ExtensioMethod_LotoGol_Test()
         {
             var listOfValuesLotoGol = new List<List<string>>
@@ -328,7 +338,9 @@ namespace Lottery.Service.Tests
             CollectionAssert.AreEqual(expectedLotoGol, actualResult);
             Assert.AreNotEqual(expectedLotoGol.First().GetHashCode(), actualResult.First().GetHashCode());
         }
-        [TestMethod]
+
+        [TestMethod("Build a LotoMania objects based on list of list of strings")]
+        [TestCategory("LotteriesExtensionMethods")]
         public void ExtensioMethod_LotoMania_Test()
         {
             var listOfValuesLotoMania = new List<List<string>>
@@ -420,7 +432,9 @@ namespace Lottery.Service.Tests
             CollectionAssert.AreEqual(expectedLotoMania, actualResult);
             Assert.AreNotEqual(expectedLotoMania.First().GetHashCode(), actualResult.First().GetHashCode());
         }
-        [TestMethod]
+
+        [TestMethod("Build a MegaSena objects based on list of list of strings")]
+        [TestCategory("LotteriesExtensionMethods")]
         public void ExtensioMethod_MegaSena_Test()
         {
             var listOfValuesMegaSena = new List<List<string>>
@@ -480,7 +494,8 @@ namespace Lottery.Service.Tests
             Assert.AreNotEqual(expectedMegaSena.First().GetHashCode(), actualResult.First().GetHashCode());
         }
 
-        [TestMethod]
+        [TestMethod("Build a Quina objects based on list of list of strings")]
+        [TestCategory("LotteriesExtensionMethods")]
         public void ExtensioMethod_Quina_Test()
         {
             var listOfValuesQuina = new List<List<string>>
@@ -542,7 +557,9 @@ namespace Lottery.Service.Tests
             CollectionAssert.AreEqual(expectedQuina, actualResult);
             Assert.AreNotEqual(expectedQuina.First().GetHashCode(), actualResult.First().GetHashCode());
         }
-        [TestMethod]
+
+        [TestMethod("Build a TimeMania objects based on list of list of strings")]
+        [TestCategory("LotteriesExtensionMethods")]
         public void ExtensioMethod_TimeMania_Test()
         {
             var listOfValuesTimeMania = new List<List<string>>
