@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LotteryApi
 {
-    public static class ServicextensionMethods
+    public static class ServiceExtensionMethods
     {
 
         public static IServiceCollection LoadDependencies(this IServiceCollection services)

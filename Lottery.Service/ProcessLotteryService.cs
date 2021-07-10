@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Linq;
-using System.Net;
 
 namespace Lottery.Services
 {
@@ -28,11 +27,15 @@ namespace Lottery.Services
             {
                 _logger.LogDebug($"Getting data from AppSettings for lottery {lotteryName}.");
                 var _setting = _settings.Lotteries.FirstOrDefault(l => l.Name.Equals(lotteryName));
-                if (_setting == null) throw new ArgumentNullException("Object Lottery setting must not be null.");
+                if (_setting == null)
+                {
+                    throw new ArgumentNullException("Object Lottery setting must not be null.");
+                }
+
                 string path = string.Concat(Environment.CurrentDirectory, _settings.TempFilePath);
 
                 _fileHandler.CreateFolder(path);
-                var filePath = Path.Combine(path, $"{_setting.Name}{Constants.ZIP}");
+                var filePath = Path.Combine(path, $"{_setting.Name}{Constants.Zip}");
                 var destinationPath = Path.Combine(path, _setting.Name);
                 var streamResponse = _webService.GetStreamFileFromWebService($"{_settings.DefaultURL}{_setting.WebFileName}");
                 _fileHandler.CreateFileFromStream(filePath, streamResponse);

@@ -1,10 +1,11 @@
+using Lottery.Services.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Lottery.Models.Test
+namespace Lottery.Service.Tests
 {
     [TestClass]
-    public class ExtensionsMethodsTest
+    public class GenericExtensionsMethodsTests
     {
         [TestMethod]
         [DataRow("", "&nbsp")]

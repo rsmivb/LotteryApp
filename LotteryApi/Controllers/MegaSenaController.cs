@@ -97,10 +97,10 @@ namespace LotteryApi.Controllers
             try
             {
                 _logger.LogInformation("api/megasena/downloadResultsFromSource - Downloading from web service.");
-                _webService.ProcessLotteryFile(Constants.MEGASENA);
+                _webService.ProcessLotteryFile(Constants.MegaSena);
                 _logger.LogInformation("api/megasena/downloadResultsFromSource - Load HTML file into Objects");
 
-                var results = _lotteryService.Load(Constants.MEGASENA);
+                var results = _lotteryService.Load(Constants.MegaSena);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results as IList<MegaSena>);

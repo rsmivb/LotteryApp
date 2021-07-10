@@ -107,10 +107,10 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                _webService.ProcessLotteryFile(Constants.TIMEMANIA);
+                _webService.ProcessLotteryFile(Constants.TimeMania);
 
                 _logger.LogInformation("Load HTML file into Objects");
-                var results = (IEnumerable<TimeMania>)_lotteryService.Load(Constants.TIMEMANIA);
+                var results = (IEnumerable<TimeMania>)_lotteryService.Load(Constants.TimeMania);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);

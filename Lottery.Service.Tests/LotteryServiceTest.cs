@@ -209,7 +209,11 @@ namespace Lottery.Service.Tests
             var lotteryName = "MegaSena";
             var path = Path.Combine( Environment.CurrentDirectory, $@"../../../{lotteryName}/" );
             var fileName = "anyFile.htm";
-            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
             var filePath = Path.Combine(path, fileName);
             if (!File.Exists(filePath))
             {

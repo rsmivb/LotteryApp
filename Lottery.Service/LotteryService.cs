@@ -1,4 +1,5 @@
 ﻿using Lottery.Models;
+using Lottery.Services.Extensions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

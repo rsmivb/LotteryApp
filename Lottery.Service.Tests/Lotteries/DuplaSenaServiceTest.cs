@@ -221,7 +221,7 @@ namespace Lottery.Service.Tests.Lotteries
 
             return new LotteryData
             {
-                LotteryName = Constants.DUPLASENA,
+                LotteryName = Constants.DuplaSena,
                 AverageWinnersData = new List<AverageData>
                     {
                         new AverageData

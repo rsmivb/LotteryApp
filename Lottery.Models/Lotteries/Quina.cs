@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lottery.Models
 {
-    public class Quina : MongoModel, IEquatable<Quina>
+    public class Quina : MongoModel
     {
         public int LotteryId { get; set; }
         public DateTime DateRealized { get; set; }
@@ -24,14 +24,10 @@ namespace Lottery.Models
         public decimal AccumulatedValue { get; set; }
         public decimal EstimatePrize { get; set; }
         public decimal AccumulatedSorteioSaoJoao { get; set; }
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as Quina);
-        }
 
-        public bool Equals(Quina other)
-        {
-            return other != null &&
+        public override bool Equals(object obj) => Equals(obj as Quina);
+
+        public bool Equals(Quina other) => other != null &&
                    LotteryId == other.LotteryId &&
                    DateRealized == other.DateRealized &&
                    Dozens.SequenceEqual(other.Dozens) &&
@@ -50,7 +46,6 @@ namespace Lottery.Models
                    AccumulatedValue == other.AccumulatedValue &&
                    EstimatePrize == other.EstimatePrize &&
                    AccumulatedSorteioSaoJoao == other.AccumulatedSorteioSaoJoao;
-        }
 
         public override int GetHashCode()
         {
@@ -76,47 +71,11 @@ namespace Lottery.Models
             return hashCode;
         }
 
-        public override string ToString()
-        {
-            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
+        public override string ToString() => $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
                    $"{TotalAmount}-{Winners5}-{City}-{UF}-" +
                    $"{Average5Numbers}-{Winners4}-{Average4Numbers}-" +
                    $"{Winners3}-{Average3Numbers}-{Winners2}-{Average2Numbers}-" +
                    $"{IsAccumulated}-{AccumulatedValue}-" +
                    $"{EstimatePrize}-{AccumulatedSorteioSaoJoao} }}";
-        }
-    }
-
-    public static class QuinaExtensionMethods
-    {
-        public static IEnumerable<Quina> Load(List<List<string>> items)
-        {
-            foreach (var item in items)
-            {
-                yield return new Quina
-                {
-                    LotteryId = item[0].ConvertToInt(),
-                    DateRealized = item[1].ConvertToDateTime(),
-                    Dozens = new List<int> { item[2].ConvertToInt(), item[3].ConvertToInt(),
-                                             item[4].ConvertToInt(), item[5].ConvertToInt(),
-                                             item[6].ConvertToInt() }.OrderBy(c => c).ToList(),
-                    TotalAmount = item[7].ConvertToDecimal(),
-                    Winners5 = item[8].ConvertToInt(),
-                    City = item[9].ConvertEmptyToString(),
-                    UF = item[10].ConvertWithMetaChatToString(),
-                    Average5Numbers = item[11].ConvertToDecimal(),
-                    Winners4 = item[12].ConvertToInt(),
-                    Average4Numbers = item[13].ConvertToDecimal(),
-                    Winners3 = item[14].ConvertToInt(),
-                    Average3Numbers = item[15].ConvertToDecimal(),
-                    Winners2 = item[16].ConvertToInt(),
-                    Average2Numbers = item[17].ConvertToDecimal(),
-                    IsAccumulated = item[18].ConvertToBoolean(),
-                    AccumulatedValue = item[19].ConvertToDecimal(),
-                    EstimatePrize = item[20].ConvertToDecimal(),
-                    AccumulatedSorteioSaoJoao = item[21].ConvertToDecimal()
-                };
-            }
-        }
     }
 }

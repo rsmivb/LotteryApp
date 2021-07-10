@@ -1,12 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Lottery.Models;
+using Lottery.Services.Extensions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lottery.Models.Test
+namespace Lottery.Service.Tests
 {
     [TestClass]
-    public class LotteriesExtMethodsTest
+    public class LotteriesExtMethodsTests
     {
         [TestMethod]
         public void ExtensioMethod_DuplaSena_Test()

@@ -33,7 +33,10 @@ namespace Lottery.Services
             try
             {
                 _logger.LogDebug($"Cleaning up folder {path}.");
-                if (Directory.Exists(path)) Directory.Delete(path, true);
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path, true);
+                }
             }
             catch (Exception e)
             {
@@ -46,7 +49,10 @@ namespace Lottery.Services
             try
             {
                 _logger.LogDebug($"Creating folder {path}.");
-                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
             }
             catch (Exception e)
             {

@@ -22,14 +22,10 @@ namespace Lottery.Models
         public decimal AccumulatedPrize { get; set; }
         public decimal EstimatedPrize { get; set; }
         public decimal AccumulatedMegaSenaVirada { get; set; }
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as MegaSena);
-        }
 
-        public bool Equals(MegaSena other)
-        {
-            return other != null &&
+        public override bool Equals(object obj) => Equals(obj as MegaSena);
+
+        public bool Equals(MegaSena other) => other != null &&
                    LotteryId == other.LotteryId &&
                    DateRealized == other.DateRealized &&
                    Dozens.SequenceEqual(other.Dozens) &&
@@ -46,7 +42,6 @@ namespace Lottery.Models
                    AccumulatedPrize == other.AccumulatedPrize &&
                    EstimatedPrize == other.EstimatedPrize &&
                    AccumulatedMegaSenaVirada == other.AccumulatedMegaSenaVirada;
-        }
 
         public override int GetHashCode()
         {
@@ -70,44 +65,10 @@ namespace Lottery.Models
             return hashCode;
         }
 
-        public override string ToString()
-        {
-            return $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
+        public override string ToString() => $"{{ {LotteryId}-{DateRealized}-[{string.Join(",", Dozens)}]-" +
                    $"{TotalCollection}-{Winners6Numbers}-{City}-{UF}-" +
                    $"{Average6Numbers}-{Winners5Numbers}-{Average5Numbers}-" +
                    $"{Winners4Numbers}-{Average4Numbers}-{IsAccumulated}-" +
                    $"{AccumulatedPrize}-{EstimatedPrize}-{AccumulatedMegaSenaVirada} }}";
-        }
-    }
-
-    public static class MegaSenaExtensionMethods
-    {
-        public static IEnumerable<MegaSena> Load(List<List<string>> items)
-        {
-            foreach (var item in items)
-            {
-                yield return new MegaSena
-                {
-                    LotteryId = item[0].ConvertToInt(),
-                    DateRealized = item[1].ConvertToDateTime(),
-                    Dozens = new List<int> { item[2].ConvertToInt(), item[3].ConvertToInt(),
-                                     item[4].ConvertToInt(), item[5].ConvertToInt(),
-                                     item[6].ConvertToInt(), item[7].ConvertToInt() }.OrderBy(c => c).ToList(),
-                    TotalCollection = item[8].ConvertToDecimal(),
-                    Winners6Numbers = item[9].ConvertToInt(),
-                    City = item[10].ConvertEmptyToString(),
-                    UF = item[11].ConvertWithMetaChatToString(),
-                    Average6Numbers = item[12].ConvertToDecimal(),
-                    Winners5Numbers = item[13].ConvertToInt(),
-                    Average5Numbers = item[14].ConvertToDecimal(),
-                    Winners4Numbers = item[15].ConvertToInt(),
-                    Average4Numbers = item[16].ConvertToDecimal(),
-                    IsAccumulated = item[17].ConvertToBoolean(),
-                    AccumulatedPrize = item[18].ConvertToDecimal(),
-                    EstimatedPrize = item[19].ConvertToDecimal(),
-                    AccumulatedMegaSenaVirada = item[20].ConvertToDecimal()
-                };
-            }
-        }
     }
 }

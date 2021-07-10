@@ -98,10 +98,10 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("api/quina/downloadResultsFromSource - Get information from CEF server");
                 //download file
-                _webService.ProcessLotteryFile(Constants.QUINA);
+                _webService.ProcessLotteryFile(Constants.Quina);
                 _logger.LogInformation("api/quina/downloadResultsFromSource - Load HTML file into Objects");
                 //load file into object
-                var results = (IEnumerable<Quina>)_lotteryService.Load(Constants.QUINA);
+                var results = (IEnumerable<Quina>)_lotteryService.Load(Constants.Quina);
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);
                 return Ok("Loaded itens on database.");

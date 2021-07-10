@@ -111,9 +111,9 @@ namespace LotteryApi.Controllers
                 //https://jonhilton.net/simple-background-jobs-with-hangfire-and-aspnet-core/
                 //https://www.hangfire.io/
                 _logger.LogInformation("Get information from CEF server");
-                _webService.ProcessLotteryFile(Constants.DUPLASENA);
+                _webService.ProcessLotteryFile(Constants.DuplaSena);
                 _logger.LogInformation("Load HTML file into Objects");
-                var results = (IEnumerable<DuplaSena>)_lotteryService.Load(Constants.DUPLASENA);
+                var results = (IEnumerable<DuplaSena>)_lotteryService.Load(Constants.DuplaSena);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);

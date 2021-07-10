@@ -98,10 +98,10 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                _webService.ProcessLotteryFile(Constants.FEDERAL);
+                _webService.ProcessLotteryFile(Constants.Federal);
                 _logger.LogInformation("Load HTML file into Objects");
                 //load file into object
-                var results = (IEnumerable<Federal>)_lotteryService.Load(Constants.FEDERAL);
+                var results = (IEnumerable<Federal>)_lotteryService.Load(Constants.Federal);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
                 _repository.InsertMany(results);
