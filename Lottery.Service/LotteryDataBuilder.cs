@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace Lottery.Services
 {
@@ -14,15 +13,16 @@ namespace Lottery.Services
         private readonly AppSettings _appSettings;
         private readonly ILogger<ILotteryDataBuilder> _logger;
 
-        public LotteryDataBuilder(AppSettings appSettings, ILogger<ILotteryDataBuilder> logger)
+        public LotteryDataBuilder(ILogger<ILotteryDataBuilder> logger,
+                                AppSettings appSettings)
         {
-            _appSettings = appSettings;
             _logger = logger;
+            _appSettings = appSettings;
         }
 
         public LotteryData Build(string lotteryName)
         {
-            var lottery = _appSettings.Lotteries.FirstOrDefault(l => l.Name == lotteryName);
+            var lottery = _appSettings.Lotteries.FirstOrDefault(l => l.Name.Equals(lotteryName, StringComparison.InvariantCultureIgnoreCase));
 
             if (lottery is null)
             {
@@ -35,8 +35,8 @@ namespace Lottery.Services
             {
                 Name = lotteryName,
                 SenderUrlPath = new Uri($"{_appSettings.DefaultURL}{lottery.ZipFileName}"),
-                ZipPath = Path.Combine(Environment.CurrentDirectory,_appSettings.TempFilePath,lottery.ZipFileName),
-                HtmlFilePath = Path.Combine(Environment.CurrentDirectory,_appSettings.TempFilePath, lottery.HtmlFileName),
+                ZipPath = Path.Combine(Environment.CurrentDirectory, $"{_appSettings.TempFilePath}{lottery.ZipFileName}"),
+                HtmlFilePath = Path.Combine(Environment.CurrentDirectory, $"{_appSettings.TempFilePath}{lottery.HtmlFileName}"),
                 Columns = lottery.Columns
             };
         }
