@@ -1,7 +1,7 @@
 ﻿using Lottery.Models;
 using System;
 
-namespace Lottery.Services.Extensions
+namespace Lottery.Services
 {
     public static class GenericExtensionMethods
     {

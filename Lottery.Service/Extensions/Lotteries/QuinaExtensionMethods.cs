@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lottery.Services.Extensions
+namespace Lottery.Services
 {
     public static class QuinaExtensionMethods
     {

@@ -1,4 +1,4 @@
-using Lottery.Services.Extensions;
+using Lottery.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
