@@ -37,9 +37,11 @@ namespace Lottery.Service.Tests
                         LotteryId = 2146,
                         DateRealized = new DateTime(2019,4,27),
                         Dozens = new List<int> { 16, 18, 31, 39, 42, 44 },
+                        City = "",
+                        UF = "",
                         TotalCollection = 150176040.00M,
                         Winners6Numbers = 0,
-                        Average6Numbers = 0M,
+                        Average6Numbers = 0.00M,
                         Winners5Numbers = 283,
                         Average5Numbers = 30594.81M,
                         Winners4Numbers = 15338,
@@ -52,11 +54,19 @@ namespace Lottery.Service.Tests
                 };
             var lotteryData = new LotteryData
             {
-                Name = "MegaSena"
+                Name = "MegaSena",
+                Columns = 26,
+                HtmlFilePath = string.Empty,
+                SenderUrlPath = new Uri("http://www.url.com"),
+                ZipPath = string.Empty
             };
             var expectedLotteryData = new LotteryData
             {
                 Name = "MegaSena",
+                Columns = 26,
+                HtmlFilePath = string.Empty,
+                SenderUrlPath = new Uri("http://www.url.com"),
+                ZipPath = string.Empty,
                 Entries = megaSenaList.Cast<MongoModel>().ToList()
             };
             List<List<string>> htmlList = new List<List<string>>
@@ -89,6 +99,8 @@ namespace Lottery.Service.Tests
 
             var result = _service.Load(htmlList, lotteryData);
 
+            CollectionAssert.AreEqual(expectedLotteryData.Entries, result.Entries);
+
             Assert.AreEqual(expectedLotteryData, result);
         }
 
@@ -96,79 +108,104 @@ namespace Lottery.Service.Tests
         [TestCategory("LotteryService")]
         public void CreateListOfDuplaSenaObjectsTest()
         {
-            //TBD
             var duplaSenaList = new List<DuplaSena>
                 {
                     new DuplaSena
                     {
                         _id = new ObjectId("000000000000000000000000"),
-                         LotteryId = 0,
-                        DateRealized = new DateTime(),
-                        DozensRound1 = new List<int>(),
-                        TotalAmount = 0,
+                        LotteryId = 1999,
+                        DateRealized = new DateTime(2021,4,27),
+                        DozensRound1 = new List<int>{ 1, 2, 4, 6, 8, 11 },
+                        TotalAmount = 150_041.21M,
                         Winners6NumbersRound1 = 0,
                         City = "",
                         UF = "",
-                        Average6NumbersRound1 = 0,
+                        Average6NumbersRound1 = 0.00M,
                         IsAccumulated = true,
-                        AccumulatedValueRound1 = 0,
-                        Winners5NumbersRound1 = 0,
-                        Average5NumbersRound1 = 0,
-                        Winners4NumbersRound1 = 0,
-                        Average4NumbersRound1 = 0,
-                        Winners3NumbersRound1 = 0,
-                        Average3NumbersRound1 = 0,
-                        DozensRound2 = new List<int>(),
+                        AccumulatedValueRound1 = 594.81M,
+                        Winners5NumbersRound1 = 38,
+                        Average5NumbersRound1 = 1106.43M,
+                        Winners4NumbersRound1 = 22,
+                        Average4NumbersRound1 = 11.10M,
+                        Winners3NumbersRound1 = 33,
+                        Average3NumbersRound1 = 9.90M,
+                        DozensRound2 = new List<int>{ 4, 7, 25, 41, 56, 57 },
                         Winners6NumbersRound2 = 0,
-                        Average6NumbersRound2 = 0,
-                        Winners5NumbersRound2 = 0,
-                        Average5NumbersRound2 = 0,
-                        Winners4NumbersRound2 = 0,
-                        Average4NumbersRound2 = 0,
-                        Winners3NumbersRound2 = 0,
-                        Average3NumbersRound2 = 0,
-                        EstimatedPrize = 0,
-                        AccumulatedEspecialPascoa = 0
+                        Average6NumbersRound2 = 0.00M,
+                        Winners5NumbersRound2 = 12,
+                        Average5NumbersRound2 = 1200.01M,
+                        Winners4NumbersRound2 = 123,
+                        Average4NumbersRound2 = 129001.99M,
+                        Winners3NumbersRound2 = 1234,
+                        Average3NumbersRound2 = 234543.01M,
+                        EstimatedPrize = 12120120.98M,
+                        AccumulatedEspecialPascoa = 1000000.00M
                     }
                 };
             var lotteryData = new LotteryData
             {
-                Name = "DuplaSena"
+                Name = "DuplaSena",
+                Columns = 12,
+                HtmlFilePath = string.Empty,
+                SenderUrlPath = new Uri("http://www.url.com"),
+                ZipPath = string.Empty
             };
             var expectedLotteryData = new LotteryData
             {
                 Name = "DuplaSena",
+                Columns = 12,
+                HtmlFilePath = string.Empty,
+                SenderUrlPath = new Uri("http://www.url.com"),
+                ZipPath = string.Empty,
                 Entries = duplaSenaList.Cast<MongoModel>().ToList()
             };
             List<List<string>> htmlList = new List<List<string>>
                 {
                     new List<string>
                     {
-                        "2146",
-                        "27/04/2019",
-                        "39",
-                        "42",
-                        "16",
-                        "18",
-                        "44",
-                        "31",
-                        "150.176.040,00",
+                        "1999",
+                        "27/04/2021",
+                        "1",
+                        "2",
+                        "6",
+                        "8",
+                        "4",
+                        "11",
+                        "150.041,21",
                         "0",
                         "&nbsp",
                         "&nbsp",
                         "0,00",
-                        "283",
-                        "30.594,81",
-                        "15338",
-                        "806,43",
                         "SIM",
-                        "107.627.872,22",
-                        "125.000.000,00",
-                        "26.248.210,83"
+                        "594,81",
+                        "38",
+                        "1106,43",
+                        "22",
+                        "11,10",
+                        "33",
+                        "9,90",
+                        "4",
+                        "25",
+                        "56",
+                        "57",
+                        "41",
+                        "7",
+                        "0",
+                        "0,00",
+                        "12",
+                        "1200,01",
+                        "123",
+                        "129.001,99",
+                        "1234",
+                        "234.543,01",
+                        "12.120.120,98",
+                        "1.000.000,00"
                     }
                 };
 
             var result = _service.Load(htmlList, lotteryData);
+
+            CollectionAssert.AreEqual(expectedLotteryData.Entries, result.Entries);
 
             Assert.AreEqual(expectedLotteryData, result);
         }
@@ -230,6 +267,8 @@ namespace Lottery.Service.Tests
                 };
 
             var result = _service.Load(htmlList, lotteryData);
+
+            CollectionAssert.AreEqual(expectedLotteryData.Entries, result.Entries);
 
             Assert.AreEqual(expectedLotteryData, result);
         }
@@ -299,6 +338,8 @@ namespace Lottery.Service.Tests
                 };
 
             var result = _service.Load(htmlList, lotteryData);
+
+            CollectionAssert.AreEqual(expectedLotteryData.Entries, result.Entries);
 
             Assert.AreEqual(expectedLotteryData, result);
         }
@@ -373,6 +414,8 @@ namespace Lottery.Service.Tests
 
             var result = _service.Load(htmlList, lotteryData);
 
+            CollectionAssert.AreEqual(expectedLotteryData.Entries, result.Entries);
+
             Assert.AreEqual(expectedLotteryData, result);
         }
 
@@ -445,6 +488,8 @@ namespace Lottery.Service.Tests
                 };
 
             var result = _service.Load(htmlList, lotteryData);
+
+            CollectionAssert.AreEqual(expectedLotteryData.Entries, result.Entries);
 
             Assert.AreEqual(expectedLotteryData, result);
         }
@@ -526,6 +571,8 @@ namespace Lottery.Service.Tests
 
             var result = _service.Load(htmlList, lotteryData);
 
+            CollectionAssert.AreEqual(expectedLotteryData.Entries, result.Entries);
+
             Assert.AreEqual(expectedLotteryData, result);
         }
 
@@ -597,6 +644,8 @@ namespace Lottery.Service.Tests
                 };
 
             var result = _service.Load(htmlList, lotteryData);
+
+            CollectionAssert.AreEqual(expectedLotteryData.Entries, result.Entries);
 
             Assert.AreEqual(expectedLotteryData, result);
         }
@@ -672,6 +721,8 @@ namespace Lottery.Service.Tests
                 };
 
             var result = _service.Load(htmlList, lotteryData);
+
+            CollectionAssert.AreEqual(expectedLotteryData.Entries, result.Entries);
 
             Assert.AreEqual(expectedLotteryData, result);
         }
