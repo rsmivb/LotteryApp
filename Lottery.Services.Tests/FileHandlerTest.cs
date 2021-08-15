@@ -51,7 +51,6 @@ namespace Lottery.Service.Tests
         [TestCategory("FileHandlerService")]
         public void CreateFileFromStream_ThrowsException_Test()
         {
-            var folderTest = @"C:\TempFolderTest";
             var testPath = string.Empty;
             Assert.ThrowsException<ArgumentException>(() => _fileHandler.CreateFileFromStream(testPath, new MemoryStream()));
         }

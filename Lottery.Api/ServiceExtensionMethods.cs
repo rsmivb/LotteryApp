@@ -4,7 +4,7 @@ using Lottery.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LotteryApi
+namespace Lottery.Api
 {
     public static class ServiceExtensionMethods
     {

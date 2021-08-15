@@ -1,13 +1,12 @@
 ﻿using Lottery.Models;
 using Lottery.Models.Lotteries;
+using Lottery.Repository;
 using Lottery.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
-using MongoDB.Bson;
-using Lottery.Repository;
 using System.Linq;
 
 namespace Lottery.Service.Tests
@@ -33,7 +32,7 @@ namespace Lottery.Service.Tests
                 {
                     new MegaSena
                     {
-                        _id = new ObjectId("000000000000000000000000"),
+                        _id = "000000000000000000000000",
                         LotteryId = 2146,
                         DateRealized = new DateTime(2019,4,27),
                         Dozens = new List<int> { 16, 18, 31, 39, 42, 44 },
@@ -112,7 +111,7 @@ namespace Lottery.Service.Tests
                 {
                     new DuplaSena
                     {
-                        _id = new ObjectId("000000000000000000000000"),
+                        _id = "000000000000000000000000",
                         LotteryId = 1999,
                         DateRealized = new DateTime(2021,4,27),
                         DozensRound1 = new List<int>{ 1, 2, 4, 6, 8, 11 },
@@ -282,7 +281,7 @@ namespace Lottery.Service.Tests
                 {
                     new Loteca
                     {
-                        _id = new ObjectId("000000000000000000000000"),
+                        _id = "000000000000000000000000",
                         LotteryId = 0,
                         DateRealized = new DateTime(),
                         Winners14 = 0,
@@ -353,7 +352,7 @@ namespace Lottery.Service.Tests
                 {
                     new LotoFacil
                     {
-                        _id = new ObjectId("000000000000000000000000"),
+                        _id = "000000000000000000000000",
                         LotteryId = 0,
                         DateRealized = new DateTime(),
                         Dozens = new List<int>(),
@@ -428,7 +427,7 @@ namespace Lottery.Service.Tests
                 {
                     new LotoGol
                     {
-                        _id = new ObjectId("000000000000000000000000"),
+                        _id = "000000000000000000000000",
                         LotteryId = 0,
                         DateRealized = new DateTime(),
                         City = "",
@@ -503,7 +502,7 @@ namespace Lottery.Service.Tests
                 {
                     new LotoMania
                     {
-                        _id = new ObjectId("000000000000000000000000"),
+                        _id = "000000000000000000000000",
                         LotteryId = 0,
                         DateRealized = new DateTime(),
                         Dozens = new List<int>(),
@@ -585,7 +584,7 @@ namespace Lottery.Service.Tests
                 {
                     new Quina
                     {
-                        _id = new ObjectId("000000000000000000000000"),
+                        _id = "000000000000000000000000",
                         LotteryId = 0,
                         DateRealized = new DateTime(),
                         Dozens = new List<int>(),
@@ -659,7 +658,7 @@ namespace Lottery.Service.Tests
                 {
                     new TimeMania
                     {
-                        _id = new ObjectId("000000000000000000000000"),
+                        _id = "000000000000000000000000",
                         LotteryId = 0,
                         DateRealized = new DateTime(),
                         Dozens = new List<int>(),

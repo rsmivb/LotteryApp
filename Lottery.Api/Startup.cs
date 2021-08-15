@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 
-namespace LotteryApi
+namespace Lottery.Api
 {
     public class Startup
     {

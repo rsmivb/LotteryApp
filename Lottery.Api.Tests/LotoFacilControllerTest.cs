@@ -1,20 +1,18 @@
+using Lottery.Api.Controllers;
 using Lottery.Models;
 using Lottery.Repository;
 using Lottery.Services;
-using LotteryApi.Controllers;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 
-namespace Lottery.Api.Test
+namespace Lottery.Api.Tests
 {
     public class LotoFacilControllerTest
     {
-        private LotoFacilController lotoFacilControllerTest;
+        private readonly LotoFacilController lotoFacilControllerTest;
         private readonly IRepository<LotoFacil> mockRepo;
         private readonly ILogger<LotoFacilController> mockLog;
         private readonly ILotteryService mockLotteryService;

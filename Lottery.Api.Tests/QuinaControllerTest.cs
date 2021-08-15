@@ -1,20 +1,18 @@
+using Lottery.Api.Controllers;
 using Lottery.Models;
 using Lottery.Repository;
 using Lottery.Services;
-using LotteryApi.Controllers;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 
-namespace Lottery.Api.Test
+namespace Lottery.Api.Tests
 {
     public class QuinaControllerTest
     {
-        private QuinaController quinaControllerTest;
+        private readonly QuinaController quinaControllerTest;
         private readonly IRepository<Quina> mockRepo;
         private readonly ILogger<QuinaController> mockLog;
         private readonly ILotteryService mockLotteryService;

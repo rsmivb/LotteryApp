@@ -10,8 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Lottery.Models\Lottery.Models.csproj" />
     <ProjectReference Include="..\Lottery.Repository\Lottery.Repository.csproj" />
-    <ProjectReference Include="..\Lottery.Service\Lottery.Services.csproj" />
+    <ProjectReference Include="..\Lottery.Services\Lottery.Services.csproj" />
   </ItemGroup>
 
 </Project>

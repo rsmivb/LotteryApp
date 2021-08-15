@@ -8,7 +8,7 @@ using System;
 using System.IO;
 using Xunit;
 
-namespace LotteryApi.Test
+namespace Lottery.Api.Tests
 {
 
     public class StartupTest
@@ -68,7 +68,7 @@ namespace LotteryApi.Test
         {
             var testProjectPath = Environment.CurrentDirectory;
 
-            var relativePathToHostProject = @"../../../../LotteryApi";
+            var relativePathToHostProject = @"../../../../Lottery.Api";
 
             return Path.Combine(testProjectPath, relativePathToHostProject);
         }

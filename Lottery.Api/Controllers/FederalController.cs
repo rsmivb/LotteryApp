@@ -5,11 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LotteryApi.Controllers
+namespace Lottery.Api.Controllers
 {
     /// <summary>
     ///
@@ -100,7 +99,7 @@ namespace LotteryApi.Controllers
                 //load file into object
                 //var results = (IEnumerable<Federal>)_lotteryService.Load(Constants.Federal);
                 _logger.LogInformation("loading into database");
-                _repository.CreateDatabase();
+                //_repository.CreateDatabase();
                 //_repository.InsertMany(results);
 
                 return Ok("Loaded itens on database.");

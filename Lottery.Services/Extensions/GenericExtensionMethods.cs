@@ -1,5 +1,7 @@
 ﻿using Lottery.Models;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Lottery.Services
 {
@@ -27,6 +29,12 @@ namespace Lottery.Services
             {
                 return string.Empty;
             }
+        }
+        public static Type GetLotteryType(this string lotteryName)
+        {
+            return Assembly.GetExecutingAssembly()
+                                .GetTypes()
+                                .FirstOrDefault(method => method.Name.Equals($"{lotteryName}ExtensionMethods")) ?? throw new Exception($"Lottery {lotteryName} wasn't implemented.");
         }
     }
 }

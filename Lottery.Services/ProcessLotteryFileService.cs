@@ -1,10 +1,6 @@
-﻿
-using Lottery.Models;
-using Lottery.Models.Lotteries;
+﻿using Lottery.Models.Lotteries;
 using Microsoft.Extensions.Logging;
 using System;
-using System.IO;
-using System.Linq;
 
 namespace Lottery.Services
 {

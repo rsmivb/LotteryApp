@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace LotteryApi.Controllers
+namespace Lottery.Api.Controllers
 {
     [Route("api/[controller]")]
     public class LotteryController : Controller
