@@ -71,7 +71,7 @@ namespace Lottery.Service.Tests
         }
         [TestMethod("Converts string value to a DateTime to a first char")]
         [TestCategory("GenericExtensionsMethods")]
-        [DataRow("1","112")]
+        [DataRow("1", "112")]
         [DataRow("x", "xasd")]
         public void ConvertToChar_Test(string expected, string toBeTested)
         {
@@ -86,6 +86,15 @@ namespace Lottery.Service.Tests
             var toBeTested = string.Empty;
             var expectedResult = string.Empty;
             var result = toBeTested.ConvertToAChar();
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod("Given a lottery name convert to a Type")]
+        [TestCategory("GenericExtensionsMethods")]
+        public void GivenLotteryNameConvertToType_Test()
+        {
+            var toBeTested = "MegaSena";
+            var expectedResult = typeof(MegaSenaExtensionMethods);
+            var result = toBeTested.ConvertToExtensionsMethodsType();
             Assert.AreEqual(expectedResult, result);
         }
     }

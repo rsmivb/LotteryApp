@@ -21,7 +21,7 @@ namespace Lottery.Services
         {
             try
             {
-                var type = lotteryData.Name.GetLotteryType();
+                var type = lotteryData.Name.ConvertToExtensionsMethodsType();
 
                 object[] args = { htmlLines };
 
