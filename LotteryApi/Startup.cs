@@ -67,12 +67,6 @@ namespace LotteryApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.RoutePrefix = "swagger";
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lottery API V1");
-                });
             }
             app.UseHttpsRedirection();
 
@@ -83,6 +77,12 @@ namespace LotteryApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "swagger";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lottery API V1");
             });
         }
     }

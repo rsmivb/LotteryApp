@@ -26,10 +26,11 @@ namespace Lottery.Repository
             }
         }
 
-        public MongoRepository(MongoConfiguration settings)
+        public MongoRepository(MongoDBConfiguration settings)
         {
             _db = new MongoClient(settings.Url).GetDatabase(settings.Name);
-            _collectionName = typeof(T).Name;
+            _collectionName = nameof(T);
+            CreateDatabase();
         }
         public T GetOne(FilterDefinition<T> filter)
         {
@@ -71,10 +72,9 @@ namespace Lottery.Repository
             Collection.InsertOneAsync(item);
         }
 
-        public void CreateDatabase()
+        private void CreateDatabase()
         {
-            var collection = _db.GetCollection<T>(_collectionName);
-            if (collection != null)
+            if (Collection != null)
             {
                 _db.DropCollection(_collectionName);
             }

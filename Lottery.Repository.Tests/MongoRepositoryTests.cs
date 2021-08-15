@@ -10,7 +10,7 @@ namespace Lottery.Repository.Tests
         public void CreateDatabaseShouldExistsDummyCollection()
         {
             var expextedCollectionName = nameof(Dummy);
-            var repository = new MongoRepository<Dummy>(new MongoConfiguration { Name = "local", Url = "mongodb://localhost:27017" });
+            var repository = new MongoRepository<Dummy>(new MongoDBConfiguration { Name = "local", Url = "mongodb://localhost:27017" });
 
             repository.CreateDatabase();
 

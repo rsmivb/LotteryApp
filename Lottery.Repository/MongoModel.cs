@@ -6,6 +6,7 @@ namespace Lottery.Repository
     public abstract class MongoModel
     {
         [BsonId]
-        public ObjectId _id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string _id { get; set; }
     }
 }
