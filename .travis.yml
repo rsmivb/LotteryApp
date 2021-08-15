@@ -29,9 +29,8 @@ services:
 script:
 #  - dotnet-sonarscanner begin /k:"rsmivb_LotteryApp" /o:"rsmivb-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$env:SONAR_TOKEN"
   - dotnet build
-  - dotnet test Lottery.Models.Test/Lottery.Models.Test.csproj
-#  - dotnet test Lottery.Service.Tests/Lottery.Service.Tests.csproj
-  - dotnet test Lottery.Api.Test/LotteryApi.Test.csproj
+#  - dotnet test Lottery.Services.Tests/Lottery.Services.Tests.csproj
+  - dotnet test Lottery.Api.Tests/LotteryApi.Tests.csproj
 #  - dotnet-sonarscanner end /d:sonar.login="$env:SONAR_TOKEN"
 #  - coverlet ./Lottery.Models.Test/bin/Debug/netcoreapp2.2/Lottery.Models.Test.dll --target "dotnet" --targetargs "test ./Lottery.Models.Test/Lottery.Models.Test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover" --format opencover --output ./testResults/lotteryApp.Model.xml
 #  - codecov -f .\testResults\lotteryApp.Model.xml -t $env:CODECOV_TOKEN
