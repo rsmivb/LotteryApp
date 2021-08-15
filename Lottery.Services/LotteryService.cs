@@ -1,5 +1,6 @@
 ﻿using Lottery.Models.Lotteries;
 using Lottery.Repository;
+using Lottery.Services.Extensions.Lotteries;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,7 @@ namespace Lottery.Services
         {
             try
             {
-                Type type = Assembly.GetExecutingAssembly()
-                                .GetTypes()
-                                .FirstOrDefault(method => method.Name.Equals($"{lotteryData.Name}ExtensionMethods"));
-
-                if (type is null) throw new Exception();
+                var type = lotteryData.Name.GetLotteryType();
 
                 object[] args = { htmlLines };
 
