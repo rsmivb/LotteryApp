@@ -12,8 +12,6 @@ namespace Lottery.Repository.Tests
             var expextedCollectionName = nameof(Dummy);
             var repository = new MongoRepository<Dummy>(new MongoDBConfiguration { Name = "local", Url = "mongodb://localhost:27017" });
 
-            repository.CreateDatabase();
-
             Assert.Equal(expextedCollectionName, repository.Collection.CollectionNamespace.CollectionName);
         }
     }

@@ -29,7 +29,7 @@ namespace Lottery.Repository
         public MongoRepository(MongoDBConfiguration settings)
         {
             _db = new MongoClient(settings.Url).GetDatabase(settings.Name);
-            _collectionName = nameof(T);
+            _collectionName = typeof(T).Name;
             CreateDatabase();
         }
         public T GetOne(FilterDefinition<T> filter)
