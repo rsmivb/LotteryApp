@@ -17,7 +17,6 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class LotoGolController : Controller
     {
-        private readonly IProcessLotteryService _webService;
         private readonly IRepository<LotoGol> _repository;
         private readonly ILogger<LotoGolController> _logger;
         private readonly ILotteryService _lotteryService;
@@ -28,12 +27,10 @@ namespace LotteryApi.Controllers
         /// <param name="repository"></param>
         /// <param name="logger"></param>
         /// <param name="lotteryService"></param>
-        public LotoGolController(IProcessLotteryService webService,
-            IRepository<LotoGol> repository,
+        public LotoGolController(IRepository<LotoGol> repository,
             ILogger<LotoGolController> logger,
             ILotteryService lotteryService)
         {
-            _webService = webService;
             _repository = repository;
             _logger = logger;
             _lotteryService = lotteryService;
@@ -98,12 +95,12 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                _webService.ProcessLotteryFile(Constants.LotoGol);
-                _logger.LogInformation("Load HTML file into Objects");
-                var results = (IEnumerable<LotoGol>)_lotteryService.Load(Constants.LotoGol);
-                _logger.LogInformation("loading into database");
-                _repository.CreateDatabase();
-                _repository.InsertMany(results);
+                //_webService.ProcessLotteryFile(Constants.LotoGol);
+                //_logger.LogInformation("Load HTML file into Objects");
+                //var results = (IEnumerable<LotoGol>)_lotteryService.Load(Constants.LotoGol);
+                //_logger.LogInformation("loading into database");
+                //_repository.CreateDatabase();
+                //_repository.InsertMany(results);
                 return Ok("Loaded itens on database.");
             }
             catch (Exception e)

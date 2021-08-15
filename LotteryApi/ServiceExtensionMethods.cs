@@ -14,7 +14,6 @@ namespace LotteryApi
             //add all dependencies
             services.AddTransient<IWebServiceService, WebServiceService>();
             services.AddTransient<IFileHandlerService, FileHandlerService>();
-            services.AddTransient<IProcessLotteryService, ProcessLotteryService>();
             services.AddTransient<IHtmlHandlerService, HtmlHandlerService>();
             services.AddTransient<ILotteryService, LotteryService>();
 

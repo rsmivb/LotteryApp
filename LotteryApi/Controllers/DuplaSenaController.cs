@@ -17,7 +17,6 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class DuplaSenaController : Controller
     {
-        private readonly IProcessLotteryService _webService;
         private readonly IRepository<DuplaSena> _repository;
         private readonly ILogger<DuplaSenaController> _logger;
         private readonly ILotteryService _lotteryService;
@@ -28,12 +27,10 @@ namespace LotteryApi.Controllers
         /// <param name="repository"></param>
         /// <param name="logger"></param>
         /// <param name="lotteryService"></param>
-        public DuplaSenaController(IProcessLotteryService webService,
-                                    IRepository<DuplaSena> repository,
+        public DuplaSenaController( IRepository<DuplaSena> repository,
                                     ILogger<DuplaSenaController> logger,
                                     ILotteryService lotteryService)
         {
-            _webService = webService;
             _repository = repository;
             _logger = logger;
             _lotteryService = lotteryService;
@@ -111,12 +108,12 @@ namespace LotteryApi.Controllers
                 //https://jonhilton.net/simple-background-jobs-with-hangfire-and-aspnet-core/
                 //https://www.hangfire.io/
                 _logger.LogInformation("Get information from CEF server");
-                _webService.ProcessLotteryFile(Constants.DuplaSena);
+                //_webService.ProcessLotteryFile(Constants.DuplaSena);
                 _logger.LogInformation("Load HTML file into Objects");
-                var results = (IEnumerable<DuplaSena>)_lotteryService.Load(Constants.DuplaSena);
+                //var results = (IEnumerable<DuplaSena>)_lotteryService.Load(Constants.DuplaSena);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
-                _repository.InsertMany(results);
+                //_repository.InsertMany(results);
                 return Ok("Loaded itens on database.");
             }
             catch (Exception e)

@@ -37,7 +37,8 @@ namespace Lottery.Services
                 SenderUrlPath = new Uri($"{_appSettings.DefaultURL}{lottery.ZipFileName}"),
                 ZipPath = Path.Combine(Environment.CurrentDirectory, $"{_appSettings.TempFilePath}{lottery.ZipFileName}"),
                 HtmlFilePath = Path.Combine(Environment.CurrentDirectory, $"{_appSettings.TempFilePath}{lottery.HtmlFileName}"),
-                Columns = lottery.Columns
+                Columns = lottery.Columns,
+                Entries = new List<Repository.MongoModel>()
             };
         }
     }

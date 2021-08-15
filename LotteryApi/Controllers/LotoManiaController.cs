@@ -17,7 +17,6 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class LotoManiaController : Controller
     {
-        private readonly IProcessLotteryService _webService;
         private readonly IRepository<LotoMania> _repository;
         private readonly ILogger<LotoManiaController> _logger;
         private readonly ILotteryService _lotteryService;
@@ -28,12 +27,10 @@ namespace LotteryApi.Controllers
         /// <param name="repository"></param>
         /// <param name="logger"></param>
         /// <param name="lotteryService"></param>
-        public LotoManiaController(IProcessLotteryService webService,
-            IRepository<LotoMania> repository,
+        public LotoManiaController(IRepository<LotoMania> repository,
             ILogger<LotoManiaController> logger,
             ILotteryService lotteryService)
         {
-            _webService = webService;
             _repository = repository;
             _logger = logger;
             _lotteryService = lotteryService;
@@ -98,13 +95,13 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                _webService.ProcessLotteryFile(Constants.LotoMania);
-                _logger.LogInformation("Load HTML file into Objects");
-
-                var results = (IEnumerable<LotoMania>)_lotteryService.Load(Constants.LotoMania);
-                _logger.LogInformation("loading into database");
-                _repository.CreateDatabase();
-                _repository.InsertMany(results);
+                //_webService.ProcessLotteryFile(Constants.LotoMania);
+                //_logger.LogInformation("Load HTML file into Objects");
+                //
+                //var results = (IEnumerable<LotoMania>)_lotteryService.Load(Constants.LotoMania);
+                //_logger.LogInformation("loading into database");
+                //_repository.CreateDatabase();
+                //_repository.InsertMany(results);
                 return Ok("Loaded itens on database.");
             }
             catch (Exception e)

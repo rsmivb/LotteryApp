@@ -17,7 +17,6 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class FederalController : Controller
     {
-        private readonly IProcessLotteryService _webService;
         private readonly IRepository<Federal> _repository;
         private readonly ILogger<FederalController> _logger;
         private readonly ILotteryService _lotteryService;
@@ -28,12 +27,10 @@ namespace LotteryApi.Controllers
         /// <param name="repository"></param>
         /// <param name="logger"></param>
         /// <param name="lotteryService"></param>
-        public FederalController(IProcessLotteryService webService,
-                                    IRepository<Federal> repository,
+        public FederalController(IRepository<Federal> repository,
                                     ILogger<FederalController> logger,
                                     ILotteryService lotteryService)
         {
-            _webService = webService;
             _repository = repository;
             _logger = logger;
             _lotteryService = lotteryService;
@@ -98,13 +95,13 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("Get information from CEF server");
                 //download file
-                _webService.ProcessLotteryFile(Constants.Federal);
+                //_webService.ProcessLotteryFile(Constants.Federal);
                 _logger.LogInformation("Load HTML file into Objects");
                 //load file into object
-                var results = (IEnumerable<Federal>)_lotteryService.Load(Constants.Federal);
+                //var results = (IEnumerable<Federal>)_lotteryService.Load(Constants.Federal);
                 _logger.LogInformation("loading into database");
                 _repository.CreateDatabase();
-                _repository.InsertMany(results);
+                //_repository.InsertMany(results);
 
                 return Ok("Loaded itens on database.");
             }

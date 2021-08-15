@@ -17,7 +17,6 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class LotecaController : Controller
     {
-        private readonly IProcessLotteryService _webService;
         private readonly IRepository<Loteca> _repository;
         private readonly ILogger<LotecaController> _logger;
         private readonly ILotteryService _lotteryService;
@@ -28,12 +27,10 @@ namespace LotteryApi.Controllers
         /// <param name="repository"></param>
         /// <param name="logger"></param>
         /// <param name="lotteryService"></param>
-        public LotecaController(IProcessLotteryService webService,
-            IRepository<Loteca> repository,
+        public LotecaController(IRepository<Loteca> repository,
             ILogger<LotecaController> logger,
             ILotteryService lotteryService)
         {
-            _webService = webService;
             _repository = repository;
             _logger = logger;
             _lotteryService = lotteryService;
@@ -98,13 +95,13 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("api/loteca/downloadResultsFromSource - Get information from CEF server");
                 //download file
-                _webService.ProcessLotteryFile(Constants.Loteca);
-                _logger.LogInformation("api/loteca/downloadResultsFromSource - Load HTML file into Objects");
-                //load file into object
-                var results = (IEnumerable<Loteca>)_lotteryService.Load(Constants.Loteca);
-                _logger.LogInformation("loading into database");
-                _repository.CreateDatabase();
-                _repository.InsertMany(results);
+                //_webService.ProcessLotteryFile(Constants.Loteca);
+                //_logger.LogInformation("api/loteca/downloadResultsFromSource - Load HTML file into Objects");
+                ////load file into object
+                //var results = (IEnumerable<Loteca>)_lotteryService.Load(Constants.Loteca);
+                //_logger.LogInformation("loading into database");
+                //_repository.CreateDatabase();
+                //_repository.InsertMany(results);
                 return Ok("Loaded itens on database.");
             }
             catch (Exception e)

@@ -17,7 +17,6 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class MegaSenaController : Controller
     {
-        private readonly IProcessLotteryService _webService;
         private readonly IRepository<MegaSena> _repository;
         private readonly ILogger<MegaSenaController> _logger;
         private readonly ILotteryService _lotteryService;
@@ -28,12 +27,10 @@ namespace LotteryApi.Controllers
         /// <param name="repository"></param>
         /// <param name="logger"></param>
         /// <param name="lotteryService"></param>
-        public MegaSenaController(IProcessLotteryService webService,
-            IRepository<MegaSena> repository,
+        public MegaSenaController(IRepository<MegaSena> repository,
             ILogger<MegaSenaController> logger,
             ILotteryService lotteryService)
         {
-            _webService = webService;
             _repository = repository;
             _logger = logger;
             _lotteryService = lotteryService;
@@ -96,14 +93,14 @@ namespace LotteryApi.Controllers
         {
             try
             {
-                _logger.LogInformation("api/megasena/downloadResultsFromSource - Downloading from web service.");
-                _webService.ProcessLotteryFile(Constants.MegaSena);
-                _logger.LogInformation("api/megasena/downloadResultsFromSource - Load HTML file into Objects");
-
-                var results = _lotteryService.Load(Constants.MegaSena);
-                _logger.LogInformation("loading into database");
-                _repository.CreateDatabase();
-                _repository.InsertMany(results as IList<MegaSena>);
+                //_logger.LogInformation("api/megasena/downloadResultsFromSource - Downloading from web service.");
+                //_webService.ProcessLotteryFile(Constants.MegaSena);
+                //_logger.LogInformation("api/megasena/downloadResultsFromSource - Load HTML file into Objects");
+                //
+                //var results = _lotteryService.Load(Constants.MegaSena);
+                //_logger.LogInformation("loading into database");
+                //_repository.CreateDatabase();
+                //_repository.InsertMany(results as IList<MegaSena>);
                 return Ok("All items have been loaded to database.");
             }
             catch (Exception e)

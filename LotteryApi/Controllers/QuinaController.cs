@@ -17,7 +17,6 @@ namespace LotteryApi.Controllers
     [Route("api/[controller]")]
     public class QuinaController : Controller
     {
-        private readonly IProcessLotteryService _webService;
         private readonly IRepository<Quina> _repository;
         private readonly ILogger<QuinaController> _logger;
         private readonly ILotteryService _lotteryService;
@@ -28,12 +27,10 @@ namespace LotteryApi.Controllers
         /// <param name="repository"></param>
         /// <param name="logger"></param>
         /// <param name="lotteryService"></param>
-        public QuinaController(IProcessLotteryService webService,
-            IRepository<Quina> repository,
+        public QuinaController(IRepository<Quina> repository,
             ILogger<QuinaController> logger,
             ILotteryService lotteryService)
         {
-            _webService = webService;
             _repository = repository;
             _logger = logger;
             _lotteryService = lotteryService;
@@ -98,12 +95,12 @@ namespace LotteryApi.Controllers
             {
                 _logger.LogInformation("api/quina/downloadResultsFromSource - Get information from CEF server");
                 //download file
-                _webService.ProcessLotteryFile(Constants.Quina);
-                _logger.LogInformation("api/quina/downloadResultsFromSource - Load HTML file into Objects");
-                //load file into object
-                var results = (IEnumerable<Quina>)_lotteryService.Load(Constants.Quina);
-                _repository.CreateDatabase();
-                _repository.InsertMany(results);
+                //_webService.ProcessLotteryFile(Constants.Quina);
+                //_logger.LogInformation("api/quina/downloadResultsFromSource - Load HTML file into Objects");
+                ////load file into object
+                //var results = (IEnumerable<Quina>)_lotteryService.Load(Constants.Quina);
+                //_repository.CreateDatabase();
+                //_repository.InsertMany(results);
                 return Ok("Loaded itens on database.");
             }
             catch (Exception e)

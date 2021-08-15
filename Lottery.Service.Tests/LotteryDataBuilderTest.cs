@@ -45,10 +45,11 @@ namespace Lottery.Service.Tests
             var expectedLotteryData = new LotteryData
             {
                 Columns = 1,
-                Name = "Lottery",
+                Name = lotteryName,
                 SenderUrlPath = new Uri("http://some.url.com/zip/filename"),
                 HtmlFilePath = Path.Combine(Environment.CurrentDirectory, $"{appSettings.TempFilePath}/path/to/file"),
-                ZipPath = Path.Combine(Environment.CurrentDirectory, $"{appSettings.TempFilePath}/zip/filename")
+                ZipPath = Path.Combine(Environment.CurrentDirectory, $"{appSettings.TempFilePath}/zip/filename"),
+                Entries = new List<Repository.MongoModel>()
             };
 
             _builder = new LotteryDataBuilder(logger.Object, appSettings);
