@@ -82,11 +82,16 @@ namespace Lottery.Api.Controllers
         // GET api/megasena/downloadResultsFromSource
         [HttpGet("Load")]
         [SwaggerOperation(Summary = "Gets file from Caixa and load it into MongoDB", Description = "This is a description examples")]
-        public async Task<IActionResult> Load(string lotteryName)
+        public async Task<IActionResult> Load()
         {
             try
             {
-                _lotteryFacade.LoadData(lotteryName);
+                var lotteries = new string[] { "TimeMania" };
+                foreach (var lotteryName in lotteries)
+                {
+                    _lotteryFacade.LoadData(lotteryName);
+                }
+
                 //_logger.LogInformation("api/megasena/downloadResultsFromSource - Downloading from web service.");
                 //_webService.ProcessLotteryFile(Constants.MegaSena);
                 //_logger.LogInformation("api/megasena/downloadResultsFromSource - Load HTML file into Objects");

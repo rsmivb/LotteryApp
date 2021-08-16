@@ -21,7 +21,7 @@ namespace Lottery.Services
             try
             {
                 var doc = new HtmlDocument();
-                doc.Load(lottery.HtmlFilePath, Encoding.UTF7);
+                doc.Load(lottery.HtmlFilePath, Encoding.UTF8);
                 _logger.LogDebug("Trying to load stream.");
                 if (doc is null)
                 {
@@ -36,9 +36,9 @@ namespace Lottery.Services
                 {
                     foreach (var td in tr.ChildNodes)
                     {
-                        if (!td.InnerText.Equals("\r\r\n") &&
-                            !td.InnerText.Equals("\r\n") &&
-                            !td.InnerText.Equals("\r"))
+                        // Loteca !td.InnerText.Equals("\n\t")
+                        // MegaSena !td.InnerText.StartWith("\n   ") && InnerHtml.StartWith("<!-- DEZENAS -->") Ler até rateio Faixa3
+                        if (!td.InnerText.StartsWith("\n") && !td.InnerHtml.StartsWith("<!--"))
                         {
                             nodes.Add(td.InnerText.Trim());
                         }

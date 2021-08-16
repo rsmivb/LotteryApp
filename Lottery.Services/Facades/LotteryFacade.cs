@@ -33,8 +33,8 @@ namespace Lottery.Services
                 //get repositories from IServiceCollection
 
                 // build Entries
-                var entries = _htmlHandlerService.ConvertHtmlTo(lotteryData);
-                _lotteryService.Load(entries, lotteryData);
+                //var entries = _htmlHandlerService.ConvertHtmlTo(lotteryData);
+                //_lotteryService.Load(entries, lotteryData);
                 // load to database based on repository
 
             }

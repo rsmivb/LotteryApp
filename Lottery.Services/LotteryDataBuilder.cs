@@ -35,7 +35,7 @@ namespace Lottery.Services
             {
                 Name = lotteryName,
                 CaixaLotteryURL = lottery.WebSite,
-                HtmlFilePath = Path.Combine(Environment.CurrentDirectory, $"{_appSettings.TempFilePath}{lottery.HtmlFileName}"),
+                HtmlFilePath = $"{Environment.CurrentDirectory}{_appSettings.TempFilePath}{lottery.HtmlFileName}",
                 Columns = lottery.Columns,
                 Entries = new List<Repository.MongoModel>()
             };

@@ -23,7 +23,7 @@ namespace Lottery.Services
             try
             {
                 var content = _webService.GetContent(lottery.CaixaLotteryURL);
-                _fileHandlerService.ProcessToFile(content, lottery.HtmlFilePath);
+                _fileHandlerService.ProcessToFile(lottery.HtmlFilePath, content);
                 return true;
             }
             catch (Exception e)
