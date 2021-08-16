@@ -8,11 +8,11 @@ namespace Lottery.Services
     {
         private readonly ILogger<IProcessLotteryFileService> _logger;
         private readonly IFileHandlerService _fileHandlerService;
-        private readonly IWebServiceService _webService;
+        private readonly ICaixaWSService _webService;
 
         public ProcessLotteryFileService( ILogger<IProcessLotteryFileService> logger,
                                         IFileHandlerService fileHandlerService,
-                                        IWebServiceService webService)
+                                        ICaixaWSService webService)
         {
             _logger = logger;
             _fileHandlerService = fileHandlerService;
@@ -22,8 +22,8 @@ namespace Lottery.Services
         {
             try
             {
-                var stream = _webService.GetStreamFileFromWebService(lottery.SenderUrlPath);
-                _fileHandlerService.ProcessToFile(stream, lottery.ZipPath, lottery.HtmlFilePath);
+                var content = _webService.GetContent(lottery.CaixaLotteryURL);
+                _fileHandlerService.ProcessToFile(content, lottery.HtmlFilePath);
                 return true;
             }
             catch (Exception e)

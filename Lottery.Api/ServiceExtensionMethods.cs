@@ -12,10 +12,13 @@ namespace Lottery.Api
         public static IServiceCollection LoadDependencies(this IServiceCollection services)
         {
             //add all dependencies
-            services.AddTransient<IWebServiceService, WebServiceService>();
+            services.AddHttpClient<ICaixaWSService, CaixaWSService>();
             services.AddTransient<IFileHandlerService, FileHandlerService>();
             services.AddTransient<IHtmlHandlerService, HtmlHandlerService>();
             services.AddTransient<ILotteryService, LotteryService>();
+            services.AddTransient<IProcessLotteryFileService, ProcessLotteryFileService>();
+            services.AddTransient<ILotteryDataBuilder, LotteryDataBuilder>();
+            services.AddTransient<ILotteryFacade, LotteryFacade>();
 
             services.AddSingleton<IRepository<DuplaSena>, MongoRepository<DuplaSena>>();
             services.AddSingleton<IRepository<MegaSena>, MongoRepository<MegaSena>>();
@@ -34,8 +37,8 @@ namespace Lottery.Api
             // add config from appsettings.json to class
             var config = new AppSettings();
             var mongoDb = new MongoDBConfiguration();
-            Configuration.Bind("AppSettings", config);
-            Configuration.Bind("MongoConfiguration", mongoDb);
+            Configuration.Bind(nameof(AppSettings), config);
+            Configuration.Bind(nameof(MongoDBConfiguration), mongoDb);
             services.AddSingleton<AppSettings>(config);
             services.AddSingleton<MongoDBConfiguration>(mongoDb);
 

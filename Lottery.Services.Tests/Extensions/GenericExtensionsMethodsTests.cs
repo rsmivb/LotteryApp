@@ -2,7 +2,7 @@ using Lottery.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Lottery.Service.Tests
+namespace Lottery.Services.Tests
 {
     [TestClass]
     public class GenericExtensionsMethodsTests

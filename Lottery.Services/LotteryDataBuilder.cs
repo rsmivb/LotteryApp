@@ -34,8 +34,7 @@ namespace Lottery.Services
             return new LotteryData
             {
                 Name = lotteryName,
-                SenderUrlPath = new Uri($"{_appSettings.DefaultURL}{lottery.ZipFileName}"),
-                ZipPath = Path.Combine(Environment.CurrentDirectory, $"{_appSettings.TempFilePath}{lottery.ZipFileName}"),
+                CaixaLotteryURL = lottery.WebSite,
                 HtmlFilePath = Path.Combine(Environment.CurrentDirectory, $"{_appSettings.TempFilePath}{lottery.HtmlFileName}"),
                 Columns = lottery.Columns,
                 Entries = new List<Repository.MongoModel>()

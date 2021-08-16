@@ -37,7 +37,9 @@ namespace Lottery.Api.Tests
             Assert.NotNull(_server);
             Assert.NotNull(_testClient);
             // test each dependency injection if exists
-            var service = _server.Host.Services.GetService(typeof(IWebServiceService));
+            var service = _server.Host.Services.GetService(typeof(ICaixaWSService));
+            Assert.NotNull(service);
+            service = _server.Host.Services.GetService(typeof(ILotteryFacade));
             Assert.NotNull(service);
             service = _server.Host.Services.GetService(typeof(IFileHandlerService));
             Assert.NotNull(service);

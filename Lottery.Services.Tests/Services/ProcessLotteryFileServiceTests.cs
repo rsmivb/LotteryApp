@@ -6,21 +6,21 @@ using Moq;
 using System;
 using System.IO;
 
-namespace Lottery.Service.Tests
+namespace Lottery.Services.Tests
 {
     [TestClass]
-    public class ProcessLotteryFileServiceTest
+    public class ProcessLotteryFileServiceTests
     {
         private readonly Mock<ILogger<IProcessLotteryFileService>> _logger;
         private readonly Mock<IFileHandlerService> _fileHandlerService;
-        private readonly Mock<IWebServiceService> _webService;
+        private readonly Mock<ICaixaWSService> _webService;
         private readonly IProcessLotteryFileService _service;
 
-        public ProcessLotteryFileServiceTest()
+        public ProcessLotteryFileServiceTests()
         {
             _logger = new Mock<ILogger<IProcessLotteryFileService>>();
             _fileHandlerService = new Mock<IFileHandlerService>();
-            _webService = new Mock<IWebServiceService>();
+            _webService = new Mock<ICaixaWSService>();
             _service = new ProcessLotteryFileService(_logger.Object, _fileHandlerService.Object,_webService.Object);
         }
 
@@ -30,12 +30,12 @@ namespace Lottery.Service.Tests
         {
             var lotteryData = new LotteryData
             {
-                SenderUrlPath = new Uri("http://some.url.com"),
-                ZipPath = "some/path/"
+                CaixaLotteryURL = "http://some.url.com",
+                HtmlFilePath = "/some/path/"
             };
 
-            _webService.Setup(r => r.GetStreamFileFromWebService(lotteryData.SenderUrlPath)).Returns(new MemoryStream());
-            _fileHandlerService.Setup(r => r.ProcessToFile(null,lotteryData.ZipPath,lotteryData.HtmlFilePath));
+            _webService.Setup(r => r.GetContent(lotteryData.CaixaLotteryURL)).Returns(string.Empty);
+            _fileHandlerService.Setup(r => r.ProcessToFile(null,lotteryData.HtmlFilePath));
 
             Assert.IsTrue(_service.Execute(lotteryData));
         }
@@ -46,11 +46,10 @@ namespace Lottery.Service.Tests
         {
             var lotteryData = new LotteryData
             {
-                SenderUrlPath = new Uri("http://some.url.com"),
-                ZipPath = "some/path/"
+                CaixaLotteryURL = "http://some.url.com"
             };
 
-            _webService.Setup(r => r.GetStreamFileFromWebService(lotteryData.SenderUrlPath)).Throws(new Exception());
+            _webService.Setup(r => r.GetContent(lotteryData.CaixaLotteryURL)).Throws(new Exception());
 
             Assert.IsFalse(_service.Execute(lotteryData));
         }

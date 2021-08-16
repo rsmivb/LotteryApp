@@ -4,9 +4,8 @@ namespace Lottery.Services
 {
     public interface IFileHandlerService
     {
-        void ProcessToFile(Stream stream, string zipPath, string tempFile);
-        void ExtractFile(string zipPath, string tempFile);
-        void CreateFileFromStream(string filePath, Stream stream);
+        void ProcessToFile(string tempFile, string content);
+        void CreateFile(string filePath, string content);
         void CleanUpFolder(string path);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
-using System.IO.Compression;
+using System.Text;
 
 namespace Lottery.Services
 {
@@ -14,23 +14,9 @@ namespace Lottery.Services
             _logger = logger;
         }
 
-        public void ProcessToFile(Stream stream, string zipPath, string tempFile)
+        public void ProcessToFile(string tempFile, string content)
         {
-            CreateFileFromStream(zipPath, stream);
-            ExtractFile(zipPath, tempFile);
-        }
-        public void ExtractFile(string zipPath, string tempFile)
-        {
-            try
-            {
-                _logger.LogDebug($"Extracting file {zipPath} to {tempFile}");
-                ZipFile.ExtractToDirectory(zipPath, tempFile,true);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError($"Error when try to extract from {zipPath}. Error -> {e.Message} -> StackTrace -> {e.StackTrace}.");
-                throw;
-            }
+            CreateFile(tempFile, content);
         }
 
         public void CleanUpFolder(string path)
@@ -50,20 +36,14 @@ namespace Lottery.Services
             }
         }
 
-        public void CreateFileFromStream(string filePath, Stream stream)
+        public void CreateFile(string filePath, string content)
         {
             try
             {
                 _logger.LogDebug($"Creating file from Stream to {filePath}.");
                 FileInfo fileInfo = new FileInfo(filePath);
                 CreateFolder(fileInfo.Directory);
-                using (var responseStream = stream)
-                {
-                    using (var fileStream = new FileStream(fileInfo.FullName, FileMode.Create))
-                    {
-                        responseStream.CopyTo(fileStream);
-                    }
-                }
+                File.WriteAllText(filePath, content, Encoding.UTF8);
             }
             catch (Exception e)
             {

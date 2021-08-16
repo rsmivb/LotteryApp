@@ -7,15 +7,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Lottery.Service.Tests
+namespace Lottery.Services.Tests
 {
     [TestClass]
-    public class HTMLHandlerServiceTest
+    public class HTMLHandlerServiceTests
     {
         private readonly Mock<ILogger<HtmlHandlerService>> _mockLogger;
         private readonly HtmlHandlerService _service;
 
-        public HTMLHandlerServiceTest()
+        public HTMLHandlerServiceTests()
         {
             _mockLogger = new Mock<ILogger<HtmlHandlerService>>();
             _service = new HtmlHandlerService(_mockLogger.Object);

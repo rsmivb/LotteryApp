@@ -9,15 +9,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lottery.Service.Tests
+namespace Lottery.Services.Tests
 {
     [TestClass]
-    public class LotteryServiceTest
+    public class LotteryServiceTests
     {
         private readonly Mock<ILogger<ILotteryService>> _logger;
         private readonly ILotteryService _service;
 
-        public LotteryServiceTest()
+        public LotteryServiceTests()
         {
             _logger = new Mock<ILogger<ILotteryService>>();
             _service = new LotteryService(_logger.Object);
@@ -56,16 +56,14 @@ namespace Lottery.Service.Tests
                 Name = "MegaSena",
                 Columns = 26,
                 HtmlFilePath = string.Empty,
-                SenderUrlPath = new Uri("http://www.url.com"),
-                ZipPath = string.Empty
+                CaixaLotteryURL = "http://www.url.com"
             };
             var expectedLotteryData = new LotteryData
             {
                 Name = "MegaSena",
                 Columns = 26,
                 HtmlFilePath = string.Empty,
-                SenderUrlPath = new Uri("http://www.url.com"),
-                ZipPath = string.Empty,
+                CaixaLotteryURL = "http://www.url.com",
                 Entries = megaSenaList.Cast<MongoModel>().ToList()
             };
             List<List<string>> htmlList = new List<List<string>>
@@ -146,16 +144,14 @@ namespace Lottery.Service.Tests
                 Name = "DuplaSena",
                 Columns = 12,
                 HtmlFilePath = string.Empty,
-                SenderUrlPath = new Uri("http://www.url.com"),
-                ZipPath = string.Empty
+                CaixaLotteryURL = "http://www.url.com"
             };
             var expectedLotteryData = new LotteryData
             {
                 Name = "DuplaSena",
                 Columns = 12,
                 HtmlFilePath = string.Empty,
-                SenderUrlPath = new Uri("http://www.url.com"),
-                ZipPath = string.Empty,
+                CaixaLotteryURL = "http://www.url.com",
                 Entries = duplaSenaList.Cast<MongoModel>().ToList()
             };
             List<List<string>> htmlList = new List<List<string>>

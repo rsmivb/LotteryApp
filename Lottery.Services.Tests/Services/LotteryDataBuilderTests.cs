@@ -8,20 +8,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Lottery.Service.Tests
+namespace Lottery.Services.Tests
 {
     [TestClass]
-    public class LotteryDataBuilderTest
+    public class LotteryDataBuilderTests
     {
         private readonly Mock<ILogger<ILotteryDataBuilder>> logger;
         private readonly AppSettings appSettings;
         private LotteryDataBuilder _builder;
 
-        public LotteryDataBuilderTest()
+        public LotteryDataBuilderTests()
         {
             logger = new Mock<ILogger<ILotteryDataBuilder>>();
             appSettings = new AppSettings {
-                DefaultURL = "http://some.url.com",
                 TempFilePath = "/some/root/path",
                 Lotteries = new List<LotterySetting>
                 {
@@ -30,7 +29,7 @@ namespace Lottery.Service.Tests
                         Columns = 1,
                         Name = "Lottery",
                         HtmlFileName = "/path/to/file",
-                        ZipFileName = "/zip/filename"
+                        WebSite ="http://some.url.com/zip/filename"
                     }
                 }
             };
@@ -46,9 +45,8 @@ namespace Lottery.Service.Tests
             {
                 Columns = 1,
                 Name = lotteryName,
-                SenderUrlPath = new Uri("http://some.url.com/zip/filename"),
+                CaixaLotteryURL = "http://some.url.com/zip/filename",
                 HtmlFilePath = Path.Combine(Environment.CurrentDirectory, $"{appSettings.TempFilePath}/path/to/file"),
-                ZipPath = Path.Combine(Environment.CurrentDirectory, $"{appSettings.TempFilePath}/zip/filename"),
                 Entries = new List<Repository.MongoModel>()
             };
 
