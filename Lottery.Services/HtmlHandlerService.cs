@@ -23,7 +23,7 @@ namespace Lottery.Services
                 var doc = new HtmlDocument();
                 doc.Load(lottery.HtmlFilePath, Encoding.UTF8);
                 _logger.LogDebug("Trying to load stream.");
-                if (doc is null)
+                if (doc.DocumentNode?.ChildNodes?.Count < 1)
                 {
                     throw new HtmlWebException("HTML file is empty.");
                 }

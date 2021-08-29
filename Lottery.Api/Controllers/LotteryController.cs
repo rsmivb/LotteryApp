@@ -6,7 +6,10 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel;
 
 namespace Lottery.Api.Controllers
 {
@@ -14,19 +17,22 @@ namespace Lottery.Api.Controllers
     ///
     /// </summary>
     [Route("api/[controller]")]
-    public class MegaSenaController : Controller
+    public class LotteryController : Controller
     {
-        private readonly IRepository<MegaSena> _repository;
-        private readonly ILogger<MegaSenaController> _logger;
+        private readonly ILogger<LotteryController> _logger;
         private readonly ILotteryFacade _lotteryFacade;
+        private readonly IServiceProvider _provider;
+
         /// <summary>
         ///
-        public MegaSenaController(
-            ILogger<MegaSenaController> logger,
-            ILotteryFacade lotteryFacade)
+        public LotteryController(
+            ILogger<LotteryController> logger,
+            ILotteryFacade lotteryFacade,
+            IServiceProvider provider)
         {
             _logger = logger;
             _lotteryFacade = lotteryFacade;
+            _provider = provider;
         }
         ///// <summary>
         /////
@@ -86,7 +92,7 @@ namespace Lottery.Api.Controllers
         {
             try
             {
-                var lotteries = new string[] { "TimeMania" };
+                var lotteries = new string[] { "MegaSena" };
                 foreach (var lotteryName in lotteries)
                 {
                     _lotteryFacade.LoadData(lotteryName);

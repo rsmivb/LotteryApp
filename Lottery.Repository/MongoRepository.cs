@@ -71,7 +71,7 @@ namespace Lottery.Repository
         {
             Collection.InsertOneAsync(item);
         }
-
+        //TODO: add indexes for each collection by LotteryId
         private void CreateDatabase()
         {
             if (Collection != null)

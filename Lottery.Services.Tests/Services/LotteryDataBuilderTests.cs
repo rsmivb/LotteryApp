@@ -46,7 +46,7 @@ namespace Lottery.Services.Tests
                 Columns = 1,
                 Name = lotteryName,
                 CaixaLotteryURL = "http://some.url.com/zip/filename",
-                HtmlFilePath = Path.Combine(Environment.CurrentDirectory, $"{appSettings.TempFilePath}/path/to/file"),
+                HtmlFilePath = $"{Environment.CurrentDirectory}{appSettings.TempFilePath}/path/to/file",
                 Entries = new List<Repository.MongoModel>()
             };
 

@@ -20,15 +20,8 @@ namespace Lottery.Api
             services.AddTransient<ILotteryDataBuilder, LotteryDataBuilder>();
             services.AddTransient<ILotteryFacade, LotteryFacade>();
 
-            services.AddSingleton<IRepository<DuplaSena>, MongoRepository<DuplaSena>>();
-            services.AddSingleton<IRepository<MegaSena>, MongoRepository<MegaSena>>();
-            services.AddSingleton<IRepository<Loteca>, MongoRepository<Loteca>>();
-            services.AddSingleton<IRepository<Federal>, MongoRepository<Federal>>();
-            services.AddSingleton<IRepository<LotoFacil>, MongoRepository<LotoFacil>>();
-            services.AddSingleton<IRepository<LotoGol>, MongoRepository<LotoGol>>();
-            services.AddSingleton<IRepository<LotoMania>, MongoRepository<LotoMania>>();
-            services.AddSingleton<IRepository<Quina>, MongoRepository<Quina>>();
-            services.AddSingleton<IRepository<TimeMania>, MongoRepository<TimeMania>>();
+            // This is part of all repositories based on lottery names
+            services.AddSingleton(typeof(IRepository<>), typeof(MongoRepository<>));
             return services;
         }
 
@@ -39,8 +32,8 @@ namespace Lottery.Api
             var mongoDb = new MongoDBConfiguration();
             Configuration.Bind(nameof(AppSettings), config);
             Configuration.Bind(nameof(MongoDBConfiguration), mongoDb);
-            services.AddSingleton<AppSettings>(config);
-            services.AddSingleton<MongoDBConfiguration>(mongoDb);
+            services.AddSingleton(config);
+            services.AddSingleton(mongoDb);
 
             return services;
         }

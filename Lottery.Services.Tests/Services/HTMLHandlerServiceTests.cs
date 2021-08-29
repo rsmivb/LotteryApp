@@ -29,7 +29,7 @@ namespace Lottery.Services.Tests
             var lotteryData = new LotteryData
             {
                 Columns = 26,
-                HtmlFilePath = $"{string.Concat(Environment.CurrentDirectory, @"/Resources/Lottery_Test_file.htm")}"
+                HtmlFilePath = $"{string.Concat(Environment.CurrentDirectory, @"/Resources/MEGASENA_Test.htm")}"
             };
 
             var expectedListString = new List<List<string>>

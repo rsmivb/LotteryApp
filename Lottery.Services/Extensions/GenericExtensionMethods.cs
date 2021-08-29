@@ -30,8 +30,11 @@ namespace Lottery.Services
                 return string.Empty;
             }
         }
-        public static Type ConvertToExtensionsMethodsType(this string lotteryName) => Assembly.GetExecutingAssembly()
-                                .GetTypes()
-                                .FirstOrDefault(method => method.Name.Equals($"{lotteryName}ExtensionMethods")) ?? throw new Exception($"Lottery {lotteryName} wasn't implemented.");
+        public static Type ConvertToExtensionsMethodsType(this string lotteryName) =>
+            Assembly.GetExecutingAssembly()
+                    .GetTypes()
+                    .FirstOrDefault(method => method.Name
+                                                    .Equals($"{lotteryName}ExtensionMethods")) ??
+                                                throw new Exception($"Lottery {lotteryName} wasn't implemented.");
     }
 }

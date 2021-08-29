@@ -1,3 +1,5 @@
+using Lottery.Models;
+using Lottery.Repository;
 using Lottery.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -88,6 +90,7 @@ namespace Lottery.Services.Tests
             var result = toBeTested.ConvertToAChar();
             Assert.AreEqual(expectedResult, result);
         }
+
         [TestMethod("Given a lottery name convert to a Type")]
         [TestCategory("GenericExtensionsMethods")]
         public void GivenLotteryNameConvertToType_Test()
